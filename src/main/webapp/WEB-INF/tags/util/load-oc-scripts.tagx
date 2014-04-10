@@ -1,0 +1,8 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+  <jsp:output omit-xml-declaration="yes" />
+  <link rel="icon" type="image/ico" href="images/favicon.ico" />
+  <spring:url value="/includes/NewLoginStyles.css" var="css_url" />
+  <link rel="stylesheet" type="text/css" href="${css_url}" media="screen" />
+    
+</jsp:root>

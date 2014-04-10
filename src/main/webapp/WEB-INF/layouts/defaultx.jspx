@@ -1,0 +1,9 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page" 
+      xmlns:tiles="http://tiles.apache.org/tags-tiles">  
+    
+    <tiles:insertAttribute name="tags"/>
+    <jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />  
+    <tiles:insertAttribute name="body"/>
+</html>

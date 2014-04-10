@@ -1,0 +1,69 @@
+/* CSS Document */
+
+/* general style propertyies */
+
+body.login_BG { background: url(../images/login_BG2.gif) repeat-x top left #FFFFFF;  margin: 0; }
+
+div.login_BG { background: url(../images/login_BG.gif) no-repeat top center; height: 100%; padding-top: 117px; }
+
+#OClogo { background: url(../images/OC_login_logo.png) no-repeat top left; width: 428px; height: 112px; }
+
+#OClogoIE6 { background: url(../images/OC_login_logo.gif) no-repeat top left; width: 428px; height: 112px; }
+
+.loginBoxes { margin-bottom: 200px; }
+
+.loginBoxes td { width: 310px; vertical-align: top; text-align: left; }
+
+.loginBox_T { background: url(../images/login_box_T.png) no-repeat top center; height: 10px; line-height: 10px; font-size: 1px; }
+
+.loginBox { background: url(../images/login_box_BG.png) no-repeat bottom center; }
+
+#loginBox, #newsBox { padding: 6px 28px 38px 28px; }
+
+.loginBox form, .loginBox H1 { margin-top: 0px; }
+
+.loginBox li, .loginBox ul { list-style-image: url(../images/bullet.gif); margin-left: 7px; padding-left: 7px; }
+
+.loginBox li { margin-bottom: 13px; }
+
+body.login_BG .footer {
+    background-image: url(../images/login_footer_BG.gif);
+    background-position: center bottom;
+    background-repeat: repeat-x;
+    line-height: 5px;
+    padding-bottom: 9px;
+    padding-left: 30px;
+    vertical-align: bottom;
+}
+
+body.login_BG H1 {
+    color: #789EC5;
+    font-family: Tahoma,Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+body.login_BG p {
+    color: #4D4D4D;
+    font-family: Tahoma,Arial,Helvetica,Sans-Serif;
+    font-size: 11px;
+    line-height: 15px;
+}
+
+body.login_BG a:hover, a:active {
+    color: #789EC5;
+    text-decoration: underline
+}
+
+body.login_BG  a:link, a:visited {
+    color: #789EC5;
+    text-decoration: none;
+}
+
+body.login_BG td {
+    color: #4D4D4D;
+    font-family: Tahoma,Arial,Helvetica,Sans-Serif;
+    font-size: 11px;
+    line-height: 15px;
+}

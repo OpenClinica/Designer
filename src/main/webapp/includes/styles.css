@@ -1,0 +1,203 @@
+.ui-layout-north { background: url(img/header_T.gif) repeat-x top left #ffffff; }
+
+.ui-layout-north #header { background: url(img/header_B.png) repeat-x bottom left transparent; height: 44px; }
+
+.ui-layout-pane, .ui-widget-content { border-style: none; }
+
+.ui-layout-resizer-north { background: url(img/resizer-north_BG.gif) repeat-x top left #ffffff; 
+	height: 2px;
+	}
+
+.ui-layout-resizer-west { background: url(img/resizer-west_BG.gif) repeat-y top left #ffffff; 
+	width: 10px;
+	}
+
+.ui-layout-resizer-east { background: url(img/resizer-east_BG.gif) repeat-y top right #ffffff; 
+	width: 10px;
+	}
+
+.ui-layout-toggler-west { background: url(img/resizer-west-tab_BG.png) no-repeat top left transparent;
+	width: 10px;
+	height: 65px;
+	}
+
+.ui-layout-toggler-east { background: url(img/resizer-east-tab_BG.png) no-repeat top right transparent;
+	width: 10px;
+	height: 65px;
+	}
+
+.ui-layout-toggler-north { display: none; }
+
+.ui-layout-center .ui-widget-header { background: url(img/navTabs_BG.png) repeat-x bottom left #729fcf; }
+
+.ui-widget-content.ui-corner-all { border: 1px solid #AAAAAA;
+    margin: 6px;
+    -moz-box-shadow: 2px 2px 4px #CACACA;
+    -webkit-box-shadow: 2px 2px 4px #CACACA;
+    box-shadow: 2px 2px 4px #CACACA;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#CACACA')";
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#CACACA');
+    }
+
+.topButtons button.ui-button { background: url(img/button_BG.png) repeat-x top left #729FCF;
+	-moz-box-shadow: 1px 1px 3px #456B99;
+	-webkit-box-shadow: 1px 1px 3px #456B99;
+	box-shadow: 1px 1px 3px #456B99;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#456B99')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#456B99');
+	}
+
+.ui-button { background: url(img/button_BG.png) repeat-x top left #729FCF;
+	-moz-box-shadow: 1px 1px 3px #CACACA;
+	-webkit-box-shadow: 1px 1px 3px #CACACA;
+	box-shadow: 1px 1px 3px #CACACA;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CACACA')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CACACA');
+	height: 18px;
+	line-height: 18px;
+	padding: 0 .75em;
+	
+	}
+
+.ui-button-text-only  .ui-button-text { padding: 0;
+	line-height: 18px;
+	}
+	
+.ui-layout-toggler-west, .ui-layout-toggler-east {
+    border-width: 0 0;
+}
+
+/* UPDATED STYLES FOR ACTION FIELDSETS AND LEGENDS (should work in IE) */
+
+#ruleActions fieldset { margin-top: 36px;
+    padding-top: 0;
+    background-color: #ffffff;
+    display: block;
+    overflow: visible;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-box-shadow: 2px 2px 4px #CACACA;
+    -webkit-box-shadow: 2px 2px 4px #CACACA;
+    box-shadow: 2px 2px 4px #CACACA;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#CACACA')";
+    }
+
+#ruleActions fieldset.login p:first-child{
+	margin-top:10px;
+	}
+
+
+#ruleActions fieldset legend { padding: 0px;
+    margin: 0px;
+    height: 1px;
+    display: inline-block;
+    overflow: visible;
+    border-style:none;
+    }
+
+#ruleActions fieldset legend span {
+	
+    display: block;
+    height: 18px;
+    max-height: 9px;
+    position: relative;
+    top: -18px;
+    overflow: visible;
+    margin: 0 -2px;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+    background-color: #ffffff;
+    padding: 4px 12px;
+    border-bottom-width: 0;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    -webkit-border-topleft-radius: 6px;
+    -webkit-border-topright-radius: 6px;
+    }
+
+
+
+
+/* STYLE FOR DROP-DOWN MENU ON RIGHT SIDE IN HEADER */
+
+.header .actionCont a#usermenu { color: #3363a8; }
+
+
+
+
+/* STYLES FOR TRANSPARENT BACKGROUND OF RESIZING BARS (they currently show white background when you move them over content) */
+
+body { background-color: #FFFFFF; }
+
+.ui-layout-resizer-west, .ui-layout-resizer-east { background-color: transparent; 
+    border-style: none;
+    }
+    
+/* FIXES POSITION OF TOP RIGHT ACTIONS DROP-DOWN IN IE */
+
+
+#header #actions { float: right; 
+    text-align: right; 
+    width: 300px;
+    }
+
+#header #actions li.actionItem span { display: block; 
+    float: left; 
+    width: 230px; 
+    text-align: right;
+    }
+
+#header a#usermenu { margin-left: 8px; }
+
+
+/* STYLES FOR GREEN STATUS BOX (use class .ui-state-good instead of .ui-state-error) */
+
+.ui-state-good, .ui-widget-content .ui-state-good, .ui-widget-header .ui-state-good { background: url("../images/ui-state-good_BG.png") repeat-x scroll 50% bottom #E6FFE5;
+        border: 1px solid #5B8D5A;
+        color: #5B8D5A;
+}
+
+.ui-state-good .ui-icon, .ui-state-good-text .ui-icon { background-image: url("../images/icon_ui-state-good.png");
+}    
+
+.topButtons{
+    float:right; 
+    margin-top:-40px
+}
+
+.bottomButtons{
+    float:right; 
+}
+
+.ui-state-success{
+    background: url("images/ui-bg_inset-soft_95_fef1ec_1x100.png") repeat-x scroll 50% bottom #FEF1EC;
+    border: 1px solid #00cc00;
+    color: #00cc00;
+}
+
+#ruleActions { margin: 0 8px; }
+
+
+#ruleActions fieldset legend a { margin-left: 24px; }
+
+#ruleActions fieldset table, #ruleActions fieldset table td,#ruleActions fieldset table th { border-style: none;
+    background-color: transparent;
+    }
+
+
+.buttonRight{float:right;}
+
+
+
+
+
+
+
+

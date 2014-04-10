@@ -1,0 +1,122 @@
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-16 09:39:20
+project --topLevelPackage org.akaza.openclinica.designer --projectName Designer --java 6
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-16 09:39:21
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-16 09:39:49
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-16 09:39:56
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-16 09:42:57
+hint
+persistence setup --provider HIBERNATE --database POSTGRES --databaseName designer --userName clinica --password clinica
+entity --class org.akaza.openclinica.designer.core.domain.Contact --testAutomatically 
+field string --fieldName firstName
+controller all --package org.akaza.openclinica.designer.web.controller
+perform eclipse
+perform eclipse -DdownloadJavadocs=true
+perform package
+perform assembly 
+ hint
+help
+perform package
+perform package
+perform package
+perform package
+perform clean package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform package
+perform clean 
+perform package
+perform package
+perform eclipse
+perform eclipse -DdownloadJavadocs=true
+perform eclipse -DdownloadJavadocs=true
+perform package
+perform clean
+perform package
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-20 10:53:59
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-02 13:37:33
+perform package
+perform package
+perform package
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-11-04 11:08:37
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-13 10:42:11
+perform eclipse 
+perform package
+perform eclipse -DdownloadSources=true
+perform package 
+perform package 
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-11-13 11:04:37
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-13 11:04:53
+perform package 
+perform package 
+perform clean package 
+perform package 
+perform clean package 
+perform package 
+perform package 
+perform package 
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-11-17 20:26:27
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-12-27 17:37:42
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-12-27 17:41:04
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-12-27 17:48:46
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2011-01-14 11:26:43
+hint
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2011-01-14 11:35:59
+hint topics
+hint topics
+hint
+// [failed] hint security
+hint email
+hint security
+// [failed] hint
+help security
+hint
+security setup
+exit
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2011-01-14 11:51:34
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2011-01-14 13:46:58
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-11 21:37:17
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-11 21:44:03
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-11 21:44:58
+hint
+hint topics
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-11 21:45:47
+exit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-11 21:46:35
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-11 21:46:46
+hint
+help
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-12 12:07:43
+exit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-12 12:08:09
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-12 12:08:17
+perform tests
+exit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-12 12:23:17
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-12 12:25:05
+hint
+help
+hint controller class
+controller class --class org.akaza.openclinica.designer.web.TestController
+exit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-12 12:40:31
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-06 22:43:14
+help
+hint 
+hint 
+persistence setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY --databaseName designer --userName clinica --password clinica
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-09 08:55:35
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 19:10:39
+backup
+exit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 19:11:28
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-05-18 21:18:05
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-05-18 21:38:20
