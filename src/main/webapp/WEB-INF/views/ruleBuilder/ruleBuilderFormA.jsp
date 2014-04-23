@@ -88,6 +88,7 @@
             <form:option value="addShowAction"><fmt:message key="label_show_action"/> </form:option>
             <form:option value="addHideAction"><fmt:message key="label_hide_action"/> </form:option>
             <form:option value="addInsertAction"><fmt:message key="label_insert_action"/> </form:option>
+            <form:option value="addEventAction"><fmt:message key="label_event_action"/> </form:option>
         </form:select>
         <form:errors path="addActions" cssClass="errorTextColor"/>
     </p>
