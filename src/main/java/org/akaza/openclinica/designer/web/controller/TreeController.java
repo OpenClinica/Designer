@@ -97,7 +97,7 @@ public class TreeController {
 
     @RequestMapping(value = "/eventCrfsList", method = RequestMethod.GET)
     public @ResponseBody
-    List<TreeModel> eventsCrfsList(@RequestParam String eventOid, HttpSession session) throws IOException {
+    List<TreeModelInterface> eventsCrfsList(@RequestParam String eventOid, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         return getEventCrfs(uiODMContainer, eventOid, false);
@@ -105,14 +105,14 @@ public class TreeController {
 
     @RequestMapping(value = "/eventCrfsListOid", method = RequestMethod.GET)
     public @ResponseBody
-    List<TreeModel> eventsCrfsListOid(@RequestParam String eventOid, HttpSession session) throws IOException {
+    List<TreeModelInterface> eventsCrfsListOid(@RequestParam String eventOid, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         return getEventCrfs(uiODMContainer, eventOid, true);
     }
 
-    private List<TreeModel> getEventCrfs(UIODMContainer uiODMContainer, String eventOid, Boolean useOid) {
-        List<TreeModel> crfs = new ArrayList<TreeModel>();
+    private List<TreeModelInterface> getEventCrfs(UIODMContainer uiODMContainer, String eventOid, Boolean useOid) {
+        List<TreeModelInterface> crfs = new ArrayList<TreeModelInterface>();
         UIEvent uiEvent = uiODMContainer.getEventsByOID(eventOid);
 
         for (UICrf uiCrf : uiEvent.getCrfs()) {
@@ -127,6 +127,25 @@ public class TreeController {
             crfs.add(newCrf);
 
         }
+
+        // Event Start Date
+        TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "START_DATE" : "Start Date", "closed", "item", "E_", "START_DATE");
+        startDate.setName("Start Date");
+        startDate.setOid("START_DATE");
+        startDate.addAttr("oid", eventOid + ".START_DATE");
+        startDate.addAttr("eventOid", eventOid);
+        startDate.getData().setIcon("item");
+        crfs.add(startDate);
+
+        // Event Status
+        TreeModelLeaf eventStatus = new TreeModelLeaf(useOid ? "STATUS" : "Status", "closed", "item", "E_", "STATUS");
+        eventStatus.setName("Status");
+        eventStatus.setOid("STATUS");
+        eventStatus.addAttr("oid", eventOid + ".STATUS");
+        eventStatus.addAttr("eventOid", eventOid);
+        eventStatus.getData().setIcon("item");
+        crfs.add(eventStatus);
+
         return crfs;
 
     }
