@@ -45,6 +45,8 @@
     <fmt:message key="tooltip_apply_on_insert" var="tooltipApplyOnInsert"/>
     <fmt:message key="tooltip_apply_on_value" var="tooltipApplyOnValue"/>
     <fmt:message key="tooltip_apply_on_expression" var="tooltipApplyOnExpression"/>
+    <fmt:message key="tooltip_event_apply_to" var="tooltipEventApplyTo"/>
+    <fmt:message key="tooltip_event_expression" var="tooltipEventExpression"/>
      
     <span class="topButtons">
     <button id="validateButton1" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Validate</span></button>
@@ -340,6 +342,9 @@
                     break;
                 case "addInsertAction":
                     addInsertAction("${toolExpressionEvaluatesTo}","${tooltipApplyOnInsert}","${tooltipApplyOnValue}","${tooltipApplyOnExpression}");
+                    break;
+                case "addEventAction":
+                    addEventAction("${toolExpressionEvaluatesTo}","${tooltipEventExpression}","${tooltipEventApplyTo}");
                     break;      
                 default:
                     // DO NOTHING specifically when Add is selected
