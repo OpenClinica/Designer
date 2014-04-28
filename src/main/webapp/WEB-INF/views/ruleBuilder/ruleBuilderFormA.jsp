@@ -273,6 +273,34 @@
             </fieldset>
             </span>
         </c:forEach>
+
+        <!-- event Actions -->
+        <c:forEach items="${rulesCommand.ruleRef.lazyEventActions}" varStatus="gridRow">
+            <span id="lazyEventActions${gridRow.index}">
+            <fieldset class="login">
+            <legend><span><fmt:message key="label_event_action"/> <a id="removeEventAction" href="#" onclick="$('#lazyEventActions${gridRow.index}').remove();"><img title="Remove" alt="Remove" src="images/bt_Remove.gif" name="bt_Remove1"></a></span></legend>
+            
+            <p>
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label> 
+                <form:select path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                  <form:option value="true"/>
+                  <form:option value="false"/>
+                </form:select>
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" cssClass="error" />
+            </p>
+            <p>
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.applyToLabel" for="ruleRef.lazyEventActions[${gridRow.index}].OID" path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="errorTextColor"><fmt:message key="label_to"/>: </form:label>
+                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="errorBorder" title="${tooltipTo}" />
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssClass="errorTextColor"/>
+            </p>
+            <p>
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyEventDestinations${gridRow.index}.valueExpression" for="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" path="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" cssErrorClass="errorTextColor"><fmt:message key="label_message"/>: </form:label>
+                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" cssErrorClass="errorBorder" title="${tooltipTo}" />
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" cssClass="errorTextColor" />
+            </p>
+            </fieldset>
+            </span>
+        </c:forEach>
     </div>
     
 </form:form>

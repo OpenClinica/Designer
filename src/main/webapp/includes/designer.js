@@ -239,35 +239,34 @@
     }
 
     function addEventAction(toolExpressionEvaluatesTo,tooltipExpression,tooltipApplyTo){
-            var nameAttrOLlazyEventActions =  $("textarea[name*=lazyEventActions]").last().attr("id");
-            index = nameAttrOLlazyEventActions == null ? 0 : parseInt(nameAttrOLlazyEventActions.match(/[\d]/)) +1;
-            var propPrefix = "ruleRef.lazyEventActions[" + index  + "]";
-            var idPrefix = "ruleRef.lazyEventActions" + index  + "";
-            $("#ruleActions").append(
-             "<span id=\"lazyEventActions" + index + "\">"
-             + "<fieldset class=\"login\">"
-             + "<legend><span>Event Action " //+ index
-             + "<a id=\"removeEventAction\" href=\"#\" onclick=\"$('#lazyEventActions"+ index +"').remove();\"><img title=\"Remove\" alt=\"Remove\" src=\"images/bt_Remove.gif\" name=\"bt_Remove1\"><\/a>"
-             + "<\/span><\/legend>"
-             + "<p>"
-             + "<label id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
-             + " <option value=\"true\">true<\/option> "
-             + " <option value=\"false\">false<\/option> "
-             + "  <\/select>"
-             + " <\/p><p>"
-             + "<label id=\"ruleRef.lazyEventActions" + index  + ".applyToLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].applyTo\">Apply To:<\/label>"
-             + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].applyTo\" id=\"ruleRef.lazyEventActions" + index  + "..lazyProperties" + index  + ".applyTo\" title=\"" + tooltipApplyTo + "\" > "
-             + "<\/p><p>"
-             + "<label id=\"ruleRef.lazyEventActions" + index  + ".expressionLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].expression\">Expression:<\/label>"
-             + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].expression\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".expression\" title=\"" + tooltipExpression + "\" >"
-             + "<\/p>"
-             + addRun(propPrefix,idPrefix,true,true,true,true)
-             + "<\/fieldset>"
-             + "<\/span>"
-             );
-             $('#theCenter').animate({ scrollTop: $("#lazyEventActions" + index).offset().top }, 1000);
-             initializeToolTips();
+        var nameAttrOLlazyEventActions =  $("textarea[name*=lazyEventActions]").last().attr("id");
+        index = nameAttrOLlazyEventActions == null ? 0 : parseInt(nameAttrOLlazyEventActions.match(/[\d]/)) +1;
+        var propPrefix = "ruleRef.lazyEventActions[" + index  + "]";
+        var idPrefix = "ruleRef.lazyEventActions" + index  + "";
+        $("#ruleActions").append(
+         "<span id=\"lazyEventActions" + index + "\">"
+         + "<fieldset class=\"login\">"
+         + "<legend><span>Event Action " //+ index
+         + "<a id=\"removeEventAction\" href=\"#\" onclick=\"$('#lazyEventActions"+ index +"').remove();\"><img title=\"Remove\" alt=\"Remove\" src=\"images/bt_Remove.gif\" name=\"bt_Remove1\"><\/a>"
+         + "<\/span><\/legend>"
+         + "<p>"
+         + "<label id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
+         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+         + " <option value=\"true\">true<\/option> "
+         + " <option value=\"false\">false<\/option> "
+         + "  <\/select>"
+         + " <\/p><p>"
+         + "<label id=\"ruleRef.lazyEventActions" + index  + ".applyToLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].OID\">Apply To:<\/label>"
+         + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].OID\" id=\"ruleRef.lazyEventActions" + index  + ".OID\" title=\"" + tooltipApplyTo + "\" > "
+         + "<\/p><p>"
+         + "<label id=\"ruleRef.lazyEventActions" + index  + ".expressionLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyEventDestinations[" + index  + "].valueExpression\">Expression:<\/label>"
+         + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression\" title=\"" + tooltipExpression + "\" >"
+         + "<\/p>"
+         + "<\/fieldset>"
+         + "<\/span>"
+         );
+         $('#theCenter').animate({ scrollTop: $("#lazyEventActions" + index).offset().top }, 1000);
+         initializeToolTips();
     }
     
     function initializeWYSIWYGToolTips(targetText,ruleExpressionText){
