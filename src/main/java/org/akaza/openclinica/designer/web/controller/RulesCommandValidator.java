@@ -7,6 +7,7 @@ import org.openclinica.ns.rules.v31.InsertActionType;
 import org.openclinica.ns.rules.v31.PropertyType;
 import org.openclinica.ns.rules.v31.RuleDefType;
 import org.openclinica.ns.rules.v31.ShowActionType;
+import org.openclinica.ns.rules.v31.EventActionType;
 import org.openclinica.ns.rules.v31.TargetType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -45,7 +46,7 @@ public class RulesCommandValidator implements Validator {
         LazyRuleRefType2 action = p.getRuleRef();
         // At least one action has to be selected
         if (action.getLazyDiscrepancyNoteActions().isEmpty() && action.getLazyEmailActions().isEmpty() && action.getLazyHideActions().isEmpty()
-            && action.getLazyInsertActions().isEmpty() && action.getLazyShowActions().isEmpty()) {
+            && action.getLazyInsertActions().isEmpty() && action.getLazyShowActions().isEmpty() && action.getLazyEventActions().isEmpty()) {
             e.rejectValue("addActions", "add.action");
         }
 

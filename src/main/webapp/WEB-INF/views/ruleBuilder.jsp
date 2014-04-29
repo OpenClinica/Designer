@@ -343,7 +343,7 @@ $(function () {
     });
     $("#demo3").jstree({
          "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties']",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 var ctrl = data.r[0],
                     pos = 0,
@@ -437,7 +437,7 @@ $(function () {
 $(function () {
     $("#demo2").jstree({
         "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties']",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 var ctrl = data.r[0],
                     pos = 0,
@@ -537,7 +537,7 @@ $(function () {
 $(function () {
     $("#demo4").jstree({
         "dnd": {
-           "drop_target": "#ocTextArea, input[name*='lazyProperties']",
+           "drop_target": "#ocTextArea, input[name*='lazyProperties'], input[name*='lazyEventActions']",
            "drop_finish": function (data) {
                alert("test");
                var ctrl = data.r[0],

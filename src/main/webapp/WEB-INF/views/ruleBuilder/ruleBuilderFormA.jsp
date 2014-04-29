@@ -288,16 +288,23 @@
                 </form:select>
                 <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" cssClass="error" />
             </p>
+
             <p>
-                <form:label id="ruleRef.lazyEventActions${gridRow.index}.applyToLabel" for="ruleRef.lazyEventActions[${gridRow.index}].OID" path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="errorTextColor"><fmt:message key="label_to"/>: </form:label>
-                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="errorBorder" title="${tooltipTo}" />
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.applyToLabel" for="ruleRef.lazyEventActions[${gridRow.index}].OID" path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="errorTextColor"><fmt:message key="label_event_apply_to"/>: </form:label>
+                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="errorBorder" title="${tooltipEventApplyTo}" style="width: 50%" />
                 <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssClass="errorTextColor"/>
             </p>
+
             <p>
-                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyEventDestinations${gridRow.index}.valueExpression" for="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" path="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" cssErrorClass="errorTextColor"><fmt:message key="label_message"/>: </form:label>
-                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" cssErrorClass="errorBorder" title="${tooltipTo}" />
-                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyEventDestinations[${gridRow.index}].valueExpression" cssClass="errorTextColor" />
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="errorTextColor"><fmt:message key="label_event_value_expression"/>: </form:label>
+                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="errorBorder" title="${tooltipEventExpression}" style="width: 50%" />
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssClass="errorTextColor" />
             </p>
+
+            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].placeHolder"/>
+            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].property"/>
+
+            <designerTags:renderActionRunOnStatusTable pathPrefix="ruleRef.lazyEventActions[${gridRow.index}]"/>
             </fieldset>
             </span>
         </c:forEach>
@@ -313,20 +320,20 @@
 <script type="text/javascript">
         
     function save(){
-    	$('form#rulesCommand').attr({action: "ruleBuilder/saveRuleFromDesignerTab?ignoreDuplicates=true"});
+        $('form#rulesCommand').attr({action: "ruleBuilder/saveRuleFromDesignerTab?ignoreDuplicates=true"});
         $('#rulesCommand').submit();
     }
     
     function reset(){
-    	$.get("ruleBuilder/ruleBuilderFormA?reset=true", function(data) {
+        $.get("ruleBuilder/ruleBuilderFormA?reset=true", function(data) {
             $('#kkforms').html(data);
         });
     }
 
   
     $(document).ready( function() {
-    	
-    	// Initialize WYSIWYG editors 
+        
+        // Initialize WYSIWYG editors 
         new nicEditor({
             iconsPath: 'includes/nicEdit/nicEditorIcons.gif',
             maxHeight: 120,
@@ -381,8 +388,8 @@
         });
         
         $("#rulesCommand").submit(function() {
-        	nicEditors.findEditor('ruleDef.expression.value').saveContent()
-        	nicEditors.findEditor('target.value').saveContent()
+            nicEditors.findEditor('ruleDef.expression.value').saveContent()
+            nicEditors.findEditor('target.value').saveContent()
             $.post($(this).attr("action"), $(this).serialize(), function(data) {
                 $('#kkforms').html(data);
                 
@@ -393,13 +400,13 @@
         });
         
         $("#validateButton1,#validateButton2").click(function(){
-        	$('form#rulesCommand').attr({action: "ruleBuilder/ruleBuilderFormA"});
-        	$('#rulesCommand').submit();
+            $('form#rulesCommand').attr({action: "ruleBuilder/ruleBuilderFormA"});
+            $('#rulesCommand').submit();
             return false;  
         });
         
         $("#saveButton1,#saveButton2").click(function(){
-        	$('form#rulesCommand').attr({action: "ruleBuilder/saveRuleFromDesignerTab?ignoreDuplicates=false"});
+            $('form#rulesCommand').attr({action: "ruleBuilder/saveRuleFromDesignerTab?ignoreDuplicates=false"});
             $('#rulesCommand').submit();
             return false;  
         });

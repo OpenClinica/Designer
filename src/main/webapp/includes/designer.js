@@ -1,8 +1,8 @@
-	function addRun(propPrefix,idPrefix,runOnAdmin,runOnInitial,runOnDouble,runOnBatch){
-    	var runOnAdminVal = runOnAdmin == true ? "checked" : "";
-    	var runOnInitialVal = runOnInitial == true ? "checked" : "";
-    	var runOnDoubleVal = runOnDouble == true ? "checked" : "";
-    	var runOnBatchVal = runOnBatch == true ? "checked" : "";
+    function addRun(propPrefix,idPrefix,runOnAdmin,runOnInitial,runOnDouble,runOnBatch){
+        var runOnAdminVal = runOnAdmin == true ? "checked" : "";
+        var runOnInitialVal = runOnInitial == true ? "checked" : "";
+        var runOnDoubleVal = runOnDouble == true ? "checked" : "";
+        var runOnBatchVal = runOnBatch == true ? "checked" : "";
         var html = "<div id=\"tables\" class=\"block\" style=\"margin: 0px;\">"
             + "<table><tbody>"
             + "<tr>"
@@ -257,27 +257,82 @@
          + "  <\/select>"
          + " <\/p><p>"
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".applyToLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].OID\">Apply To:<\/label>"
-         + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].OID\" id=\"ruleRef.lazyEventActions" + index  + ".OID\" title=\"" + tooltipApplyTo + "\" > "
+         + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].OID\" id=\"ruleRef.lazyEventActions" + index  + ".OID\" title=\"" + tooltipApplyTo + "\" style=\"width: 50%\"> "
          + "<\/p><p>"
-         + "<label id=\"ruleRef.lazyEventActions" + index  + ".expressionLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyEventDestinations[" + index  + "].valueExpression\">Expression:<\/label>"
-         + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression\" title=\"" + tooltipExpression + "\" >"
+         + "<label id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression.valueLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression.value\">Value Expression:<\/label>"
+         + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression.value\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression.value\" title=\"" + tooltipExpression + "\" style=\"width: 50%\">"
+         + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].placeHolder" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".placeHolder\"" + " value=\"placeHolder\"" + "\">"
+         + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].property" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".property\"" + " value=\"START_DATE\"" + "\">"
          + "<\/p>"
+         + addRunOnStatus(propPrefix,idPrefix,true,true,false,false,false,false)
          + "<\/fieldset>"
          + "<\/span>"
          );
          $('#theCenter').animate({ scrollTop: $("#lazyEventActions" + index).offset().top }, 1000);
          initializeToolTips();
     }
-    
+
+    function addRunOnStatus(propPrefix,idPrefix,runOnNotStarted,runOnScheduled,runOnStarted,runOnCompleted,runOnSkipped,runOnStopped){
+        var runOnNotStartedVal = runOnNotStarted == true ? "checked" : "";
+        var runOnScheduledVal = runOnScheduled == true ? "checked" : "";
+        var runOnStartedVal = runOnStarted == true ? "checked" : "";
+        var runOnCompletedVal = runOnCompleted == true ? "checked" : "";
+        var runOnSkippedVal = runOnSkipped == true ? "checked" : "";
+        var runOnStoppedVal = runOnStopped == true ? "checked" : "";
+        var html = "<div id=\"tables\" class=\"block\" style=\"margin: 0px;\">"
+            + "<table><tbody>"
+            + "<tr>"
+            + "<td colspan=\"100%\">Specify the event status where this action should run</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<th>Not Started</th>"
+            + "<th>Scheduled</th>"
+            + "<th>Data Entry Started</th>"
+            + "<th>Completed</th>"
+            + "<th>Skipped</th>"
+            + "<th>Stopped</th>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>"
+            + "<input type=\"checkbox\" " + runOnNotStartedVal +  " name=\"" + propPrefix + ".runOnStatus.notStarted\" id=\"" + idPrefix + ".runOnStatus.notStarted1\">" 
+            + "<input type=\"hidden\" value=\"on\" name=\"_" + propPrefix + ".runOnStatus.notStarted\">"
+            + "</td>"
+            + "<td>"
+            + "<input type=\"checkbox\" " + runOnScheduledVal + " name=\"" + propPrefix + ".runOnStatus.scheduled\" id=\"" + idPrefix + ".runOnStatus.scheduled1\">" 
+            + "<input type=\"hidden\" value=\"on\" name=\"_" + propPrefix + ".runOnStatus.scheduled\">"
+            + "</td>"
+            + "<td>"
+            + "<input type=\"checkbox\" " + runOnStartedVal +  " name=\"" + propPrefix + ".runOnStatus.dataEntryStarted\" id=\"" + idPrefix + ".runOnStatus.dataEntryStarted1\">" 
+            + "<input type=\"hidden\" value=\"on\" name=\"_" + propPrefix + ".runOnStatus.dataEntryStarted\">"
+            + "</td>"
+            + "<td>"
+            + "<input type=\"checkbox\" " + runOnCompletedVal +  " name=\"" + propPrefix + ".runOnStatus.complete\" id=\"" + idPrefix + ".runOnStatus.complete1\">" 
+            + "<input type=\"hidden\" value=\"on\" name=\"_" + propPrefix + ".runOnStatus.complete\">"
+            + "</td>"
+            + "<td>"
+            + "<input type=\"checkbox\" " + runOnSkippedVal +  " name=\"" + propPrefix + ".runOnStatus.skipped\" id=\"" + idPrefix + ".runOnStatus.skipped1\">" 
+            + "<input type=\"hidden\" value=\"on\" name=\"_" + propPrefix + ".runOnStatus.skipped\">"
+            + "</td>"
+            + "<td>"
+            + "<input type=\"checkbox\" " + runOnStoppedVal +  " name=\"" + propPrefix + ".runOnStatus.stopped\" id=\"" + idPrefix + ".runOnStatus.stopped1\">" 
+            + "<input type=\"hidden\" value=\"on\" name=\"_" + propPrefix + ".runOnStatus.stopped\">"
+            + "</td>"
+            + "</tr>"
+            + "</tbody></table>"
+            + "</div>"
+            ;    
+        return html;        
+    }
+
     function initializeWYSIWYGToolTips(targetText,ruleExpressionText){
-    	$("#targetWYSIWYG>div").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right", content:targetText });
+        $("#targetWYSIWYG>div").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right", content:targetText });
         $("#ruleExpressionWYSIWYG>div").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right", content: ruleExpressionText });
     }
     
     
     function initializeToolTips() {
-    	
-    	$("input").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right"});
+        
+        $("input").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right"});
         $("select").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right"});
         $("textarea").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right"});
         $("a").tipTip({maxWidth: "auto", edgeOffset: 10,defaultPosition: "right"});
