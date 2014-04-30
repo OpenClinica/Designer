@@ -24,7 +24,7 @@ $(function () {
     });
     $("#demo3").jstree({
          "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last, input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 //data.r.html(data.o.attr("oid"));
                 
@@ -126,7 +126,7 @@ $(function () {
 $(function () {
     $("#demo2").jstree({
         "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last, input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 //data.r.html(data.o.attr("oid"));
                 if ( data.r.context.nodeName == 'DIV'){
@@ -231,7 +231,7 @@ $(function () {
 $(function () {
     $("#demo4").jstree({
         "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last, input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 //data.r.html(data.o.attr("oid"));
                 if ( data.r.context.nodeName == 'DIV'){

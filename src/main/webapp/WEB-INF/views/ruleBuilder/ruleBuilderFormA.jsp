@@ -302,7 +302,7 @@
             </p>
 
             <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].placeHolder"/>
-            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].property"/>
+            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property"/>
 
             <designerTags:renderActionRunOnStatusTable pathPrefix="ruleRef.lazyEventActions[${gridRow.index}]"/>
             </fieldset>

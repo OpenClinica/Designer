@@ -14,7 +14,7 @@
 				<td colspan="100%"><fmt:message key="label_specify_runonstatus_mode" /></td>
 			</tr>
 			<tr>
-				<th><fmt:message key="label_not_started" /></th>
+				<th><fmt:message key="label_not_scheduled" /></th>
 				<th><fmt:message key="label_scheduled" /></th>
 				<th><fmt:message key="label_data_entry_started" /></th>
 				<th><fmt:message key="label_completed" /></th>
@@ -22,10 +22,10 @@
 				<th><fmt:message key="label_stopped" /></th>
 			</tr>
 			<tr>
-				<td><form:checkbox path="${pathPrefix}.runOnStatus.notStarted" /></td>
+				<td><form:checkbox path="${pathPrefix}.runOnStatus.notScheduled" /></td>
 				<td><form:checkbox path="${pathPrefix}.runOnStatus.scheduled" /></td>
 				<td><form:checkbox path="${pathPrefix}.runOnStatus.dataEntryStarted" /></td>
-				<td><form:checkbox path="${pathPrefix}.runOnStatus.complete" /></td>
+				<td><form:checkbox path="${pathPrefix}.runOnStatus.completed" /></td>
 				<td><form:checkbox path="${pathPrefix}.runOnStatus.skipped" /></td>
 				<td><form:checkbox path="${pathPrefix}.runOnStatus.stopped" /></td>
 			</tr>
