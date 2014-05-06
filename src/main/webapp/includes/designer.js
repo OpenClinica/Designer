@@ -262,7 +262,7 @@
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression.valueLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression.value\">Value Expression:<\/label>"
          + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression.value\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression.value\" title=\"" + tooltipExpression + "\" style=\"width: 50%\">"
          + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].placeHolder" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".placeHolder\"" + " value=\"placeHolder\"" + "\">"
-         + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\"" + " value=\"START_DATE\"" + "\">"
+         + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\"" + " value=\"STARTDATE\"" + "\">"
          + "<\/p>"
          + addRunOnStatus(propPrefix,idPrefix,true,true,false,false,false,false)
          + "<\/fieldset>"

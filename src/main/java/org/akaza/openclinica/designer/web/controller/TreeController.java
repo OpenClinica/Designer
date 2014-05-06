@@ -129,10 +129,10 @@ public class TreeController {
         }
 
         // Event Start Date
-        TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "START_DATE" : "Start Date", "closed", "item", "E_", "START_DATE");
+        TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "STARTDATE" : "Start Date", "closed", "item", "E_", "STARTDATE");
         startDate.setName("Start Date");
-        startDate.setOid("START_DATE");
-        startDate.addAttr("oid", eventOid + ".START_DATE");
+        startDate.setOid("STARTDATE");
+        startDate.addAttr("oid", eventOid + ".STARTDATE");
         startDate.addAttr("eventOid", eventOid);
         startDate.getData().setIcon("item");
         crfs.add(startDate);
