@@ -115,19 +115,6 @@ public class TreeController {
         List<TreeModelInterface> crfs = new ArrayList<TreeModelInterface>();
         UIEvent uiEvent = uiODMContainer.getEventsByOID(eventOid);
 
-        for (UICrf uiCrf : uiEvent.getCrfs()) {
-
-            TreeModel newCrf = new TreeModel(useOid ? uiCrf.getOid() : uiCrf.getName(), "closed", "crf", "E_");
-            newCrf.setName(uiCrf.getName());
-            newCrf.setOid(uiCrf.getOid());
-            newCrf.addAttr("oid", uiCrf.getOid());
-            newCrf.addAttr("eventOid", eventOid);
-            // newCrf.getData().setIcon("crf");
-            newCrf.getData().setIcon("crf");
-            crfs.add(newCrf);
-
-        }
-
         // Event Start Date
         TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "STARTDATE" : "Start Date", "closed", "item", "E_", "STARTDATE");
         startDate.setName("Start Date");
@@ -145,6 +132,19 @@ public class TreeController {
         eventStatus.addAttr("eventOid", eventOid);
         eventStatus.getData().setIcon("item");
         crfs.add(eventStatus);
+
+        for (UICrf uiCrf : uiEvent.getCrfs()) {
+
+            TreeModel newCrf = new TreeModel(useOid ? uiCrf.getOid() : uiCrf.getName(), "closed", "crf", "E_");
+            newCrf.setName(uiCrf.getName());
+            newCrf.setOid(uiCrf.getOid());
+            newCrf.addAttr("oid", uiCrf.getOid());
+            newCrf.addAttr("eventOid", eventOid);
+            // newCrf.getData().setIcon("crf");
+            newCrf.getData().setIcon("crf");
+            crfs.add(newCrf);
+
+        }
 
         return crfs;
 
