@@ -112,9 +112,7 @@ public class TreeController {
     }
 
     private List<TreeModelInterface> getEventCrfs(UIODMContainer uiODMContainer, String eventOid, Boolean useOid) {
-        List<TreeModelInterface> crfs = new ArrayList<TreeModelInterface>();
-        UIEvent uiEvent = uiODMContainer.getEventsByOID(eventOid);
-
+        
         // Event Start Date
         TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "STARTDATE" : "Start Date", "closed", "item", "E_", "STARTDATE");
         startDate.setName("Start Date");
@@ -132,6 +130,9 @@ public class TreeController {
         eventStatus.addAttr("eventOid", eventOid);
         eventStatus.getData().setIcon("item");
         crfs.add(eventStatus);
+
+        List<TreeModelInterface> crfs = new ArrayList<TreeModelInterface>();
+        UIEvent uiEvent = uiODMContainer.getEventsByOID(eventOid);
 
         for (UICrf uiCrf : uiEvent.getCrfs()) {
 
