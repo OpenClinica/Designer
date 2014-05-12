@@ -238,7 +238,7 @@
          return k;
     }
 
-    function addEventAction(toolExpressionEvaluatesTo,tooltipExpression,tooltipApplyTo){
+    function addEventAction(toolExpressionEvaluatesTo,tooltipExpression,tooltipApplyTo,tooltipEventProperty){
         var nameAttrOLlazyEventActions =  $("textarea[name*=lazyEventActions]").last().attr("id");
         index = nameAttrOLlazyEventActions == null ? 0 : parseInt(nameAttrOLlazyEventActions.match(/[\d]/)) +1;
         var propPrefix = "ruleRef.lazyEventActions[" + index  + "]";
@@ -259,10 +259,15 @@
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".applyToLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].OID\">Apply To:<\/label>"
          + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].OID\" id=\"ruleRef.lazyEventActions" + index  + ".OID\" title=\"" + tooltipApplyTo + "\" style=\"width: 50%\"> "
          + "<\/p><p>"
+         + "<label id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".PropertyLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\">Property:<\/label>"
+         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\" title=\"" + tooltipEventProperty + "\" > "
+         + " <option value=\"\">Select<\/option> "
+         + " <option value=\"STARTDATE\">STARTDATE<\/option> "
+         + "  <\/select>"
+         + " <\/p><p>"
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression.valueLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression.value\">Value Expression:<\/label>"
          + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].valueExpression.value\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".valueExpression.value\" title=\"" + tooltipExpression + "\" style=\"width: 50%\">"
          + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].placeHolder" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".placeHolder\"" + " value=\"placeHolder\"" + "\">"
-         + "<input type=\"hidden\" name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property" +  "\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\"" + " value=\"STARTDATE\"" + "\">"
          + "<\/p>"
          + addRunOnStatus(propPrefix,idPrefix,true,true,false,false,false,false)
          + "<\/fieldset>"

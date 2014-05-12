@@ -47,6 +47,7 @@
     <fmt:message key="tooltip_apply_on_expression" var="tooltipApplyOnExpression"/>
     <fmt:message key="tooltip_event_apply_to" var="tooltipEventApplyTo"/>
     <fmt:message key="tooltip_event_expression" var="tooltipEventExpression"/>
+    <fmt:message key="tooltip_event_property" var="tooltipEventProperty"/>
      
     <span class="topButtons">
     <button id="validateButton1" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Validate</span></button>
@@ -296,13 +297,21 @@
             </p>
 
             <p>
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
+                <form:select path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" title="${tooltipEventProperty }">
+                  <form:option value="">Select</form:option>
+                  <form:option value="STARTDATE">STARTDATE</form:option>
+                </form:select>
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" cssClass="error" />
+            </p>
+
+            <p>
                 <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="errorTextColor"><fmt:message key="label_event_value_expression"/>: </form:label>
                 <form:input path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="errorBorder" title="${tooltipEventExpression}" style="width: 50%" />
                 <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssClass="errorTextColor" />
             </p>
 
             <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].placeHolder"/>
-            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property"/>
 
             <designerTags:renderActionRunOnStatusTable pathPrefix="ruleRef.lazyEventActions[${gridRow.index}]"/>
             </fieldset>
@@ -379,7 +388,7 @@
                     addInsertAction("${toolExpressionEvaluatesTo}","${tooltipApplyOnInsert}","${tooltipApplyOnValue}","${tooltipApplyOnExpression}");
                     break;
                 case "addEventAction":
-                    addEventAction("${toolExpressionEvaluatesTo}","${tooltipEventExpression}","${tooltipEventApplyTo}");
+                    addEventAction("${toolExpressionEvaluatesTo}","${tooltipEventExpression}","${tooltipEventApplyTo}","${tooltipEventProperty}");
                     break;      
                 default:
                     // DO NOTHING specifically when Add is selected
