@@ -194,7 +194,11 @@ body { background-color: #FFFFFF; }
 
 .buttonRight{float:right;}
 
-
+/* STYLES FOR FOOTER */
+.ui-layout-south a {
+    color: #789EC5;
+    font-size: 12px;
+}
 
 
 

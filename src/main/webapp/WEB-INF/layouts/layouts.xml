@@ -27,7 +27,7 @@
   <definition name="designer2" template="/WEB-INF/layouts/defaulty.jspx">
     <put-attribute name="head" value="/WEB-INF/views/head.jsp" />
     <put-attribute name="north" value="/WEB-INF/views/north.jsp" />
-    <!-- NO NEED FOR FOOTER <put-attribute name="south" value="/WEB-INF/views/south.jsp" />  -->
+    <put-attribute name="south" value="/WEB-INF/views/south.jsp" />
     <put-attribute name="center" value="/WEB-INF/views/center.jsp" />
     <put-attribute name="west" value="/WEB-INF/views/west.jsp" />
     <put-attribute name="east" value="/WEB-INF/views/east.jsp" />
