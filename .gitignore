@@ -7,9 +7,6 @@ release.properties
 .classpath
 .project
 .settings/
-<<<<<<< Updated upstream
 designer.log
-=======
 .idea/
 Designer.iml
->>>>>>> Stashed changes
