@@ -17,6 +17,7 @@ public class LazyEventActionType extends EventActionType {
     public LazyEventActionType(EventActionType eventActionType) {
         this();
         this.setIfExpressionEvaluates(eventActionType.getIfExpressionEvaluates());
+        this.setOID(eventActionType.getOID());
         this.setRunOnStatus(eventActionType.getRunOnStatus());
         this.getEventDestination().addAll(eventActionType.getEventDestination());
         for (EventDestinationType eventDestinationType : this.getEventDestination()) {
