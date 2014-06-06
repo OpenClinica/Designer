@@ -49,13 +49,18 @@ public class TreeController {
 
     @RequestMapping(value = "/itemDetails", method = RequestMethod.GET)
     public @ResponseBody
-    UIItemDetail getItemDetails(@RequestParam String name, HttpSession session) throws IOException {
+    UIEntityDetail getItemDetails(@RequestParam String name, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         UIODMBuilder uiODMBuilder = new UIODMBuilder(uiODMContainer);
-        UIItemDetail itemDetail = uiODMBuilder.buildItemDetail(name);
+        UIEntityDetail itemDetail = uiODMBuilder.buildItemDetail(name);
 
-        return itemDetail;
+        if (name.lastIndexOf('.') != -1) {
+            return (UIEventItemDetail) itemDetail;
+        } else {
+            return (UIItemDetail) itemDetail;
+        }
+        
     }
 
     @RequestMapping(value = "/eventsList", method = RequestMethod.GET)
@@ -116,18 +121,18 @@ public class TreeController {
         List<TreeModelInterface> crfs = new ArrayList<TreeModelInterface>();
 
         // Event Start Date
-        TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "STARTDATE" : "Start Date", "closed", "item", "E_", "STARTDATE");
+        TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "STARTDATE" : "Start Date", "closed", "item", "E_", eventOid + ".STARTDATE");
         startDate.setName("Start Date");
-        startDate.setOid("STARTDATE");
+        startDate.setOid(eventOid + ".STARTDATE");
         startDate.addAttr("oid", eventOid + ".STARTDATE");
         startDate.addAttr("eventOid", eventOid);
         startDate.getData().setIcon("item");
         crfs.add(startDate);
 
         // Event Status
-        TreeModelLeaf eventStatus = new TreeModelLeaf(useOid ? "STATUS" : "Status", "closed", "item", "E_", "STATUS");
+        TreeModelLeaf eventStatus = new TreeModelLeaf(useOid ? "STATUS" : "Status", "closed", "item", "E_", eventOid + ".STATUS");
         eventStatus.setName("Status");
-        eventStatus.setOid("STATUS");
+        eventStatus.setOid(eventOid + ".STATUS");
         eventStatus.addAttr("oid", eventOid + ".STATUS");
         eventStatus.addAttr("eventOid", eventOid);
         eventStatus.getData().setIcon("item");

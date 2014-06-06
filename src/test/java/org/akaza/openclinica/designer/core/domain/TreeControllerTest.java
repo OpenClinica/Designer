@@ -77,10 +77,10 @@ public class TreeControllerTest {
         mockHttpSession.setAttribute("uiODMContainer", mockedUIODMContainer);
         List<TreeModelInterface> treeModel = treeController.eventsCrfsList(METHOD_PARAM, mockHttpSession);
         assertEquals(treeModel.size(), 3);
-        assertEquals(((TreeModelLeaf) treeModel.get(0)).getOid(), "STARTDATE");
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getOid(), METHOD_PARAM + ".STARTDATE");
         assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getIcon(), "item");
         assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getTitle(), "Start Date");
-        assertEquals(((TreeModelLeaf) treeModel.get(1)).getOid(), "STATUS");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getOid(), METHOD_PARAM + ".STATUS");
         assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getIcon(), "item");
         assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getTitle(), "Status");
         assertEquals(((TreeModel) treeModel.get(2)).getOid(), "C_CRF");
@@ -97,10 +97,10 @@ public class TreeControllerTest {
         mockHttpSession.setAttribute("uiODMContainer", mockedUIODMContainer);
         List<TreeModelInterface> treeModel = treeController.eventsCrfsListOid(METHOD_PARAM, mockHttpSession);
         assertEquals(treeModel.size(), 3);
-        assertEquals(((TreeModelLeaf) treeModel.get(0)).getOid(), "STARTDATE");
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getOid(), METHOD_PARAM + ".STARTDATE");
         assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getIcon(), "item");
         assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getTitle(), "STARTDATE");
-        assertEquals(((TreeModelLeaf) treeModel.get(1)).getOid(), "STATUS");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getOid(), METHOD_PARAM + ".STATUS");
         assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getIcon(), "item");
         assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getTitle(), "STATUS");
         assertEquals(((TreeModel) treeModel.get(2)).getOid(), "C_CRF");
