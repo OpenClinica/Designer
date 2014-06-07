@@ -11,7 +11,7 @@
 	<table>
 		<tbody>
 			<tr>
-				<td colspan="100%"><fmt:message key="label_specify_runonstatus_mode" /></td>
+				<td colspan="100%"><fmt:message key="label_event_specify_runonstatus_mode" /></td>
 			</tr>
 			<tr>
 				<th><fmt:message key="label_not_scheduled" /></th>

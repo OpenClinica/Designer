@@ -287,7 +287,7 @@
         var html = "<div id=\"tables\" class=\"block\" style=\"margin: 0px;\">"
             + "<table><tbody>"
             + "<tr>"
-            + "<td colspan=\"100%\">Specify which status(es) the 'Apply to' event should have in order for the action to run</td>"
+            + "<td colspan=\"100%\">Run this action if the status of the 'Apply To' Event is:</td>"
             + "</tr>"
             + "<tr>"
             + "<th>Not Scheduled</th>"
