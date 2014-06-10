@@ -49,13 +49,18 @@ public class TreeController {
 
     @RequestMapping(value = "/itemDetails", method = RequestMethod.GET)
     public @ResponseBody
-    UIItemDetail getItemDetails(@RequestParam String name, HttpSession session) throws IOException {
+    UIEntityDetail getItemDetails(@RequestParam String name, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         UIODMBuilder uiODMBuilder = new UIODMBuilder(uiODMContainer);
-        UIItemDetail itemDetail = uiODMBuilder.buildItemDetail(name);
+        UIEntityDetail itemDetail = uiODMBuilder.buildItemDetail(name);
 
-        return itemDetail;
+        if (name.lastIndexOf('.') != -1) {
+            return (UIEventItemDetail) itemDetail;
+        } else {
+            return (UIItemDetail) itemDetail;
+        }
+        
     }
 
     @RequestMapping(value = "/eventsList", method = RequestMethod.GET)

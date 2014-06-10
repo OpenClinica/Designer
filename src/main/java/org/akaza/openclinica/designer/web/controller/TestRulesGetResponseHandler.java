@@ -18,8 +18,9 @@ public class TestRulesGetResponseHandler implements TestRulesResponseHandler {
         for (ParameterType parameterType : response.getParameters()) {
             if (!parameterType.getKey().equals("result") && !parameterType.getKey().equals("ruleEvaluatesTo")
                 && !parameterType.getKey().equals("ruleValidation")) {
-                UIItemDetail itemDetail = uiODMBuilder.buildItemDetail(parameterType.getKey());
-                if (null != itemDetail) {
+                UIEntityDetail itemDetail = uiODMBuilder.buildItemDetail(parameterType.getKey());
+                System.out.println("itemDetail.getClass() : " + itemDetail.getClass());
+                if (itemDetail.getClass() == UIItemDetail.class) {
                     form.getRuleProperties().put(parameterType.getKey(), parameterType.getValue());
                     inputFields.add(InputFieldFactory.createInputField("ruleProperties['" + parameterType.getKey() + "']", parameterType.getKey(), itemDetail));
                 } else {
@@ -36,7 +37,6 @@ public class TestRulesGetResponseHandler implements TestRulesResponseHandler {
                     }
                 }
 
-                
             }
         }
 

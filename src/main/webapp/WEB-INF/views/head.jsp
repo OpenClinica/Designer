@@ -146,9 +146,13 @@
     
     function populateItemDetails(oid){
         $.getJSON('tree/itemDetails',{ name: oid }, function(data) {
-              $('#itemDetails').html('<p>' + addItemDetailsTable(data) + '</p>');
-              $('#accordion2').accordion('activate', 1);
-            });
+            if (oid.indexOf(".") > -1) {
+                $('#itemDetails').html('<p>' + addEntityDetailsTable(data) + '</p>');
+            } else {
+                $('#itemDetails').html('<p>' + addItemDetailsTable(data) + '</p>');
+            }
+            $('#accordion2').accordion('activate', 1);
+        });
     }
     
     function addItemDetailsTable(data){
@@ -206,9 +210,69 @@
             }   
           return html;        
     }
+
+    function addEntityDetailsTable(data){
+        var html = "";
+        var responseOptionsValueHtml = "";
+
+        var codeListItemSize = numAttrs(data.responseOptions);
+        if (codeListItemSize > 0) {
+            responseOptionsValueHtml = " " + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + codeListItemSize + "):</th>" + "</tr>"
+            var dialogResponseOptionsValueHtml = "<table><tbody>" + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + codeListItemSize + "):</th>" + "</tr>"
+
+            var key2_ctr = 0;
+            for(key2 in data.responseOptions) {
+                var theVar =
+                     "<tr>" 
+                     + "<td style=\"padding: 0.2em 3em; border-top: 0px none; border-bottom: 0px none;\">" + key2  + "</td>" 
+                     + "<td style=\"border-top: 0px none; border-bottom: 0px none;\">" + data.responseOptions[key2] + "</td>" 
+                     + "</tr>";
+                if (key2_ctr < 5) { 
+                    responseOptionsValueHtml += theVar;
+                    dialogResponseOptionsValueHtml += theVar;
+                } else {
+                    dialogResponseOptionsValueHtml += theVar;
+                }
+                key2_ctr++;                       
+            }
+
+            responseOptionsValueHtml += codeListItemSize >= 5 ? "<tr><td colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"><a onclick=\"openLink()\" href=\"#\">more</a></td></tr>" : "";
+                 $('#dialogResponseOptionsValuesHtml').html(dialogResponseOptionsValueHtml + "</tbody></table>");
+        }
+             
+        html += "<div id=\"tables\" class=\"block\" style=\"margin: 0px;\">"
+            + "<table><tbody>"
+            + "<tr>" 
+            + "<td>" + data.itemName +  "</td>"
+            + "</tr>"
+            + "</tbody></table>"
+            + "<table><tbody>"
+            + "<tr>" + "<th>Event Name:</th>" + "<td>" + data.eventName + "</td>" + "</tr>"
+            + "<tr>" + "<th>Event OID:</th>" + "<td>" + data.eventOid + "</td>" + "</tr>"
+            + "<tr>" + "<th>Event Repeating:</th>" + "<td>" + data.eventRepeating + "</td>" + "</tr>"
+            + "<tr>" + "<th>Item Name:</th>" + "<td>" + data.itemName + "</td>" + "</tr>"
+            + "<tr>" + "<th>OID:</th>" + "<td>" + data.oid + "</td>" + "</tr>"
+            + "<tr>" + "<th>Data Type:</th>" + "<td>" + data.dataType + "</td>" + "</tr>"
+            +  responseOptionsValueHtml
+            + "</tbody></table>"
+            + "</div>"
+            ;
+
+        return html;        
+    }
     
     function openLink(){
        $('#dialogResponseOptionsValues').dialog("open");
+    }
+
+    function numAttrs(obj) {
+        var count = 0;
+            for(var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    ++count;
+                }
+            }
+        return count;
     }
     
 

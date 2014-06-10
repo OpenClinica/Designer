@@ -21,7 +21,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UIODMBuilder {
 
@@ -84,10 +86,48 @@ public class UIODMBuilder {
         return oid;
     }
 
-    UIItemDetail buildItemDetail(String oid) {
-        UIItemDetail itemDetail = new UIItemDetail();
-        ODMcomplexTypeDefinitionItemDef itemDef = getItemDefFromItemOid(oidCleaner(oid));
-        if (null != itemDef) {
+    UIEntityDetail buildItemDetail(String oid) {
+
+        if (oid.lastIndexOf('.') != -1) {
+
+            UIEventItemDetail itemDetail = new UIEventItemDetail();
+
+            String seOid = oid.substring(0, oid.lastIndexOf('.'));
+            ODMcomplexTypeDefinitionStudyEventDef seDef = getStudyEventDefByStudyEventOID(seOid);
+
+            itemDetail.setEventName(seDef.getName());
+            itemDetail.setEventOid(seDef.getOID());
+            itemDetail.setEventRepeating(seDef.getRepeating().value());
+
+            itemDetail.setItemName(oidCleaner(oid));
+            itemDetail.setOid(oid);
+
+            if (oidCleaner(oid).equals("STARTDATE")) {
+                itemDetail.setDataType("DATE");
+                itemDetail.setResponseLabel("Start Date");
+            } else if (oidCleaner(oid).equals("STATUS")) {
+                itemDetail.setDataType("STRING");
+                itemDetail.setResponseLabel("Event Status");
+
+                Map<String, String> responseOptions = new LinkedHashMap<String, String>();
+                responseOptions.put("not_scheduled", "Not Scheduled");
+                responseOptions.put("scheduled", "Scheduled");
+                responseOptions.put("data_entry_started", "Data Entry Started");
+                responseOptions.put("completed", "Completed");
+                responseOptions.put("signed", "Signed");
+                responseOptions.put("skipped", "Skipped");
+                responseOptions.put("stopped", "Stopped");
+                responseOptions.put("locked", "Locked");
+                
+                itemDetail.setResponseOptions(responseOptions);
+            }
+
+            return itemDetail;
+
+        } else {
+            
+            UIItemDetail itemDetail = new UIItemDetail();
+            ODMcomplexTypeDefinitionItemDef itemDef = getItemDefFromItemOid(oidCleaner(oid));
             itemDetail.setItemName(itemDef.getName());
             itemDetail.setOid(itemDef.getOID());
             itemDetail.setDescription(itemDef.getComment() == null ? "" : itemDef.getComment());
@@ -153,11 +193,10 @@ public class UIODMBuilder {
                     }
                 }
             }
-        } else {
-            itemDetail = null;
-        }
         
-        return itemDetail;
+            return itemDetail;
+
+        }
 
     }
 
