@@ -21,7 +21,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UIODMBuilder {
 
@@ -84,75 +86,118 @@ public class UIODMBuilder {
         return oid;
     }
 
-    UIItemDetail buildItemDetail(String oid) {
-        final UIItemDetail itemDetail = new UIItemDetail();
-        ODMcomplexTypeDefinitionItemDef itemDef = getItemDefFromItemOid(oidCleaner(oid));
-        itemDetail.setItemName(itemDef.getName());
-        itemDetail.setOid(itemDef.getOID());
-        itemDetail.setDescription(itemDef.getComment() == null ? "" : itemDef.getComment());
-        itemDetail.setDataType(itemDef.getDataType().name());
-        String validation = "";
-        String validationErrorMessage = "";
-        ODMcomplexTypeDefinitionCodeList codeList = new ODMcomplexTypeDefinitionCodeList();
-        if (itemDef.getCodeListRef() != null) {
-            codeList = getCodeListDefFromCodeListOID(itemDef.getCodeListRef().getCodeListOID());
-        }
-        OCodmComplexTypeDefinitionMultiSelectList multiSelectList = new OCodmComplexTypeDefinitionMultiSelectList();
-        for (OCodmComplexTypeDefinitionMultiSelectListRef multiSelectRef : this.container.getMultiSelectRefFromItemDef(itemDef)) {
-            multiSelectList = getMultiSelectListDefFromMultiSelectOID(multiSelectRef.getMultiSelectListID());
-        }
-        if (itemDef.getRangeCheck() != null) {
-            for (ODMcomplexTypeDefinitionRangeCheck rangeCheck : itemDef.getRangeCheck()) {
-                if (rangeCheck.getCheckValue() != null) {
-                    for (ODMcomplexTypeDefinitionCheckValue checkValue : rangeCheck.getCheckValue()) {
-                        validation += checkValue.getValue() + "<br/>";
+    UIEntityDetail buildItemDetail(String oid) {
+
+        if (oid.lastIndexOf('.') != -1) {
+
+            UIEventItemDetail itemDetail = new UIEventItemDetail();
+
+            String seOid = oid.substring(0, oid.lastIndexOf('.'));
+            ODMcomplexTypeDefinitionStudyEventDef seDef = getStudyEventDefByStudyEventOID(seOid);
+
+            itemDetail.setEventName(seDef.getName());
+            itemDetail.setEventOid(seDef.getOID());
+            itemDetail.setEventRepeating(seDef.getRepeating().value());
+
+            itemDetail.setItemName(oidCleaner(oid));
+            itemDetail.setOid(oid);
+
+            if (oidCleaner(oid).equals("STARTDATE")) {
+                itemDetail.setDataType("DATE");
+                itemDetail.setResponseLabel("Start Date");
+            } else if (oidCleaner(oid).equals("STATUS")) {
+                itemDetail.setDataType("STRING");
+                itemDetail.setResponseLabel("Event Status");
+
+                Map<String, String> responseOptions = new LinkedHashMap<String, String>();
+                responseOptions.put("not_scheduled", "Not Scheduled");
+                responseOptions.put("scheduled", "Scheduled");
+                responseOptions.put("data_entry_started", "Data Entry Started");
+                responseOptions.put("completed", "Completed");
+                responseOptions.put("signed", "Signed");
+                responseOptions.put("skipped", "Skipped");
+                responseOptions.put("stopped", "Stopped");
+                responseOptions.put("locked", "Locked");
+                
+                itemDetail.setResponseOptions(responseOptions);
+            }
+
+            return itemDetail;
+
+        } else {
+            
+            UIItemDetail itemDetail = new UIItemDetail();
+            ODMcomplexTypeDefinitionItemDef itemDef = getItemDefFromItemOid(oidCleaner(oid));
+            itemDetail.setItemName(itemDef.getName());
+            itemDetail.setOid(itemDef.getOID());
+            itemDetail.setDescription(itemDef.getComment() == null ? "" : itemDef.getComment());
+            itemDetail.setDataType(itemDef.getDataType().name());
+            String validation = "";
+            String validationErrorMessage = "";
+            ODMcomplexTypeDefinitionCodeList codeList = new ODMcomplexTypeDefinitionCodeList();
+            if (itemDef.getCodeListRef() != null) {
+                codeList = getCodeListDefFromCodeListOID(itemDef.getCodeListRef().getCodeListOID());
+            }
+            OCodmComplexTypeDefinitionMultiSelectList multiSelectList = new OCodmComplexTypeDefinitionMultiSelectList();
+            for (OCodmComplexTypeDefinitionMultiSelectListRef multiSelectRef : this.container.getMultiSelectRefFromItemDef(itemDef)) {
+                multiSelectList = getMultiSelectListDefFromMultiSelectOID(multiSelectRef.getMultiSelectListID());
+            }
+            if (itemDef.getRangeCheck() != null) {
+                for (ODMcomplexTypeDefinitionRangeCheck rangeCheck : itemDef.getRangeCheck()) {
+                    if (rangeCheck.getCheckValue() != null) {
+                        for (ODMcomplexTypeDefinitionCheckValue checkValue : rangeCheck.getCheckValue()) {
+                            validation += checkValue.getValue() + "<br/>";
+                        }
                     }
-                }
-                if (rangeCheck.getErrorMessage() != null) {
-                    for (ODMcomplexTypeDefinitionTranslatedText errorMessage : rangeCheck.getErrorMessage().getTranslatedText()) {
-                        validationErrorMessage += errorMessage.getValue() + "<br/>";
+                    if (rangeCheck.getErrorMessage() != null) {
+                        for (ODMcomplexTypeDefinitionTranslatedText errorMessage : rangeCheck.getErrorMessage().getTranslatedText()) {
+                            validationErrorMessage += errorMessage.getValue() + "<br/>";
+                        }
                     }
                 }
             }
-        }
 
-        itemDetail.setUnits("");
-        // List<ODMcomplexTypeDefinitionItemGroupDef> itemGroupDefs = getItemGroupByItemOID(itemDef.getOID(),
-        // getItemGroupDefs());
-        for (OCodmComplexTypeDefinitionItemPresentInForm itemPresentInForm : this.container.getItemDetailsFromItemDef(itemDef).getItemPresentInForm()) {
-            ODMcomplexTypeDefinitionFormDef formDef = getFormDefFromFormOid(itemPresentInForm.getFormOID());
-            UIItemDetailPerCrfVersion uiItemDetailPerCrfVersion = new UIItemDetailPerCrfVersion();
-            itemDetail.getItemDetailsPerCrfVersion().add(uiItemDetailPerCrfVersion);
-            itemDetail.setCrfName(crfNameFromFormDefName(formDef.getName()));
-            uiItemDetailPerCrfVersion.setLeftItemText(itemPresentInForm.getLeftItemText());
-            uiItemDetailPerCrfVersion.setRightItemText(itemPresentInForm.getRightItemText() == null ? "" : itemPresentInForm.getRightItemText());
-            uiItemDetailPerCrfVersion.setDefaultValue(itemPresentInForm.getDefaultValue() == null ? "" : itemPresentInForm.getDefaultValue());
-            uiItemDetailPerCrfVersion.setResponseLayout(itemPresentInForm.getItemResponse().getResponseLayout() == null ? "" : itemPresentInForm
-                    .getItemResponse().getResponseLayout());
-            uiItemDetailPerCrfVersion.setResponseType(itemPresentInForm.getItemResponse().getResponseType());
-            uiItemDetailPerCrfVersion.setResponseLabel(itemPresentInForm.getItemResponse().getResponseType());
-            uiItemDetailPerCrfVersion.setSectionLabel(itemPresentInForm.getSectionLabel());
-            uiItemDetailPerCrfVersion.setPhi(itemPresentInForm.getPHI());
-            uiItemDetailPerCrfVersion.setCodeList(codeList);
-            uiItemDetailPerCrfVersion.setMultiSelectList(multiSelectList);
-            uiItemDetailPerCrfVersion.setValidation(validation);
-            uiItemDetailPerCrfVersion.setValidationErrorMessage(validationErrorMessage);
-            uiItemDetailPerCrfVersion.setRequired("");
+            itemDetail.setUnits("");
+            // List<ODMcomplexTypeDefinitionItemGroupDef> itemGroupDefs = getItemGroupByItemOID(itemDef.getOID(),
+            // getItemGroupDefs());
+            for (OCodmComplexTypeDefinitionItemPresentInForm itemPresentInForm : this.container.getItemDetailsFromItemDef(itemDef).getItemPresentInForm()) {
+                ODMcomplexTypeDefinitionFormDef formDef = getFormDefFromFormOid(itemPresentInForm.getFormOID());
+                UIItemDetailPerCrfVersion uiItemDetailPerCrfVersion = new UIItemDetailPerCrfVersion();
+                itemDetail.getItemDetailsPerCrfVersion().add(uiItemDetailPerCrfVersion);
+                itemDetail.setCrfName(crfNameFromFormDefName(formDef.getName()));
+                uiItemDetailPerCrfVersion.setLeftItemText(itemPresentInForm.getLeftItemText());
+                uiItemDetailPerCrfVersion.setRightItemText(itemPresentInForm.getRightItemText() == null ? "" : itemPresentInForm.getRightItemText());
+                uiItemDetailPerCrfVersion.setDefaultValue(itemPresentInForm.getDefaultValue() == null ? "" : itemPresentInForm.getDefaultValue());
+                uiItemDetailPerCrfVersion.setResponseLayout(itemPresentInForm.getItemResponse().getResponseLayout() == null ? "" : itemPresentInForm
+                        .getItemResponse().getResponseLayout());
+                uiItemDetailPerCrfVersion.setResponseType(itemPresentInForm.getItemResponse().getResponseType());
+                uiItemDetailPerCrfVersion.setResponseLabel(itemPresentInForm.getItemResponse().getResponseType());
+                uiItemDetailPerCrfVersion.setSectionLabel(itemPresentInForm.getSectionLabel());
+                uiItemDetailPerCrfVersion.setPhi(itemPresentInForm.getPHI());
+                uiItemDetailPerCrfVersion.setCodeList(codeList);
+                uiItemDetailPerCrfVersion.setMultiSelectList(multiSelectList);
+                uiItemDetailPerCrfVersion.setValidation(validation);
+                uiItemDetailPerCrfVersion.setValidationErrorMessage(validationErrorMessage);
+                uiItemDetailPerCrfVersion.setRequired("");
 
-            // Get the group by using the form and then searching for the item. Is there a better way ?
-            for (ODMcomplexTypeDefinitionItemGroupRef itemGroupRef : formDef.getItemGroupRef()) {
-                uiItemDetailPerCrfVersion.setCrfVersionName(formDef.getName());
-                ODMcomplexTypeDefinitionItemGroupDef itemGroupDef = getItemGroupDefFromItemGroupRef(itemGroupRef);
-                for (ODMcomplexTypeDefinitionItemRef itemRef : itemGroupDef.getItemRef()) {
-                    if (itemRef.getItemOID().equals(itemDef.getOID())) {
-                        uiItemDetailPerCrfVersion.setGroupName(itemGroupDef.getName());
-                        uiItemDetailPerCrfVersion.setRequired(itemRef.getMandatory().value());
-                        break;
+                // Get the group by using the form and then searching for the item. Is there a better way ?
+                for (ODMcomplexTypeDefinitionItemGroupRef itemGroupRef : formDef.getItemGroupRef()) {
+                    uiItemDetailPerCrfVersion.setCrfVersionName(formDef.getName());
+                    ODMcomplexTypeDefinitionItemGroupDef itemGroupDef = getItemGroupDefFromItemGroupRef(itemGroupRef);
+                    for (ODMcomplexTypeDefinitionItemRef itemRef : itemGroupDef.getItemRef()) {
+                        if (itemRef.getItemOID().equals(itemDef.getOID())) {
+                            uiItemDetailPerCrfVersion.setGroupName(itemGroupDef.getName());
+                            uiItemDetailPerCrfVersion.setRequired(itemRef.getMandatory().value());
+                            break;
+                        }
                     }
                 }
             }
+
+            return itemDetail;
         }
-        return itemDetail;
+        
+        
 
     }
 
@@ -336,6 +381,22 @@ public class UIODMBuilder {
                     }
                 }
                 return false;
+            }
+        };
+    }
+
+    public ODMcomplexTypeDefinitionStudyEventDef getStudyEventDefByStudyEventOID(String oid) {
+        List<ODMcomplexTypeDefinitionStudyEventDef> eventDefs = new ArrayList<ODMcomplexTypeDefinitionStudyEventDef>();
+        eventDefs.addAll(Collections2.filter(getStudyEventDefs(), studyEventOidEqualTo(oid)));
+        return eventDefs.size() > 0 ? eventDefs.get(0) : null;
+
+    }
+
+    private Predicate<ODMcomplexTypeDefinitionStudyEventDef> studyEventOidEqualTo(final String value) {
+        return new Predicate<ODMcomplexTypeDefinitionStudyEventDef>() {
+            @Override
+            public boolean apply(ODMcomplexTypeDefinitionStudyEventDef eventDef) {
+                return eventDef.getOID().equals(value);
             }
         };
     }

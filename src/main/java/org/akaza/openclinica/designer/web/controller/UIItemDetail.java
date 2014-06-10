@@ -8,12 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UIItemDetail {
+public class UIItemDetail extends UIEntityDetail {
     String crfName;
-    String itemName;
-    String oid;
     String description;
-    String dataType;
     String units;
     String phi;
     List<UIItemDetailPerCrfVersion> itemDetailsPerCrfVersion;
@@ -26,36 +23,12 @@ public class UIItemDetail {
         this.crfName = crfName;
     }
 
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(String oid) {
-        this.oid = oid;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
     }
 
     public String getUnits() {
