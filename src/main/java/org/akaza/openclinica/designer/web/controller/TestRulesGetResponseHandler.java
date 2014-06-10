@@ -19,7 +19,6 @@ public class TestRulesGetResponseHandler implements TestRulesResponseHandler {
             if (!parameterType.getKey().equals("result") && !parameterType.getKey().equals("ruleEvaluatesTo")
                 && !parameterType.getKey().equals("ruleValidation")) {
                 UIEntityDetail itemDetail = uiODMBuilder.buildItemDetail(parameterType.getKey());
-                System.out.println("itemDetail.getClass() : " + itemDetail.getClass());
                 if (itemDetail.getClass() == UIItemDetail.class) {
                     form.getRuleProperties().put(parameterType.getKey(), parameterType.getValue());
                     inputFields.add(InputFieldFactory.createInputField("ruleProperties['" + parameterType.getKey() + "']", parameterType.getKey(), itemDetail));
