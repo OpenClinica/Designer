@@ -368,6 +368,7 @@
                 <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow.index].valueExpression.value}" />&nbsp;                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value"/>
                 <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssClass="error" />
             </p>
+            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].placeHolder"/>
 
             <div id="tables" class="block" style="margin: 0px;">
                 <table>
