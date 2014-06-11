@@ -110,14 +110,14 @@ public class UIODMBuilder {
                 itemDetail.setResponseLabel("Event Status");
 
                 Map<String, String> responseOptions = new LinkedHashMap<String, String>();
-                responseOptions.put("not_scheduled", "Not Scheduled");
-                responseOptions.put("scheduled", "Scheduled");
-                responseOptions.put("data_entry_started", "Data Entry Started");
-                responseOptions.put("completed", "Completed");
-                responseOptions.put("signed", "Signed");
-                responseOptions.put("skipped", "Skipped");
-                responseOptions.put("stopped", "Stopped");
-                responseOptions.put("locked", "Locked");
+                responseOptions.put("Not Scheduled", "not_scheduled");
+                responseOptions.put("Scheduled", "scheduled");
+                responseOptions.put("Data Entry Started", "data_entry_started");
+                responseOptions.put("Completed", "completed");
+                responseOptions.put("Signed", "signed");
+                responseOptions.put("Skipped", "skipped");
+                responseOptions.put("Stopped", "stopped");
+                responseOptions.put("Locked", "locked");
                 
                 itemDetail.setResponseOptions(responseOptions);
             }
