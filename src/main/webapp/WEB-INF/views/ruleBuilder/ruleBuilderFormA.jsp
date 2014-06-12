@@ -276,7 +276,7 @@
         </c:forEach>
 
         <!-- event Actions -->
-        <c:forEach items="${rulesCommand.ruleRef.lazyEventActions}" varStatus="gridRow">
+        <c:forEach items="${rulesCommand.ruleRef.lazyEventActions}" var="eventAction" varStatus="gridRow">
             <span id="lazyEventActions${gridRow.index}">
             <fieldset class="login">
             <legend><span><fmt:message key="label_event_action"/> <a id="removeEventAction" href="#" onclick="$('#lazyEventActions${gridRow.index}').remove();"><img title="Remove" alt="Remove" src="images/bt_Remove.gif" name="bt_Remove1"></a></span></legend>
@@ -296,22 +296,30 @@
                 <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssClass="errorTextColor"/>
             </p>
 
-            <p>
-                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
-                <form:select path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" title="${tooltipEventProperty }">
-                  <form:option value="">Select</form:option>
-                  <form:option value="STARTDATE">STARTDATE</form:option>
-                </form:select>
-                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" cssClass="error" />
-            </p>
+            <span id="ruleRef.lazyEventActions${gridRow.index}.propertiesContainer">
+            <c:forEach items="${eventAction.lazyProperties}" varStatus="gridRow2">
+                <span id="ruleRef.lazyShowActions${gridRow.index}.lazyProperties${gridRow2.index}">
 
-            <p>
-                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="errorTextColor"><fmt:message key="label_event_value_expression"/>: </form:label>
-                <form:input path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="errorBorder" title="${tooltipEventExpression}" style="width: 50%" />
-                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssClass="errorTextColor" />
-            </p>
+                <p>
+                    <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
+                    <form:select path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" title="${tooltipEventProperty }">
+                      <form:option value="">Select</form:option>
+                      <form:option value="STARTDATE">STARTDATE</form:option>
+                    </form:select>
+                    <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssClass="error" />
+                </p>
 
-            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].placeHolder"/>
+                <p>
+                    <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssErrorClass="errorTextColor"><fmt:message key="label_event_value_expression"/>: </form:label>
+                    <form:input path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssErrorClass="errorBorder" title="${tooltipEventExpression}" style="width: 50%" />
+                    <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssClass="errorTextColor" />
+                </p>
+
+                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].placeHolder"/>
+
+                </span>
+            </c:forEach>
+            </span>
 
             <designerTags:renderActionRunOnStatusTable pathPrefix="ruleRef.lazyEventActions[${gridRow.index}]"/>
             </fieldset>
