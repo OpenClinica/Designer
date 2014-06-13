@@ -147,11 +147,12 @@
     function populateItemDetails(oid){
         $.getJSON('tree/itemDetails',{ name: oid }, function(data) {
             if (oid.indexOf(".") > -1) {
-                $('#itemDetails').html('<p>' + addEntityDetailsTable(data) + '</p>');
+                $('#entityDetails').html('<p>' + addEntityDetailsTable(data) + '</p>');
+                $('#accordion2').accordion('activate', 2);
             } else {
                 $('#itemDetails').html('<p>' + addItemDetailsTable(data) + '</p>');
+                $('#accordion2').accordion('activate', 1);
             }
-            $('#accordion2').accordion('activate', 1);
         });
     }
     
