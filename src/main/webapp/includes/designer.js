@@ -239,7 +239,7 @@
     }
 
     function addEventAction(toolExpressionEvaluatesTo,tooltipExpression,tooltipApplyTo,tooltipEventProperty){
-        var nameAttrOLlazyEventActions =  $("textarea[name*=lazyEventActions]").last().attr("id");
+        var nameAttrOLlazyEventActions =  $("select[name*=lazyEventActions]").last().attr("id");
         index = nameAttrOLlazyEventActions == null ? 0 : parseInt(nameAttrOLlazyEventActions.match(/[\d]/)) +1;
         var propPrefix = "ruleRef.lazyEventActions[" + index  + "]";
         var idPrefix = "ruleRef.lazyEventActions" + index  + "";

@@ -265,10 +265,10 @@ $(function () {
                         pos = ctrl.selectionStart;
                     }
                     ctrl.value = ctrl.value.slice(0, pos) + "" + data.o.attr("oid") + "" + ctrl.value.slice(pos);
-                    if (data.r.context.id.indexOf("lazyEventActions") > -1 && data.r.context.id.indexOf("OID") > -1 && data.o.attr("id") == "E_STARTDATE") {
+                    if (data.r.context.id.indexOf("lazyEventActions") > -1 && data.r.context.id.indexOf("OID") > -1 && data.o.attr("id").indexOf(".STARTDATE") > -1) {
                         var ctrl_value = data.o.attr("oid");
                         ctrl.value = ctrl_value.slice(0, ctrl_value.indexOf("."));
-                        $(document.getElementById("ruleRef.lazyEventActions0.OID")).parent().next().find('select').val(ctrl_value.substr(ctrl_value.indexOf(".") + 1));
+                        $(document.getElementById(data.r.context.id)).parent().next().find('select').val(ctrl_value.substr(ctrl_value.indexOf(".") + 1));
                     }
                 }
             },

@@ -356,19 +356,28 @@
                 <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssClass="error"/>
             </p>
 
-            <p>
-                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
-                <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow.index].property}" />&nbsp;
-                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property"/>
-                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].Property" cssClass="error" />
-            </p>
+            <span id="ruleRef.lazyEventActions${gridRow.index}.propertiesContainer">
+            <c:forEach items="${eventAction.lazyProperties}" varStatus="gridRow2">
+                <span id="ruleRef.lazyShowActions${gridRow.index}.lazyProperties${gridRow2.index}">
+                
+                <p>
+                    <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
+                    <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow2.index].property}" />&nbsp;
+                    <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property"/>
+                    <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssClass="error" />
+                </p>
 
-            <p>
-                <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssErrorClass="error"><fmt:message key="label_event_value_expression"/>: </form:label>
-                <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow.index].valueExpression.value}" />&nbsp;                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value"/>
-                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].valueExpression.value" cssClass="error" />
-            </p>
-            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow.index}].placeHolder"/>
+                <p>
+                    <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssErrorClass="error"><fmt:message key="label_event_value_expression"/>: </form:label>
+                    <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow2.index].valueExpression.value}" />&nbsp;                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value"/>
+                    <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssClass="error" />
+                </p>
+                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].placeHolder"/>
+
+
+                </span>
+            </c:forEach>
+            </span>
 
             <div id="tables" class="block" style="margin: 0px;">
                 <table>
