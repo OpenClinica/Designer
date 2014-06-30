@@ -4,7 +4,7 @@
     <groupId>org.akaza.openclinica.designer</groupId>
     <artifactId>Designer</artifactId>
     <packaging>war</packaging>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
+    <version>SNAPSHOT</version>
     <name>Designer</name>
     <properties>
         <roo.version>1.1.5.RELEASE</roo.version>
