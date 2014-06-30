@@ -39,11 +39,11 @@ public class HostAccessService {
     }
 
     private void getEnterpriseHosts() {
-        final String host = "www.openclinica.com";
-        final String url = "https://" + host + "/OpenClinica/clients/list2.php";
+        final String host = Strings.nullToEmpty(resources.getProperty("hostlist.host"));
+        final String url = Strings.nullToEmpty(resources.getProperty("hostlist.url"));
         final Integer port = 443;
-        final String username = "occlients";
-        final String password = "0cCl13nt%";
+        final String username = Strings.nullToEmpty(resources.getProperty("hostlist.username"));
+        final String password = Strings.nullToEmpty(resources.getProperty("hostlist.password"));
         boolean result = false;
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpParams params = new BasicHttpParams();
