@@ -200,7 +200,9 @@ body { background-color: #FFFFFF; }
     font-size: 12px;
 }
 
-
+.ui-layout-south span.text {
+    font-size: 12px;
+}
 
 
 
