@@ -1,0 +1,19 @@
+<assembly>
+    <id>Designer</id>
+    <baseDirectory>Designer-${project.version}</baseDirectory>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <files>
+        <file>
+            <source>LICENSE.txt</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>false</filtered>
+        </file>
+        <file>
+            <source>${project.build.directory}/${project.build.finalName}.war</source>
+            <outputDirectory>distribution</outputDirectory>
+            <destName>Designer-${project.version}.war</destName>
+        </file>
+    </files>
+</assembly>
