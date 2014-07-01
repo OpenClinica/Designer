@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 @Service
 public class HostAccessService {
@@ -39,9 +41,19 @@ public class HostAccessService {
     }
 
     private void getEnterpriseHosts() {
-        final String host = Strings.nullToEmpty(resources.getProperty("hostlist.host"));
         final String url = Strings.nullToEmpty(resources.getProperty("hostlist.url"));
-        final Integer port = 443;
+        String host = "";
+        if (! Strings.isNullOrEmpty(url)) {
+            try {
+                URL hostListURL = new URL(url);
+                host = hostListURL.getHost();
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
+        }
+        final Integer port = Integer.parseInt(Strings.nullToEmpty(resources.getProperty("hostlist.port")));
         final String username = Strings.nullToEmpty(resources.getProperty("hostlist.username"));
         final String password = Strings.nullToEmpty(resources.getProperty("hostlist.password"));
         boolean result = false;
@@ -73,7 +85,7 @@ public class HostAccessService {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
+        }  finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
