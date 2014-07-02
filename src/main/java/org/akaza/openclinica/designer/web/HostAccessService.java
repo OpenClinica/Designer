@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 @Service
 public class HostAccessService {
@@ -39,11 +41,21 @@ public class HostAccessService {
     }
 
     private void getEnterpriseHosts() {
-        final String host = "www.openclinica.com";
-        final String url = "https://" + host + "/OpenClinica/clients/list2.php";
-        final Integer port = 443;
-        final String username = "occlients";
-        final String password = "0cCl13nt%";
+        final String url = Strings.nullToEmpty(resources.getProperty("hostlist.url"));
+        String host = "";
+        if (! Strings.isNullOrEmpty(url)) {
+            try {
+                URL hostListURL = new URL(url);
+                host = hostListURL.getHost();
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
+        }
+        final Integer port = Integer.parseInt(Strings.nullToEmpty(resources.getProperty("hostlist.port")));
+        final String username = Strings.nullToEmpty(resources.getProperty("hostlist.username"));
+        final String password = Strings.nullToEmpty(resources.getProperty("hostlist.password"));
         boolean result = false;
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpParams params = new BasicHttpParams();
@@ -73,7 +85,7 @@ public class HostAccessService {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
+        }  finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
