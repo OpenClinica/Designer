@@ -87,6 +87,7 @@
         //myLayout.resizeAll();
         $westAccordion.accordion("resize");
         $eastAccordion.accordion("resize");
+        resizeWYSIWYGItem();
     };
     
     function getFirstRange() {
@@ -272,11 +273,16 @@
             }
         return count;
     }
+
+    function resizeWYSIWYGItem() {
+      $("#targetWYSIWYG > div, #ruleExpressionWYSIWYG > div").each(function() { 
+        var new_width = ($("#ui-tabs-1").width() - 150 > 550) ? 550 : $("#ui-tabs-1").width() - 150;
+        $(this).width(new_width);
+      });
+    }
     
 
     $(document).ready( function() {
-        
-        
         
         myLayout = $('body').layout({
             west__size:         200
@@ -316,7 +322,9 @@
             $('.dropdownCont').css({'visibility' : 'hidden', 'opacity' : '0'})
         });
         
-
+        $(window).resize(function() {
+          resizeWYSIWYGItem();
+        });
 
         // THEME SWITCHER
         //$('#switcher').themeswitcher();
