@@ -14,7 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <spring-security.version>3.0.5.RELEASE</spring-security.version>
 	    <logback.version>0.9.28</logback.version>
-   		<scm.path>scm:svn:http://svn.akazaresearch.com/openclinica-projects-prop/Designer/trunk</scm.path>
+   		<!--scm.path>scm:svn:http://svn.akazaresearch.com/openclinica-projects-prop/Designer/trunk</scm.path-->
+        <scm.path>scm:git:https://github.com/OpenClinica/Designer.git</scm.path>
     </properties>
 	<repositories>
         <repository>
@@ -705,7 +706,68 @@
                     </configuration>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>buildnumber</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                        <configuration>
+                            <doCheck>true</doCheck>
+                            <doUpdate>true</doUpdate>
+                            <buildNumberPropertyName>changeSet</buildNumberPropertyName>
+                            <!--timestampFormat>"yyyy-MM-dd HH:mm Z"</timestampFormat-->
+                            <!--format>{0} {1,date,yyyy-MM-dd HH:mm Z}</format>
+                            <items>
+                                <item>buildNumber</item>
+                                <item>timestamp</item>
+                            </items-->
+                        </configuration>
+                     </execution>
+                     <execution>
+                        <id>timestamp</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create-timestamp</goal>
+                        </goals>
+                        <configuration>
+                            <timestampPropertyName>changeSetDate</timestampPropertyName>
+                            <timestampFormat>yyyy-MM-dd HH:mm Z</timestampFormat>
+                            <!--format>{0} {1,date,yyyy-MM-dd HH:mm Z}</format>
+                            <items>
+                                <item>buildNumber</item>
+                                <item>timestamp</item>
+                            </items-->
+                        </configuration>
+                    </execution>
+                </executions>
+                
+            </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.properties</exclude>
+                    <exclude>**/*.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
 	</build>
 	<scm>
         <connection>${scm.path}</connection>
