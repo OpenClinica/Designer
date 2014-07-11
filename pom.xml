@@ -718,8 +718,8 @@
                             <goal>create</goal>
                         </goals>
                         <configuration>
-                            <doCheck>true</doCheck>
-                            <doUpdate>true</doUpdate>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
                             <buildNumberPropertyName>changeSet</buildNumberPropertyName>
                             <!--timestampFormat>"yyyy-MM-dd HH:mm Z"</timestampFormat-->
                             <!--format>{0} {1,date,yyyy-MM-dd HH:mm Z}</format>
