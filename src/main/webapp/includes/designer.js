@@ -52,7 +52,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyDiscrepancyNoteActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -81,7 +81,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyEmailActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyEmailActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyEmailActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEmailActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyEmailActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEmailActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -113,7 +113,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyShowActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -148,7 +148,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyHideActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -181,7 +181,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyInsertActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -251,7 +251,7 @@
          + "<\/span><\/legend>"
          + "<p>"
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
          + " <option value=\"true\">true<\/option> "
          + " <option value=\"false\">false<\/option> "
          + "  <\/select>"
@@ -260,7 +260,7 @@
          + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].OID\" id=\"ruleRef.lazyEventActions" + index  + ".OID\" title=\"" + tooltipApplyTo + "\" style=\"width: 50%\"> "
          + "<\/p><p>"
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".PropertyLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\">Property:<\/label>"
-         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\" title=\"" + tooltipEventProperty + "\" > "
+         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\" title=\"" + tooltipEventProperty + "\" style=\"border-radius: 5px; height: 23px; width: 120px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 96px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
          + " <option value=\"\">Select<\/option> "
          + " <option value=\"STARTDATE\">STARTDATE<\/option> "
          + "  <\/select>"
@@ -275,6 +275,68 @@
          );
          $('#theCenter').animate({ scrollTop: $("#lazyEventActions" + index).offset().top }, 1000);
          initializeToolTips();
+    }
+
+    function addNotificationAction (toolExpressionEvaluatesTo,tooltipMessage,tooltipTo) {
+        var nameAttrOLlazyNotificationActions =  $("textarea[name*=lazyNotificationActions]").last().attr("id");
+            index = nameAttrOLlazyNotificationActions == null ? 0 : parseInt(nameAttrOLlazyNotificationActions.match(/[\d]/)) +1;
+            var propPrefix = "ruleRef.lazyNotificationActions[" + index  + "]";
+            var idPrefix = "ruleRef.lazyNotificationActions" + index  + "";
+            $("#ruleActions").append(
+             "<span id=\"lazyNotificationActions" + index + "\">"
+             + "<fieldset class=\"login\">"
+             + "<legend><span>Notification Action " //+ index
+             + "<a id=\"notificationAction\" href=\"#\" onclick=\"$('#lazyNotificationActions"+ index +"').remove();\"><img title=\"Remove\" alt=\"Remove\" src=\"images/bt_Remove.gif\" name=\"bt_Remove1\"><\/a>"
+             + "<\/span><\/legend>"
+             + "<p style=\"margin-left: -15px;\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
+             + " <select name=\"ruleRef.lazyNotificationActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyNotificationActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" style=\"border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';\"> "
+             + " <option value=\"true\">true<\/option> "
+             + " <option value=\"false\">false<\/option> "
+             + "  <\/select>"
+             + " <\/p><p style=\"margin-left: -15px;\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".toLabel\" for=\"ruleRef.lazyEmailActions[" + index  + "].message\">To:<\/label>"
+             + "<div style=\"background: url(includes/img/header_border.png); width: 560px; margin-left: 85px;\"><img src=\"includes/img/icon_participant.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\"><\/div>"
+             + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyNotificationActions[" + index  + "].to\" id=\"ruleRef.lazyNotificationActions" + index  + ".to\" title=\"" + tooltipTo + "\" style=\"margin-left: 85px; width: 556px; height: 25px;\" > "
+             + "<\/p><p style=\"margin-left: -15px;\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".subjectLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].subject\">Subject:<\/label>"
+             + "<div style=\"width: 560px; margin-left: 85px;\">"
+             + "<img src=\"includes/img/icon_ocVar.png\" style=\"width: 130px; padding-top: 3px; margin-bottom: -6px; \">"
+             + "<img src=\"includes/img/icon_ocpVar.png\" style=\"width: 124px; padding-left: 25px; padding-top: 3px; margin-bottom: -6px; \">"
+             + "<\/div>"
+             + "<div style=\"background: url(includes/img/header_border.png); width: 560px; margin-left: 85px;\">"
+             + "<img src=\"includes/img/icon_study.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_event.png\" style=\"width: 62px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/vertical_white.png\" style=\"width: 3px; height: 25px; padding-left: 5px; margin-bottom: -5px; \">"
+             + "<img src=\"includes/img/icon_participant.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_firstName.png\" style=\"width: 82px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_url.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_urlLogin.png\" style=\"width: 89px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_accessCode.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<\/div>"
+             + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyNotificationActions[" + index  + "].subject\" id=\"ruleRef.lazyNotificationActions" + index  + ".subject\" title=\"" + tooltipTo + "\" style=\"margin-left: 85px; width: 556px; height: 25px;\" > "
+             + "<\/p><p style=\"margin-left: -15px;\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".messageLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].message\">Message:<\/label>"
+             + "<div style=\"width: 560px; margin-left: 85px;\">"
+             + "<img src=\"includes/img/icon_ocVar.png\" style=\"width: 130px; padding-top: 3px; margin-bottom: -6px; \">"
+             + "<img src=\"includes/img/icon_ocpVar.png\" style=\"width: 124px; padding-left: 25px; padding-top: 3px; margin-bottom: -6px; \">"
+             + "<\/div>"
+             + "<div style=\"background: url(includes/img/header_border.png); width: 560px; margin-left: 85px;\">"
+             + "<img src=\"includes/img/icon_study.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_event.png\" style=\"width: 62px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/vertical_white.png\" style=\"width: 3px; height: 25px; padding-left: 5px; margin-bottom: -5px;\">"
+             + "<img src=\"includes/img/icon_participant.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_firstName.png\" style=\"width: 82px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_url.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_urlLogin.png\" style=\"width: 89px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<img src=\"includes/img/icon_accessCode.png\" style=\"width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;\">"
+             + "<textarea cols=\"50\" rows=\"3\" name=\"ruleRef.lazyNotificationActions[" + index  + "].message\" id=\"ruleRef.lazyNotificationActions" + index  + ".message\" title=\"" + tooltipMessage + "\" style=\"width: 558px; height: 150px;\"><\/textarea>"
+             + "<\/p>"
+             + "<\/fieldset>"
+             + "<\/span>"
+             );
+             $('#theCenter').animate({ scrollTop: $("#lazyNotificationActions" + index).offset().top }, 1000);
+             initializeToolTips();
     }
 
     function addRunOnStatus(propPrefix,idPrefix,runOnNotStarted,runOnScheduled,runOnStarted,runOnCompleted,runOnSkipped,runOnStopped){

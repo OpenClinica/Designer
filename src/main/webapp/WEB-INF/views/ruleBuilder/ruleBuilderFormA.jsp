@@ -65,6 +65,53 @@
         <c:out value="${rulesCommand.targetCurated.value}"/>
          --%>
     </p>
+    
+    <p>
+        <label>
+            <fmt:message key="label_run_on_a_shedule"/>:
+        </label>
+        <img id="runOnButton" src="includes/img/icon_run_off.png" alt="run on a schedule button" width="70px" height="30px" style="cursor: pointer; float: none;" />
+        <table id="showRunTimeTable" style="width: 425px; border: white; margin-bottom: 3px; display: none;">
+            <tr>
+                <td style="border: white; background: white; vertical-align: middle; padding-right: 0px;">
+                    <fmt:message key="label_run_time"/>:
+                </td>
+                <td style="border: white; background: white; vertical-align: middle; padding-left: 5px; padding-right: 0px;">
+                    <form:select path="runOnSchedule.time" id="runOnScheduleID" multiple="false" cssErrorClass="errorBorder" style="border-radius: 5px; height: 23px; width: 86px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 62px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: ''; padding-left: 5px;">
+                        <form:option value="">--select--</form:option>
+                        <form:option value="01.00"/>
+                        <form:option value="02.00"/>
+                        <form:option value="03.00"/>
+                        <form:option value="04.00"/>
+                        <form:option value="05.00"/>
+                        <form:option value="06.00"/>
+                        <form:option value="07.00"/>
+                        <form:option value="08.00"/>
+                        <form:option value="09.00"/>
+                        <form:option value="10.00"/>
+                        <form:option value="11.00"/>
+                        <form:option value="12.00"/>
+                        <form:option value="13.00"/>
+                        <form:option value="14.00"/>
+                        <form:option value="15.00"/>
+                        <form:option value="16.00"/>
+                        <form:option value="17.00"/>
+                        <form:option value="18.00"/>
+                        <form:option value="19.00"/>
+                        <form:option value="20.00"/>
+                        <form:option value="21.00"/>
+                        <form:option value="22.00"/>
+                        <form:option value="23.00"/>
+                        <form:option value="24.00"/>
+                    </form:select>
+                </td>
+                <td style="border: white; background: white; vertical-align: middle; padding-left: 5px;">
+                    <fmt:message key="run_time_format"/>
+                </td>
+            </tr>
+        </table>
+    </p>
+
     <p>
         <c:choose>
             <c:when test="${sessionScope['scopedTarget.userPreferences'].editMode == true }">
@@ -75,6 +122,9 @@
             </c:otherwise>
         </c:choose>
     </p>
+    <p id="headerExp" style="margin-bottom: -18px; display: none;">
+        <img src="includes/img/header_operator.png" style="width: 300px; padding-left: 99px;">
+    </p>
     <p id="ruleExpressionWYSIWYG">
         <dFields:textarea path="ruleDef.expression.value" imputCSSErrorClass="errorBorder" labelNameKey="label_rule_expression" labelCSSErrorClass="errorTextColor" title="This will show up in the TipTip popup." rows="5" cols="100%"/>
         <%-- FOR DEBUGGING
@@ -84,7 +134,7 @@
     </p>   
     <p>
         <form:label path="addActions" cssErrorClass="errorTextColor" id="actionsLabel"><fmt:message key="label_actions"/>:</form:label>
-        <form:select path="addActions" id="addActions" multiple="false" cssErrorClass="errorBorder" title="${tooltipActions}">
+        <form:select path="addActions" id="addActions" multiple="false" cssErrorClass="errorBorder" title="${tooltipActions}" style="border-radius: 5px; height: 23px; width: 140px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 116px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
             <form:option  value="add"><fmt:message key="label_select_one"/> </form:option>
             <form:option value="addDnAction"><fmt:message key="label_dis_note_action"/> </form:option>
             <form:option value="addEmailAction"><fmt:message key="label_email_action"/> </form:option>
@@ -92,6 +142,7 @@
             <form:option value="addHideAction"><fmt:message key="label_hide_action"/> </form:option>
             <form:option value="addInsertAction"><fmt:message key="label_insert_action"/> </form:option>
             <form:option value="addEventAction"><fmt:message key="label_event_action"/> </form:option>
+            <form:option value="addNotificationAction"><fmt:message key="label_notification_action"/> </form:option>
         </form:select>
         <form:errors path="addActions" cssClass="errorTextColor"/>
     </p>
@@ -104,8 +155,8 @@
             <fieldset class="login">
             <legend><span><fmt:message key="label_dis_note_action"/> <a id="removeDnAction" href="#" onclick="$('#lazyDiscrepancyNoteActions${gridRow.index}').remove();"><img title="Remove" alt="Remove" src="images/bt_Remove.gif" name="bt_Remove1"></a></span></legend>
             <p>
-                <form:label id="ruleRef.lazyDiscrepancyNoteActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyDiscrepancyNoteActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyDiscrepancyNoteActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label> 
-                <form:select path="ruleRef.lazyDiscrepancyNoteActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                <form:label id="ruleRef.lazyDiscrepancyNoteActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyDiscrepancyNoteActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyDiscrepancyNoteActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"></form:label> 
+                <form:select path="ruleRef.lazyDiscrepancyNoteActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                   <form:option value="true"/>
                   <form:option value="false"/>
                 </form:select>
@@ -129,7 +180,7 @@
             
             <p>
                 <form:label id="ruleRef.lazyEmailActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyEmailActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyEmailActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label> 
-                <form:select path="ruleRef.lazyEmailActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                <form:select path="ruleRef.lazyEmailActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                   <form:option value="true"/>
                   <form:option value="false"/>
                 </form:select>
@@ -158,7 +209,7 @@
             
             <p>
                 <form:label id="ruleRef.lazyShowActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyShowActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyShowActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label>
-                <form:select path="ruleRef.lazyShowActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                <form:select path="ruleRef.lazyShowActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                   <form:option value="true"/>
                   <form:option value="false"/>
                 </form:select>
@@ -200,7 +251,7 @@
             
             <p>
                 <form:label id="ruleRef.lazyHideActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyHideActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyHideActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label>
-                <form:select path="ruleRef.lazyHideActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                <form:select path="ruleRef.lazyHideActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                   <form:option value="true"/>
                   <form:option value="false"/>
                 </form:select>
@@ -242,7 +293,7 @@
             
             <p>
                 <form:label id="ruleRef.lazyInsertActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyInsertActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyInsertActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label>
-                <form:select path="ruleRef.lazyInsertActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                <form:select path="ruleRef.lazyInsertActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                   <form:option value="true"/>
                   <form:option value="false"/>
                 </form:select>
@@ -283,7 +334,7 @@
             
             <p>
                 <form:label id="ruleRef.lazyEventActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label> 
-                <form:select path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }">
+                <form:select path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                   <form:option value="true"/>
                   <form:option value="false"/>
                 </form:select>
@@ -302,7 +353,7 @@
 
                 <p>
                     <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
-                    <form:select path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" title="${tooltipEventProperty }">
+                    <form:select path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" title="${tooltipEventProperty }" style="border-radius: 5px; height: 23px; width: 120px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 96px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
                       <form:option value="">Select</form:option>
                       <form:option value="STARTDATE">STARTDATE</form:option>
                     </form:select>
@@ -397,6 +448,9 @@
                     break;
                 case "addEventAction":
                     addEventAction("${toolExpressionEvaluatesTo}","${tooltipEventExpression}","${tooltipEventApplyTo}","${tooltipEventProperty}");
+                    break;
+                case "addNotificationAction":
+                    addNotificationAction("${toolExpressionEvaluatesTo}","${tooltipMessage}","${tooltipTo}");
                     break;      
                 default:
                     // DO NOTHING specifically when Add is selected
@@ -427,7 +481,25 @@
             $('#rulesCommand').submit();
             return false;  
         });
+
+        $("#runOnButton").click(function() {
+            if ($("#showRunTimeTable").css("display") == "none") {
+                $("#runOnButton").attr("src", "includes/img/icon_run_on.png");
+                $("#runOnButton").css("float", "left");
+                $("#showRunTimeTable").css("display", "inline-block");
+                $("#headerExp").css("display", "inherit");
+            } else {
+                $("#runOnButton").attr("src", "includes/img/icon_run_off.png");
+                $("#runOnButton").css("float", "none");
+                $("#showRunTimeTable").css("display", "none");
+                $("#headerExp").css("display", "none");
+                $("#scheduleHourID").val(""); 
+            }
+        });
         
+        if ($("#runOnScheduleID").val() != "") {
+            $("#runOnButton").trigger("click");
+        }
     });
 
     </script>

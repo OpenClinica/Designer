@@ -573,6 +573,7 @@ public class RuleBuilderController {
         ra.setTarget(form.getTargetCurated(form.getTarget()));
         ra.getRuleRef().add(form.getRuleRef());
         ra.getRuleRef().get(0).setOID(form.getRuleDef().getOID());
+        ra.setRunOnSchedule(form.getRunOnSchedule());
         Rules r = new Rules();
         r.getRuleAssignment().add(ra);
         r.getRuleDef().add(form.getRuleDefCurated());

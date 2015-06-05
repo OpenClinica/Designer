@@ -4,6 +4,7 @@ import org.akaza.openclinica.designer.web.fields.InputField;
 import org.jsoup.Jsoup;
 import org.openclinica.ns.rules.v31.RuleDefType;
 import org.openclinica.ns.rules.v31.RuleRefType;
+import org.openclinica.ns.rules.v31.RunOnScheduleType;
 import org.openclinica.ns.rules.v31.TargetType;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class RulesCommand {
     TargetType target;
     RuleDefType ruleDef;
     List<String> addActions = new ArrayList();
+    RunOnScheduleType runOnSchedule;
     // XML tab
     String xml;
     // Test tab
@@ -65,6 +67,14 @@ public class RulesCommand {
 
     public TargetType getTargetCurated() {
         return getTargetCurated(this.target);
+    }
+
+    public void setRunOnSchedule(RunOnScheduleType runOnSchedule) {
+        this.runOnSchedule = runOnSchedule;
+    }
+
+    public RunOnScheduleType getRunOnSchedule() {
+        return runOnSchedule;
     }
 
     public TargetType getTargetCurated(TargetType htmlBasedTarget) {
