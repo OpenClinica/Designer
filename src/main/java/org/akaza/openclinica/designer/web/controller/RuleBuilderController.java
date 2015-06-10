@@ -87,13 +87,13 @@ public class RuleBuilderController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getCreateForm(Model model, HttpSession session, HttpServletRequest request) throws IOException {
-
         final String ruleOid = request.getParameter("ruleOid");
         final String target = request.getParameter("target");
+        final String runTime = request.getParameter("runTime");
 
         if (ruleOid != null && target != null) {
             final UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
-            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target));
+            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime));
             userPreferences.turnOnEditMode();
         }
         return "ruleBuilder";
@@ -102,9 +102,7 @@ public class RuleBuilderController {
     @RequestMapping(value = "/ruleBuilderFormA", method = RequestMethod.GET)
     public void form(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model,
             @RequestParam(value = PARAM_RESET, required = false) String resetParam) {
-
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM) != null ? (RulesCommand) session.getAttribute(SESSION_ATTR_FORM) : null;
-
         if (form == null || (resetParam != null && resetParam.equals("true"))) {
             form = new RulesCommand();
             session.setAttribute(SESSION_ATTR_FORM, form);
@@ -399,12 +397,11 @@ public class RuleBuilderController {
     ArrayList<Message> processXmlTabSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
         ArrayList<Message> messages = new ArrayList<Message>();
-
         if (result.hasErrors()) {
             model.addAttribute("ajaxRequest", isAjaxRequest(requestedWith));
             return messages;
         }
-
+        
         Rules r = null;
         try {
             r = loadRulesFromString(form.getXml());
@@ -605,7 +602,6 @@ public class RuleBuilderController {
      * Convert XML which is represented as a String to Rules Object
      */
     private Rules loadRulesFromString(String rulesString) throws UnMarshallingException {
-
         StringReader reader = new StringReader(rulesString);
         Rules rules = null;
         try {

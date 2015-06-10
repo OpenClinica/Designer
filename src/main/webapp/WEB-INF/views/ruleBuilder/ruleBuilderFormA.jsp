@@ -79,30 +79,30 @@
                 <td style="border: white; background: white; vertical-align: middle; padding-left: 5px; padding-right: 0px;">
                     <form:select path="runOnSchedule.time" id="runOnScheduleID" multiple="false" cssErrorClass="errorBorder" style="border-radius: 5px; height: 23px; width: 86px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 62px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: ''; padding-left: 5px;">
                         <form:option value="">--select--</form:option>
-                        <form:option value="01.00"/>
-                        <form:option value="02.00"/>
-                        <form:option value="03.00"/>
-                        <form:option value="04.00"/>
-                        <form:option value="05.00"/>
-                        <form:option value="06.00"/>
-                        <form:option value="07.00"/>
-                        <form:option value="08.00"/>
-                        <form:option value="09.00"/>
-                        <form:option value="10.00"/>
-                        <form:option value="11.00"/>
-                        <form:option value="12.00"/>
-                        <form:option value="13.00"/>
-                        <form:option value="14.00"/>
-                        <form:option value="15.00"/>
-                        <form:option value="16.00"/>
-                        <form:option value="17.00"/>
-                        <form:option value="18.00"/>
-                        <form:option value="19.00"/>
-                        <form:option value="20.00"/>
-                        <form:option value="21.00"/>
-                        <form:option value="22.00"/>
-                        <form:option value="23.00"/>
-                        <form:option value="24.00"/>
+                        <form:option value="01:00"/>
+                        <form:option value="02:00"/>
+                        <form:option value="03:00"/>
+                        <form:option value="04:00"/>
+                        <form:option value="05:00"/>
+                        <form:option value="06:00"/>
+                        <form:option value="07:00"/>
+                        <form:option value="08:00"/>
+                        <form:option value="09:00"/>
+                        <form:option value="10:00"/>
+                        <form:option value="11:00"/>
+                        <form:option value="12:00"/>
+                        <form:option value="13:00"/>
+                        <form:option value="14:00"/>
+                        <form:option value="15:00"/>
+                        <form:option value="16:00"/>
+                        <form:option value="17:00"/>
+                        <form:option value="18:00"/>
+                        <form:option value="19:00"/>
+                        <form:option value="20:00"/>
+                        <form:option value="21:00"/>
+                        <form:option value="22:00"/>
+                        <form:option value="23:00"/>
+                        <form:option value="00:00"/>
                     </form:select>
                 </td>
                 <td style="border: white; background: white; vertical-align: middle; padding-left: 5px;">
@@ -493,7 +493,7 @@
                 $("#runOnButton").css("float", "none");
                 $("#showRunTimeTable").css("display", "none");
                 $("#headerExp").css("display", "none");
-                $("#scheduleHourID").val(""); 
+                $("#runOnScheduleID").val(""); 
             }
         });
         

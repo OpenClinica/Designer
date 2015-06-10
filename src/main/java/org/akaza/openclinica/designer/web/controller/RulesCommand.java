@@ -108,11 +108,16 @@ public class RulesCommand {
         return ruleDef;
     }
 
-    public void buildFromRules(TargetType target, RuleDefType ruleDef, RuleRefType ruleRef) {
+    public void buildFromRules(TargetType target, RuleDefType ruleDef, RuleRefType ruleRef, String runTime) {
         this.setTarget(target);
         this.setRuleDef(ruleDef);
         LazyRuleRefType2 ruleRefType = new LazyRuleRefType2(ruleRef);
         this.setRuleRef(ruleRefType);
+        if (runTime != null) {
+            RunOnScheduleType runOnScheduleType = new RunOnScheduleType();
+            runOnScheduleType.setTime(runTime);
+            this.setRunOnSchedule(runOnScheduleType);
+        }
     }
 
     public List<InputField> getRulePropertiesHtml() {
