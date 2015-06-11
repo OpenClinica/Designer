@@ -376,6 +376,71 @@
             </fieldset>
             </span>
         </c:forEach>
+        <!-- notification Actions-->
+        <c:forEach items="${rulesCommand.ruleRef.lazyNotificationActions}" varStatus="gridRow">
+            <span id="lazyNotificationActions${gridRow.index}">
+            <fieldset class="login">
+            <legend>
+                <span><fmt:message key="label_notification_action"/>
+                <a id="removeNotificationAction" href="#" onclick="$('#lazyNotificationActions${gridRow.index}').remove();"><img title="Remove" alt="Remove" src="images/bt_Remove.gif" name="bt_Remove1"></a>
+                </span>
+            </legend>
+
+            <p style="margin-left: -15px;">
+                <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyNotificationActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label> 
+                <form:select path="ruleRef.lazyNotificationActions[${gridRow.index}].ifExpressionEvaluates" title="${toolExpressionEvaluatesTo }" style="border-radius: 5px; height: 23px; width: 60px; background: url(./includes/img/arrowUpDown.png) no-repeat 0 0; background-position: 36px -2px; -moz-apprearance: none; -webkit-appearance: none; text-indent: 0.01px; text-overflow: '';">
+                  <form:option value="true"/>
+                  <form:option value="false"/>
+                </form:select>
+                <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].ifExpressionEvaluates" cssClass="error" />
+            </p>
+            <p style="margin-left: -15px;">
+                <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.toLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].to" path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorTextColor"><fmt:message key="label_to"/>: </form:label>
+                <div style="background: url(includes/img/header_border.png); width: 586px; margin-left: 85px;"><img id="to_participant-${gridRow.index}" src="includes/img/icon_participant.png" class="participantBtn" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">    
+                </div>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder" title="${tooltipTo}" style="margin-left: 85px; width: 582px; height: 25px;"/>
+                <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssClass="errorTextColor" />
+            </p>
+            <p style="margin-left: -15px;">
+                <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.subjectLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].subject" path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorTextColor"><fmt:message key="label_subject"/>: </form:label>
+                <div style="width: 560px; margin-left: 85px;">
+                    <img src="includes/img/icon_ocVar.png" style="width: 130px; padding-top: 3px; margin-bottom: -6px;">
+                    <img src="includes/img/icon_ocpVar.png" style="width: 124px; padding-left: 32px; padding-top: 3px; margin-bottom: -6px;">
+                </div>
+                <div style="background: url(includes/img/header_border.png); width: 586px; margin-left: 85px;">
+                    <img id="subject_study-${gridRow.index}" class="studyBtn" src="includes/img/icon_study.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="subject_event-${gridRow.index}" class="eventBtn" src="includes/img/icon_event.png" style="width: 62px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img src="includes/img/vertical_white.png" style="width: 3px; height: 25px; padding-left: 5px; margin-bottom: -5px;">
+                    <img id="subject_participant-${gridRow.index}" class="participantBtn" src="includes/img/icon_participant.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="subject_fName-${gridRow.index}" class="fNameBtn" src="includes/img/icon_firstName.png" style="width: 82px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="subject_url-${gridRow.index}" class="urlBtn" src="includes/img/icon_url.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="subject_urlLogin-${gridRow.index}" class="urlLoginBtn" src="includes/img/icon_urlLogin.png" style="width: 89px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="subject_accessCode-${gridRow.index}" class="accessCodeBtn" src="includes/img/icon_accessCode.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                </div>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder" title="${tooltipMessage}" style="margin-left: 85px; width: 582px; height: 25px;"/>
+                <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssClass="errorTextColor" />
+            </p>
+            <p style="margin-left: -15px;">
+                <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.messageLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].message" path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssErrorClass="errorTextColor"><fmt:message key="label_message"/>: </form:label>
+                <div style="width: 560px; margin-left: 85px;">
+                    <img src="includes/img/icon_ocVar.png" style="width: 130px; padding-top: 3px; margin-bottom: -6px;">
+                    <img src="includes/img/icon_ocpVar.png" style="width: 124px; padding-left: 32px; padding-top: 3px; margin-bottom: -6px;">
+                </div>
+                <div style="background: url(includes/img/header_border.png); width: 586px; margin-left: 85px; height: 179px;">
+                    <img id="message_study-${gridRow.index}" class="studyBtn" src="includes/img/icon_study.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="message_event-${gridRow.index}" class="eventBtn" src="includes/img/icon_event.png" style="width: 62px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img src="includes/img/vertical_white.png" style="width: 3px; height: 25px; padding-left: 5px; margin-bottom: -5px;">
+                    <img id="message_participant-${gridRow.index}" class="participantBtn" src="includes/img/icon_participant.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="message_fName-${gridRow.index}" class="fNameBtn" src="includes/img/icon_firstName.png" style="width: 82px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="message_url-${gridRow.index}" class="urlBtn" src="includes/img/icon_url.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="message_urlLogin-${gridRow.index}" class="urlLoginBtn" src="includes/img/icon_urlLogin.png" style="width: 89px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <img id="message_accessCode-${gridRow.index}" class="accessCodeBtn" src="includes/img/icon_accessCode.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                    <form:textarea path="ruleRef.lazyNotificationActions[${gridRow.index}].message" rows="3" cols="50" cssErrorClass="errorBorder" title="${tooltipMessage }" style="width: 584px; height: 150px;" />
+                    <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssClass="errorTextColor" />
+                </div>
+            </p>
+            </span>
+        </c:forEach>
     </div>
     
 </form:form>
@@ -500,6 +565,44 @@
         if ($("#runOnScheduleID").val() != "") {
             $("#runOnButton").trigger("click");
         }
+
+        $("#ruleActions").delegate(".participantBtn,.studyBtn,.eventBtn,.fNameBtn,.urlBtn,.urlLoginBtn,.accessCodeBtn", "click",function(){
+            var currentId = $(this).attr('id');
+            var splitter = currentId.split("_");
+            var splitter2 = splitter[1].split("-");
+            var index = splitter2[1];
+            var part = splitter[0];
+            var type = splitter2[0];
+            var targetId = "ruleRef.lazyNotificationActions"+ index +"."+ part;
+            var target = document.getElementById(targetId);
+            var currentValue = target.value;
+            var optionalValue = "";
+            switch(type) {
+                case "participant":
+                    optionalValue = "\$\{participant\} ";
+                    break;
+                case "study":
+                    optionalValue = "\$\{study.name\} ";
+                    break;
+                case "event":
+                    optionalValue = "\$\{event.name\} ";
+                    break;
+                case "fName":
+                    optionalValue = "\$\{participant.firstname\} ";
+                    break;
+                case "url":
+                    optionalValue = "\$\{participant.url\} ";
+                    break;
+                case "urlLogin":
+                    optionalValue = "\$\{participant.loginurl\} ";
+                    break;
+                case "accessCode":
+                    optionalValue = "\$\{participant.accessCode\} ";
+                    break;
+            }
+            
+            document.getElementById(targetId).value = currentValue+ " " +optionalValue;
+        });
     });
 
     </script>

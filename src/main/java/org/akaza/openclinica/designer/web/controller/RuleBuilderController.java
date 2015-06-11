@@ -194,7 +194,6 @@ public class RuleBuilderController {
         messages = validateRule(uiODMContainer, rulesCommandToRules(form), new DefaultResponseHandler(VALID_RULE_MESSAGE));
 
         session.setAttribute(SESSION_ATTR_FORM, form);
-
         // success response handling
         if (isAjaxRequest(requestedWith)) {
             model.addAttribute("messages", messages);
@@ -531,7 +530,7 @@ public class RuleBuilderController {
         Map<String, String> vars = Collections.singletonMap("study", uiODMContainer.getStudyOid());
         Response resp = null;
         try {
-            resp = userPreferences.getRestTemplate().postForObject(url, rule, Response.class, vars);
+            resp = userPreferences.getRestTemplate().postForObject(url, rule, Response.class, vars);   
             if (resp.isValid()) {
                 messages.addAll(responseHandler.handle());
             } else {
