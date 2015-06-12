@@ -8,6 +8,7 @@ import org.openclinica.ns.rules.v31.RuleRefType;
 import org.openclinica.ns.rules.v31.ShowActionType;
 import org.openclinica.ns.rules.v31.EventActionType;
 import org.openclinica.ns.rules.v31.RuleDefType;
+import org.openclinica.ns.rules.v31.NotificationActionType;
 import org.springframework.util.AutoPopulatingList;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class LazyRuleRefType2 extends RuleRefType {
     private AutoPopulatingList<LazyHideActionType> lazyHideActions;
     private AutoPopulatingList<LazyInsertActionType> lazyInsertActions;
     private AutoPopulatingList<LazyEventActionType> lazyEventActions;
+    private AutoPopulatingList<NotificationActionType> lazyNotificationActions;
 
     public LazyRuleRefType2() {
         discrepancyNoteAction = new ArrayList<DiscrepancyNoteActionType>();
@@ -38,12 +40,14 @@ public class LazyRuleRefType2 extends RuleRefType {
         hideAction = new ArrayList<HideActionType>();
         insertAction = new ArrayList<InsertActionType>();
         eventAction = new ArrayList<EventActionType>();
+        notificationAction = new ArrayList<NotificationActionType>();
         lazyDiscrepancyNoteActions = new AutoPopulatingList(discrepancyNoteAction, DiscrepancyNoteActionType.class);
         lazyEmailActions = new AutoPopulatingList(emailAction, EmailActionType.class);
         lazyShowActions = new AutoPopulatingList(LazyShowActionType.class);
         lazyHideActions = new AutoPopulatingList(LazyHideActionType.class);
         lazyInsertActions = new AutoPopulatingList(LazyInsertActionType.class);
         lazyEventActions = new AutoPopulatingList(LazyEventActionType.class);
+        lazyNotificationActions = new AutoPopulatingList(notificationAction, NotificationActionType.class);
         // TODO Auto-generated constructor stub
     }
 
@@ -55,7 +59,7 @@ public class LazyRuleRefType2 extends RuleRefType {
         hideActionToLazyHideAction(ruleRef.getHideAction());
         insertActionToLazyInsertAction(ruleRef.getInsertAction());
         eventActionToLazyEventAction(ruleRef.getEventAction());
-
+        notificationActionToLazyNotificationAction(ruleRef.getNotificationAction());
     }
 
     public void lazyToNonLazy() {
@@ -65,6 +69,7 @@ public class LazyRuleRefType2 extends RuleRefType {
         reAlignLazyHideActions();
         reAlignLazyInsertActions();
         reAlignLazyEventActions();
+        reAlignNotificationActions();
     }
 
     public List<LazyRuleRefType2> splitRuleRef(RuleRefType ruleRef) {
@@ -164,6 +169,11 @@ public class LazyRuleRefType2 extends RuleRefType {
                 return true;
             }
         }
+        for (NotificationActionType notificationActionType : notificationAction) {
+            if (notificationActionType.getIfExpressionEvaluates().equals(ruleExpressionResult)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -222,6 +232,15 @@ public class LazyRuleRefType2 extends RuleRefType {
             EventActionType eventActionType = eventActionsIterator.next();
             LazyEventActionType lazyEventActionType = new LazyEventActionType(eventActionType);
             getLazyEventActions().add(lazyEventActionType);
+        }
+    }
+
+    private void notificationActionToLazyNotificationAction(List<NotificationActionType> notificationAction) {
+        Iterator<NotificationActionType> notificationActionsIterator = notificationAction.iterator();
+
+        while (notificationActionsIterator.hasNext()) {
+            NotificationActionType notificationActionType = notificationActionsIterator.next();
+            getLazyNotificationActions().add(notificationActionType);
         }
     }
 
@@ -339,12 +358,24 @@ public class LazyRuleRefType2 extends RuleRefType {
         }
     }
 
+    private void reAlignNotificationActions() {
+        Iterator<NotificationActionType> notificationActionsIterator = getLazyNotificationActions().iterator();
+
+        while (notificationActionsIterator.hasNext()) {
+            NotificationActionType notificationActionType = notificationActionsIterator.next();
+            if (notificationActionType.getIfExpressionEvaluates() == null) {
+                notificationActionsIterator.remove();
+            }
+        }
+    }
+
     @Transient
     public void formToModel() {
         showAction.addAll(lazyShowActions);
         hideAction.addAll(lazyHideActions);
         insertAction.addAll(lazyInsertActions);
         eventAction.addAll(lazyEventActions);
+        notificationAction.addAll(lazyNotificationActions);
     }
 
     public AutoPopulatingList<DiscrepancyNoteActionType> getLazyDiscrepancyNoteActions() {
@@ -393,6 +424,14 @@ public class LazyRuleRefType2 extends RuleRefType {
 
     public void setLazyEventActions(AutoPopulatingList<LazyEventActionType> lazyEventActions) {
         this.lazyEventActions = lazyEventActions;
+    }
+
+    public AutoPopulatingList<NotificationActionType> getLazyNotificationActions() {
+        return lazyNotificationActions;
+    }
+
+    public void setLazyNotificationActions(AutoPopulatingList<NotificationActionType> lazyNotificationActions) {
+        this.lazyNotificationActions = lazyNotificationActions;
     }
 
     /*

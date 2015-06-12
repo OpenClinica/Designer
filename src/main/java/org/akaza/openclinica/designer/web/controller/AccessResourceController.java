@@ -47,6 +47,7 @@ public class AccessResourceController {
     private static final String PARAM_APP_PATH = "path";
     private static final String PARAM_STUDY_OID = "study_oid";
     private static final String PARAM_PROVIDER_USER = "provider_user";
+    private static final String PARAM_RUN_TIME = "runTime";
     private static final String SESSION_ATTR_FORM = "form";
     
     protected final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -59,14 +60,13 @@ public class AccessResourceController {
     public String createForm(Model model, HttpSession session, HttpServletRequest request, @RequestParam(PARAM_HOST) String providerHost,
             @RequestParam(PARAM_APP) String providerApp, @RequestParam(PARAM_STUDY_OID) String studyOid,
             @RequestParam(PARAM_PROVIDER_USER) String providerUser, @RequestParam(value = PARAM_APP_PATH, required = false) String path,
-            @RequestParam(value = PARAM_RULE_OID, required = false) String ruleOid, @RequestParam(value = PARAM_TARGET, required = false) String target)
+            @RequestParam(value = PARAM_RULE_OID, required = false) String ruleOid, @RequestParam(value = PARAM_TARGET, required = false) String target, @RequestParam(value = PARAM_RUN_TIME, required = false) String runTime)
             throws Exception {
 
         if (!hostAccessService.isHostAllowedAccess(providerHost)) {
             return "index";
         }
         logger.debug("Host is Valid ...");
-
         userPreferences.setAppName(providerApp);
         userPreferences.setPath(path);
         userPreferences.setUser(providerUser);
@@ -81,7 +81,7 @@ public class AccessResourceController {
         session.setAttribute("providerUser", userPreferences.getUser());
         session.setAttribute("providerHost", userPreferences.getHost());
         if (ruleOid != null && target != null) {
-            session.setAttribute(SESSION_ATTR_FORM, uiODMBuilder.getContainer().getRuleCommandByRuleOidAndTarget(ruleOid, target));
+            session.setAttribute(SESSION_ATTR_FORM, uiODMBuilder.getContainer().getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime));
             userPreferences.turnOnEditMode();
         }
         // doRest();

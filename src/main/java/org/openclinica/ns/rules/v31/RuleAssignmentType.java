@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RuleAssignmentType", propOrder = {
     "target",
+    "runOnSchedule",
     "ruleRef"
 })
 public class RuleAssignmentType {
@@ -47,6 +48,8 @@ public class RuleAssignmentType {
     protected TargetType target;
     @XmlElement(name = "RuleRef", required = true)
     protected List<RuleRefType> ruleRef;
+    @XmlElement(name = "RunOnSchedule", required = true)
+    protected RunOnScheduleType runOnSchedule;
 
     /**
      * Gets the value of the target property.
@@ -100,5 +103,30 @@ public class RuleAssignmentType {
         }
         return this.ruleRef;
     }
+
+    /**
+     * Gets the value of the runOnSchedule property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link RunOnScheduleType }
+     *     
+     */
+    public RunOnScheduleType getRunOnSchedule() {
+        return runOnSchedule;
+    }
+
+    /**
+     * Sets the value of the runOnSchedule property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link RunOnScheduleType }
+     *     
+     */
+    public void setRunOnSchedule(RunOnScheduleType runOnSchedule) {
+        this.runOnSchedule = runOnSchedule;
+    }
+
 
 }

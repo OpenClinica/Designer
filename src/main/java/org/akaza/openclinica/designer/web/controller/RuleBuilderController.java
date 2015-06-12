@@ -90,10 +90,11 @@ public class RuleBuilderController {
     public String getCreateForm(Model model, HttpSession session, HttpServletRequest request) throws IOException {
         final String ruleOid = request.getParameter("ruleOid");
         final String target = request.getParameter("target");
+        final String runTime = request.getParameter("runTime");
 
         if (ruleOid != null && target != null) {
             final UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
-            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target));
+            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime));
             userPreferences.turnOnEditMode();
         }
         return "ruleBuilder";
@@ -103,7 +104,6 @@ public class RuleBuilderController {
     public void form(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model,
             @RequestParam(value = PARAM_RESET, required = false) String resetParam) {
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM) != null ? (RulesCommand) session.getAttribute(SESSION_ATTR_FORM) : null;
-
         if (form == null || (resetParam != null && resetParam.equals("true"))) {
             form = new RulesCommand();
             session.setAttribute(SESSION_ATTR_FORM, form);
@@ -193,7 +193,6 @@ public class RuleBuilderController {
         messages = validateRule(uiODMContainer, rulesCommandToRules(form), new DefaultResponseHandler(VALID_RULE_MESSAGE));
 
         session.setAttribute(SESSION_ATTR_FORM, form);
-
         // success response handling
         if (isAjaxRequest(requestedWith)) {
             model.addAttribute("messages", messages);
@@ -394,12 +393,11 @@ public class RuleBuilderController {
     ArrayList<Message> processXmlTabSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
         ArrayList<Message> messages = new ArrayList<Message>();
-
         if (result.hasErrors()) {
             model.addAttribute("ajaxRequest", isAjaxRequest(requestedWith));
             return messages;
         }
-
+        
         Rules r = null;
         try {
             r = loadRulesFromString(form.getXml());
@@ -527,7 +525,7 @@ public class RuleBuilderController {
         Map<String, String> vars = Collections.singletonMap("study", uiODMContainer.getStudyOid());
         Response resp = null;
         try {
-            resp = userPreferences.getRestTemplate().postForObject(url, rule, Response.class, vars);
+            resp = userPreferences.getRestTemplate().postForObject(url, rule, Response.class, vars);   
             if (resp.isValid()) {
                 messages.addAll(responseHandler.handle());
             } else {
@@ -567,6 +565,9 @@ public class RuleBuilderController {
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
+        ra.getRuleRef().add(form.getRuleRef());
+        ra.getRuleRef().get(0).setOID(form.getRuleDef().getOID());
+        ra.setRunOnSchedule(form.getRunOnSchedule());
         Rules r = new Rules();
         for (LazyRuleRefType2 lrr : listLzRuleRef) {
             ra.getRuleRef().add(lrr);
