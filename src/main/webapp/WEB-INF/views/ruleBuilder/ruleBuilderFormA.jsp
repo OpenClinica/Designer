@@ -396,45 +396,76 @@
             </p>
             <p style="margin-left: -15px;">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.toLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].to" path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorTextColor"><fmt:message key="label_to"/>: </form:label>
-                <div style="background: url(includes/img/header_border.png); width: 586px; margin-left: 85px;"><img id="to_participant-${gridRow.index}" src="includes/img/icon_participant.png" class="participantBtn" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">    
+                <div style="width: 586px; margin-left: 85px; height: 25px;" class=" ui-widget-header">
+                    <span id="to_participant-${gridRow.index}" class="participantBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99;">
+                        Participant
+                    </span> 
                 </div>
-                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder" title="${tooltipTo}" style="margin-left: 85px; width: 582px; height: 25px;"/>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder" title="${tooltipTo}" style="margin-left: 85px; width: 584px; height: 25px;"/>
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssClass="errorTextColor" />
             </p>
             <p style="margin-left: -15px;">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.subjectLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].subject" path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorTextColor"><fmt:message key="label_subject"/>: </form:label>
                 <div style="width: 560px; margin-left: 85px;">
-                    <img src="includes/img/icon_ocVar.png" style="width: 130px; padding-top: 3px; margin-bottom: -6px;">
-                    <img src="includes/img/icon_ocpVar.png" style="width: 124px; padding-left: 32px; padding-top: 3px; margin-bottom: -6px;">
+                    <button class="ui-widget-header" style="height: 26px; margin-left: 0px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Variables</button>
+                    <button class="ui-widget-header" style="height: 26px; margin-left: 12px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Participant Variables</button>
                 </div>
-                <div style="background: url(includes/img/header_border.png); width: 586px; margin-left: 85px;">
-                    <img id="subject_study-${gridRow.index}" class="studyBtn" src="includes/img/icon_study.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="subject_event-${gridRow.index}" class="eventBtn" src="includes/img/icon_event.png" style="width: 62px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img src="includes/img/vertical_white.png" style="width: 3px; height: 25px; padding-left: 5px; margin-bottom: -5px;">
-                    <img id="subject_participant-${gridRow.index}" class="participantBtn" src="includes/img/icon_participant.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="subject_fName-${gridRow.index}" class="fNameBtn" src="includes/img/icon_firstName.png" style="width: 82px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="subject_url-${gridRow.index}" class="urlBtn" src="includes/img/icon_url.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="subject_urlLogin-${gridRow.index}" class="urlLoginBtn" src="includes/img/icon_urlLogin.png" style="width: 89px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="subject_accessCode-${gridRow.index}" class="accessCodeBtn" src="includes/img/icon_accessCode.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                <div style="width: 586px; margin-left: 85px;" class="ui-widget-header">
+                    <span id="subject_study-${gridRow.index}" class="studyBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 10px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Study
+                    </span>
+                    <span id="subject_event-${gridRow.index}" class="eventBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 10px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Event
+                    </span>
+                    <img src="includes/img/vertical_white.png" style="width: 3px; height: 25px; padding-left: 10px; margin-bottom: -5px;">
+                    <span id="subject_participant-${gridRow.index}" class="participantBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Participant
+                    </span>
+                    <span id="subject_fName-${gridRow.index}" class="fNameBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        First Name
+                    </span>
+                    <span id="subject_url-${gridRow.index}" class="urlBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        URL
+                    </span>
+                    <span id="subject_urlLogin-${gridRow.index}" class="urlLoginBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        URL+Login
+                    </span>
+                    <span id="subject_accessCode-${gridRow.index}" class="accessCodeBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Access Code
+                    </span>
                 </div>
-                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder" title="${tooltipMessage}" style="margin-left: 85px; width: 582px; height: 25px;"/>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder" title="${tooltipMessage}" style="margin-left: 85px; width: 584px; height: 25px;"/>
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssClass="errorTextColor" />
             </p>
             <p style="margin-left: -15px;">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.messageLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].message" path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssErrorClass="errorTextColor"><fmt:message key="label_message"/>: </form:label>
                 <div style="width: 560px; margin-left: 85px;">
-                    <img src="includes/img/icon_ocVar.png" style="width: 130px; padding-top: 3px; margin-bottom: -6px;">
-                    <img src="includes/img/icon_ocpVar.png" style="width: 124px; padding-left: 32px; padding-top: 3px; margin-bottom: -6px;">
+                    <button class="ui-widget-header" style="height: 26px; margin-left: 0px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Variables</button>
+                    <button class="ui-widget-header" style="height: 26px; margin-left: 12px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Participant Variables</button>
                 </div>
-                <div style="background: url(includes/img/header_border.png); width: 586px; margin-left: 85px; height: 179px;">
-                    <img id="message_study-${gridRow.index}" class="studyBtn" src="includes/img/icon_study.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="message_event-${gridRow.index}" class="eventBtn" src="includes/img/icon_event.png" style="width: 62px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img src="includes/img/vertical_white.png" style="width: 3px; height: 25px; padding-left: 5px; margin-bottom: -5px;">
-                    <img id="message_participant-${gridRow.index}" class="participantBtn" src="includes/img/icon_participant.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="message_fName-${gridRow.index}" class="fNameBtn" src="includes/img/icon_firstName.png" style="width: 82px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="message_url-${gridRow.index}" class="urlBtn" src="includes/img/icon_url.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="message_urlLogin-${gridRow.index}" class="urlLoginBtn" src="includes/img/icon_urlLogin.png" style="width: 89px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
-                    <img id="message_accessCode-${gridRow.index}" class="accessCodeBtn" src="includes/img/icon_accessCode.png" style="width: 70px; padding-left: 5px; padding-top: 3px; margin-top: 3px; cursor: pointer; margin-bottom: -2px;">
+                <div style="width: 586px; margin-left: 85px; height: 179px;" class="ui-widget-header">
+                    <span id="message_study-${gridRow.index}" class="studyBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 10px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Study
+                    </span>
+                    <span id="message_event-${gridRow.index}" class="eventBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 10px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Event
+                    </span>
+                    <img src="includes/img/vertical_white.png" style="width: 3px; height: 25px; padding-left: 10px; margin-bottom: -5px;">
+                    <span id="message_participant-${gridRow.index}" class="participantBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Participant
+                    </span>
+                    <span id="message_fName-${gridRow.index}" class="fNameBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        First Name
+                    </span>
+                    <span id="message_url-${gridRow.index}" class="urlBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        URL
+                    </span>
+                    <span id="message_urlLogin-${gridRow.index}" class="urlLoginBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        URL+Login
+                    </span>
+                    <span id="message_accessCode-${gridRow.index}" class="accessCodeBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
+                        Access Code
+                    </span>
                     <form:textarea path="ruleRef.lazyNotificationActions[${gridRow.index}].message" rows="3" cols="50" cssErrorClass="errorBorder" title="${tooltipMessage }" style="width: 584px; height: 150px;" />
                     <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssClass="errorTextColor" />
                 </div>
