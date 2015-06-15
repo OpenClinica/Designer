@@ -277,7 +277,7 @@
          initializeToolTips();
     }
 
-    function addNotificationAction (toolExpressionEvaluatesTo,tooltipMessage,tooltipTo) {
+    function addNotificationAction (toolExpressionEvaluatesTo,tooltipTo,tooltipSubject,tooltipMessage) {
         var nameAttrOLlazyNotificationActions =  $("textarea[name*=lazyNotificationActions]").last().attr("id");
             index = nameAttrOLlazyNotificationActions == null ? 0 : parseInt(nameAttrOLlazyNotificationActions.match(/[\d]/)) +1;
             // var propPrefix = "ruleRef.lazyNotificationActions[" + index  + "]";
@@ -296,15 +296,15 @@
              + "  <\/select>"
              + " <\/p><p style=\"margin-left: -15px;\">"
              + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".toLabel\" for=\"ruleRef.lazyEmailActions[" + index  + "].message\">To:<\/label>"
-             + "<div style=\"width: 586px; margin-left: 85px; height: 25px;\" class=\"ui-widget-header\"><span id=\"to_participant-" + index  + "\" class=\"participantBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99;\">Participant</span><\/div>"
+             + "<div style=\"width: 586px; margin-left: 85px; height: 25px; background-color: rgb(239, 239, 239);\" class=\"ui-widget-header\"><span id=\"to_participant-" + index  + "\" class=\"participantBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99;\">Participant</span><\/div>"
              + "<input type=\"text\" value=\"\$\{participant\} ,jkeremian@openclinica.com\" name=\"ruleRef.lazyNotificationActions[" + index  + "].to\" id=\"ruleRef.lazyNotificationActions" + index  + ".to\" title=\"" + tooltipTo + "\" style=\"margin-left: 85px; width: 584px; height: 25px;\" > "
-             + "<\/p><p style=\"margin-left: -15px;\">"
+             + "<\/p><p style=\"margin-left: -15px; margin-top: -1px;\">"
              + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".subjectLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].subject\">Subject:<\/label>"
-             + "<div style=\"width: 560px; margin-left: 85px;\">"
-             + "<button class=\"ui-widget-header\" style=\"height: 26px; margin-left: 0px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;\">OpenClinica Variables</button>"
-             + "<button class=\"ui-widget-header\" style=\"height: 26px; margin-left: 12px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;\">OpenClinica Participant Variables</button>"
+             + "<div style=\"width: 560px; margin-left: 85px; height: 21px;\">"
+             + "<span class=\"ui-widget-header\" style=\"padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239);\">OpenClinica Variables</span>"
+             + "<span class=\"ui-widget-header\" style=\"padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239); margin-left: 14px;\">OpenClinica Participant Variables</span>"
              + "<\/div>"
-             + "<div style=\"width: 586px; margin-left: 85px;\" class=\"ui-widget-header\">"
+             + "<div style=\"width: 586px; margin-left: 85px; background-color: rgb(239, 239, 239);\" class=\"ui-widget-header\">"
              + "<span id=\"subject_study-" + index  + "\" class=\"studyBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 12px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Study</span>"
              + "<span id=\"subject_event-" + index  + "\" class=\"eventBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 12px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Event</span>"
              + "<img src=\"includes/img/vertical_white.png\" style=\"width: 3px; height: 25px; padding-left: 12px; margin-bottom: -5px; \">"
@@ -314,14 +314,14 @@
              + "<span id=\"subject_urlLogin-" + index  + "\" class=\"urlLoginBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">URL+Login</span>"
              + "<span id=\"subject_accessCode-" + index  + "\" class=\"accessCodeBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Access Code</span>"
              + "<\/div>"
-             + "<input type=\"text\" value=\"Dear \$\{participant.firstname\},You have questionnaires to Complete for \$\{event.name\}. Please visit \$\{study.name\} to complete them. Your access code : \$\{participant.accessCode\}.Url: \$\{participant.url\} LoginUrl: \$\{participant.loginurl\} Thank you.\" name=\"ruleRef.lazyNotificationActions[" + index  + "].subject\" id=\"ruleRef.lazyNotificationActions" + index  + ".subject\" title=\"" + tooltipMessage + "\" style=\"margin-left: 85px; width: 584px; height: 25px;\" > "
+             + "<input type=\"text\" value=\"Dear \$\{participant.firstname\}, You have questionnaires to Complete for \$\{event.name\}. Please visit \$\{study.name\} to complete them. Your access code : \$\{participant.accessCode\}.Url: \$\{participant.url\} LoginUrl: \$\{participant.loginurl\} Thank you.\" name=\"ruleRef.lazyNotificationActions[" + index  + "].subject\" id=\"ruleRef.lazyNotificationActions" + index  + ".subject\" title=\"" + tooltipSubject + "\" style=\"margin-left: 85px; width: 584px; height: 25px; margin-top: -1px;\" > "
              + "<\/p><p style=\"margin-left: -15px;\">"
              + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".messageLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].message\">Message:<\/label>"
-             + "<div style=\"width: 560px; margin-left: 85px;\">"
-             + "<button class=\"ui-widget-header\" style=\"height: 26px; margin-left: 0px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;\">OpenClinica Variables</button>"
-             + "<button class=\"ui-widget-header\" style=\"height: 26px; margin-left: 12px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;\">OpenClinica Participant Variables</button>"
+             + "<div style=\"width: 560px; margin-left: 85px; height: 21px;\">"
+             + "<span class=\"ui-widget-header\" style=\"padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239);\">OpenClinica Variables</span>"
+             + "<span class=\"ui-widget-header\" style=\"padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239); margin-left: 14px;\">OpenClinica Participant Variables</span>"
              + "<\/div>"
-             + "<div style=\"width: 586px; margin-left: 85px; height: 179px;\" class=\"ui-widget-header\">"
+             + "<div style=\"width: 586px; margin-left: 85px; background-color: rgb(239, 239, 239);\" class=\"ui-widget-header\">"
              + "<span id=\"message_study-" + index  + "\" class=\"studyBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 12px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Study</span>"
              + "<span id=\"message_event-" + index  + "\" class=\"eventBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 12px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Event</span>"
              + "<img src=\"includes/img/vertical_white.png\" style=\"width: 3px; height: 25px; padding-left: 12px; margin-bottom: -5px; \">"
@@ -329,8 +329,8 @@
              + "<span id=\"message_fName-" + index  + "\" class=\"fNameBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">First Name</span>"
              + "<span id=\"message_url-" + index  + "\" class=\"urlBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">URL</span>"
              + "<span id=\"message_urlLogin-" + index  + "\" class=\"urlLoginBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">URL+Login</span>"
-             + "<span id=\"message_accessCode-" + index  + "\" class=\"accessCodeBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Access Code</span>"
-             + "<textarea cols=\"50\" rows=\"3\" name=\"ruleRef.lazyNotificationActions[" + index  + "].message\" id=\"ruleRef.lazyNotificationActions" + index  + ".message\" title=\"" + tooltipMessage + "\" style=\"width: 584px; height: 150px;\">Dear \$\{participant.firstname\},\n\nYou have questionnaires to Complete for \$\{event.name\}. Please visit \$\{study.name\} to complete them. \nYour access code : \$\{participant.accessCode\}.\nUrl: \$\{participant.url\} \nLoginUrl: \$\{participant.loginurl\} \nThank you.<\/textarea>"
+             + "<span id=\"message_accessCode-" + index  + "\" class=\"accessCodeBtn ui-button\" style=\"border-radius: 5px; margin-top: 2px; margin-left: 5px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;\">Access Code</span><\/div>"
+             + "<textarea cols=\"50\" rows=\"3\" name=\"ruleRef.lazyNotificationActions[" + index  + "].message\" id=\"ruleRef.lazyNotificationActions" + index  + ".message\" title=\"" + tooltipMessage + "\" style=\"width: 586px; height: 150px; margin-left: 85px; margin-top: -1px;\">Dear \$\{participant.firstname\},\n\nYou have questionnaires to Complete for \$\{event.name\}. Please visit \$\{study.name\} to complete them. \nYour access code : \$\{participant.accessCode\}.\nUrl: \$\{participant.url\}. \nLoginUrl: \$\{participant.loginurl\}. \nThank you.<\/textarea>"
              + "<\/p>"
              + "<\/fieldset>"
              + "<\/span>"

@@ -48,6 +48,8 @@
     <fmt:message key="tooltip_event_apply_to" var="tooltipEventApplyTo"/>
     <fmt:message key="tooltip_event_expression" var="tooltipEventExpression"/>
     <fmt:message key="tooltip_event_property" var="tooltipEventProperty"/>
+    <fmt:message key="tooltip_notification_subject" var="tooltipNotifSubject"/>
+    <fmt:message key="tooltip_notification_message" var="tooltipNotifMessage"/>
      
     <span class="topButtons">
     <button id="validateButton1" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Validate</span></button>
@@ -122,8 +124,11 @@
             </c:otherwise>
         </c:choose>
     </p>
-    <p id="headerExp" style="margin-bottom: -18px; display: none;">
-        <img src="includes/img/header_operator.png" style="width: 300px; padding-left: 99px;">
+    <p>
+        <!-- <img src="includes/img/header_operator.png" style="width: 300px; padding-left: 99px;"> -->
+        <div style="width: 560px; height: 10px;" class="">
+            <span class="ui-widget-header" style="padding: 5px; margin-left: 100px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239);">Operators</span>
+        </div>
     </p>
     <p id="ruleExpressionWYSIWYG">
         <dFields:textarea path="ruleDef.expression.value" imputCSSErrorClass="errorBorder" labelNameKey="label_rule_expression" labelCSSErrorClass="errorTextColor" title="This will show up in the TipTip popup." rows="5" cols="100%"/>
@@ -396,21 +401,21 @@
             </p>
             <p style="margin-left: -15px;">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.toLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].to" path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorTextColor"><fmt:message key="label_to"/>: </form:label>
-                <div style="width: 586px; margin-left: 85px; height: 25px;" class=" ui-widget-header">
+                <div style="width: 586px; margin-left: 85px; height: 25px; background-color: rgb(239, 239, 239);" class=" ui-widget-header">
                     <span id="to_participant-${gridRow.index}" class="participantBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99;">
                         Participant
                     </span> 
                 </div>
-                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder" title="${tooltipTo}" style="margin-left: 85px; width: 584px; height: 25px;"/>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder" title="${tooltipTo}" style="margin-left: 85px; width: 584px; height: 25px; margin-top: -1px;"/>
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssClass="errorTextColor" />
             </p>
             <p style="margin-left: -15px;">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.subjectLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].subject" path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorTextColor"><fmt:message key="label_subject"/>: </form:label>
-                <div style="width: 560px; margin-left: 85px;">
-                    <button class="ui-widget-header" style="height: 26px; margin-left: 0px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Variables</button>
-                    <button class="ui-widget-header" style="height: 26px; margin-left: 12px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Participant Variables</button>
+                <div style="width: 560px; margin-left: 85px; height: 21px;">
+                    <span class="ui-widget-header" style="padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239);">OpenClinica Variables</span>
+                    <span class="ui-widget-header" style="padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239); margin-left: 14px;">OpenClinica Participant Variables</span>
                 </div>
-                <div style="width: 586px; margin-left: 85px;" class="ui-widget-header">
+                <div style="width: 586px; margin-left: 85px; background-color: rgb(239, 239, 239);" class="ui-widget-header">
                     <span id="subject_study-${gridRow.index}" class="studyBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 10px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
                         Study
                     </span>
@@ -434,16 +439,16 @@
                         Access Code
                     </span>
                 </div>
-                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder" title="${tooltipMessage}" style="margin-left: 85px; width: 584px; height: 25px;"/>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder" title="${tooltipNotifSubject}" style="margin-left: 85px; width: 584px; height: 25px; margin-top: -1px;"/>
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssClass="errorTextColor" />
             </p>
             <p style="margin-left: -15px;">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.messageLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].message" path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssErrorClass="errorTextColor"><fmt:message key="label_message"/>: </form:label>
-                <div style="width: 560px; margin-left: 85px;">
-                    <button class="ui-widget-header" style="height: 26px; margin-left: 0px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Variables</button>
-                    <button class="ui-widget-header" style="height: 26px; margin-left: 12px; margin-bottom: -1px; border-radius: 10px 10px 0px 0px;">OpenClinica Participant Variables</button>
+                <div style="width: 560px; margin-left: 85px; height: 21px;">
+                    <span class="ui-widget-header" style="padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239);">OpenClinica Variables</span>
+                    <span class="ui-widget-header" style="padding: 5px; border-radius: 10px 10px 0px 0px; background-color: rgb(239, 239, 239); margin-left: 14px;">OpenClinica Participant Variables</span>
                 </div>
-                <div style="width: 586px; margin-left: 85px; height: 179px;" class="ui-widget-header">
+                <div style="width: 586px; margin-left: 85px; background-color: rgb(239, 239, 239);" class="ui-widget-header">
                     <span id="message_study-${gridRow.index}" class="studyBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 10px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
                         Study
                     </span>
@@ -466,9 +471,9 @@
                     <span id="message_accessCode-${gridRow.index}" class="accessCodeBtn ui-button" style="border-radius: 5px; margin-top: 2px; margin-left: 3px; border: 1px solid #729fcf; moz-box-shadow: 1px 1px 3px #456B99; -webkit-box-shadow: 1px 1px 3px #456B99; box-shadow: 1px 1px 3px #456B99; vertical-align: top;">
                         Access Code
                     </span>
-                    <form:textarea path="ruleRef.lazyNotificationActions[${gridRow.index}].message" rows="3" cols="50" cssErrorClass="errorBorder" title="${tooltipMessage }" style="width: 584px; height: 150px;" />
-                    <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssClass="errorTextColor" />
                 </div>
+                <form:textarea path="ruleRef.lazyNotificationActions[${gridRow.index}].message" rows="3" cols="50" cssErrorClass="errorBorder" title="${tooltipNotifMessage}" style="margin-left: 85px; width: 586px; height: 150px; margin-top: -1px" />
+                <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssClass="errorTextColor" />
             </p>
             </span>
         </c:forEach>
@@ -546,7 +551,7 @@
                     addEventAction("${toolExpressionEvaluatesTo}","${tooltipEventExpression}","${tooltipEventApplyTo}","${tooltipEventProperty}");
                     break;
                 case "addNotificationAction":
-                    addNotificationAction("${toolExpressionEvaluatesTo}","${tooltipMessage}","${tooltipTo}");
+                    addNotificationAction("${toolExpressionEvaluatesTo}","${tooltipTo}","${tooltipNotifSubject}","${tooltipNotifMessage}");
                     break;      
                 default:
                     // DO NOTHING specifically when Add is selected
@@ -583,12 +588,10 @@
                 $("#runOnButton").attr("src", "includes/img/icon_run_on.png");
                 $("#runOnButton").css("float", "left");
                 $("#showRunTimeTable").css("display", "inline-block");
-                $("#headerExp").css("display", "inherit");
             } else {
                 $("#runOnButton").attr("src", "includes/img/icon_run_off.png");
                 $("#runOnButton").css("float", "none");
                 $("#showRunTimeTable").css("display", "none");
-                $("#headerExp").css("display", "none");
                 $("#runOnScheduleID").val(""); 
             }
         });
@@ -634,6 +637,13 @@
             
             document.getElementById(targetId).value = currentValue+ " " +optionalValue;
         });
+
+        for(var i=0;i < "${rulesCommand.ruleRef.lazyNotificationActions.size()}"; i++) {
+            var subject = document.getElementById("ruleRef.lazyNotificationActions"+i+".subject");
+            var subjectValue = subject.value;
+            var str = subjectValue.replace(/  +/g, ' ');
+            document.getElementById("ruleRef.lazyNotificationActions"+i+".subject").value = str;
+        }
     });
 
     </script>
