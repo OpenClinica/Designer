@@ -1,14 +1,6 @@
 package org.akaza.openclinica.designer.web.controller;
 
-import org.openclinica.ns.rules.v31.DiscrepancyNoteActionType;
-import org.openclinica.ns.rules.v31.EmailActionType;
-import org.openclinica.ns.rules.v31.HideActionType;
-import org.openclinica.ns.rules.v31.InsertActionType;
-import org.openclinica.ns.rules.v31.RuleRefType;
-import org.openclinica.ns.rules.v31.ShowActionType;
-import org.openclinica.ns.rules.v31.EventActionType;
-import org.openclinica.ns.rules.v31.RuleDefType;
-import org.openclinica.ns.rules.v31.NotificationActionType;
+import org.openclinica.ns.rules.v31.*;
 import org.springframework.util.AutoPopulatingList;
 
 import java.util.ArrayList;
@@ -114,6 +106,13 @@ public class LazyRuleRefType2 extends RuleRefType {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
             rr.setOID(ruleRef.getOID()+"_"+count);
             rr.getEventAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (NotificationActionType ea : ruleRef.getNotificationAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getNotificationAction().add(ea);
             count++;
             listLazy.add(rr);
         }

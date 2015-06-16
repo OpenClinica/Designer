@@ -91,10 +91,11 @@ public class RuleBuilderController {
         final String ruleOid = request.getParameter("ruleOid");
         final String target = request.getParameter("target");
         final String runTime = request.getParameter("runTime");
+        final String message = request.getParameter("message");
 
         if (ruleOid != null && target != null) {
             final UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
-            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime));
+            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime, message));
             userPreferences.turnOnEditMode();
         }
         return "ruleBuilder";
@@ -565,8 +566,6 @@ public class RuleBuilderController {
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
-        ra.getRuleRef().add(form.getRuleRef());
-        ra.getRuleRef().get(0).setOID(form.getRuleDef().getOID());
         ra.setRunOnSchedule(form.getRunOnSchedule());
         Rules r = new Rules();
         for (LazyRuleRefType2 lrr : listLzRuleRef) {
