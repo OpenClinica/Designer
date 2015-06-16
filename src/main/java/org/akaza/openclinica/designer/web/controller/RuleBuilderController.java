@@ -6,6 +6,7 @@ import org.akaza.openclinica.designer.web.fields.InputField;
 import org.openclinica.ns.response.v31.MessagesType;
 import org.openclinica.ns.response.v31.Response;
 import org.openclinica.ns.rules.v31.RuleAssignmentType;
+import org.openclinica.ns.rules.v31.RuleDefType;
 import org.openclinica.ns.rules.v31.Rules;
 import org.openclinica.ns.rules_test.v31.ParameterType;
 import org.openclinica.ns.rules_test.v31.RulesTest;
@@ -120,7 +121,6 @@ public class RuleBuilderController {
     public @ResponseBody
     ArrayList<Message> processDesignTabToTest(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
-
         ArrayList<Message> messages = new ArrayList<Message>();
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         // TODO: See if there is a way to move this to one place currently happens here and in Validator.
@@ -179,7 +179,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/ruleBuilderFormA", method = RequestMethod.POST)
     public String processSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
-
     	logger.debug("Validating form ...");
         ArrayList<Message> messages = new ArrayList<Message>();
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
@@ -243,7 +242,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/xmlForm", method = RequestMethod.GET)
     public void processSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model,
             @RequestParam(value = PARAM_RESET, required = false) String resetParam) throws IOException {
-
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM);
         if (resetParam != null && resetParam.equals("true")) {
             form = new RulesCommand();
@@ -282,7 +280,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/xmlForm", method = RequestMethod.POST)
     public String processXmlFormSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, RulesCommand form,
             BindingResult result, HttpSession session, Model model, @RequestParam("ignoreDuplicates") Boolean ignoreDuplicates) throws IOException {
-
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         ArrayList<Message> messages = new ArrayList<Message>();
 
@@ -429,7 +426,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/testForm", method = RequestMethod.GET)
     public String testForm(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model)
             throws IOException {
-
         ArrayList<Message> messages = new ArrayList<Message>();
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM);
         form.getRuleRef().lazyToNonLazy();
@@ -472,7 +468,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/testForm", method = RequestMethod.POST)
     public String processTestSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
-
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         UIODMBuilder uiODMBuilder = new UIODMBuilder(uiODMContainer);
 
@@ -563,7 +558,10 @@ public class RuleBuilderController {
      * Convert RulesCommand to Rules Object
      */
     private Rules rulesCommandToRules(RulesCommand form) {
-        form.getRuleRef().lazyToNonLazy();
+        RulesCommand rc = new RulesCommand(form); 
+        rc.getRuleRef().setOID(form.getRuleDef().getOID());
+        LazyRuleRefType2 lzRuleRef = new LazyRuleRefType2();
+        List<LazyRuleRefType2> listLzRuleRef = lzRuleRef.splitRuleRef(rc.getRuleRef());
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
@@ -571,10 +569,13 @@ public class RuleBuilderController {
         ra.getRuleRef().get(0).setOID(form.getRuleDef().getOID());
         ra.setRunOnSchedule(form.getRunOnSchedule());
         Rules r = new Rules();
+        for (LazyRuleRefType2 lrr : listLzRuleRef) {
+            ra.getRuleRef().add(lrr);
+        }
         r.getRuleAssignment().add(ra);
-        r.getRuleDef().add(form.getRuleDefCurated());
-        r.getRuleDef().get(0).setName(r.getRuleDef().get(0).getOID());
-        r.getRuleDef().get(0).setDescription(r.getRuleDef().get(0).getOID());
+        for(RuleDefType rdt : lzRuleRef.splitRuleDef(form.getRuleDefCurated(), listLzRuleRef.size())) {
+            r.getRuleDef().add(rdt);   
+        }
         return r;
 
     }

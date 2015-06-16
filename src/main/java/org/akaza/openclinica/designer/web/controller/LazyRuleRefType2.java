@@ -7,6 +7,7 @@ import org.openclinica.ns.rules.v31.InsertActionType;
 import org.openclinica.ns.rules.v31.RuleRefType;
 import org.openclinica.ns.rules.v31.ShowActionType;
 import org.openclinica.ns.rules.v31.EventActionType;
+import org.openclinica.ns.rules.v31.RuleDefType;
 import org.openclinica.ns.rules.v31.NotificationActionType;
 import org.springframework.util.AutoPopulatingList;
 
@@ -62,7 +63,6 @@ public class LazyRuleRefType2 extends RuleRefType {
     }
 
     public void lazyToNonLazy() {
-
         reAlignDiscrepancyNoteActions();
         reAlignEmailActions();
         reAlignLazyShowActions();
@@ -70,6 +70,67 @@ public class LazyRuleRefType2 extends RuleRefType {
         reAlignLazyInsertActions();
         reAlignLazyEventActions();
         reAlignNotificationActions();
+    }
+
+    public List<LazyRuleRefType2> splitRuleRef(RuleRefType ruleRef) {
+        List<LazyRuleRefType2> listLazy = new ArrayList<LazyRuleRefType2>();
+        int count = 0;
+        for (EmailActionType ea : ruleRef.getEmailAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getEmailAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (DiscrepancyNoteActionType ea : ruleRef.getDiscrepancyNoteAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getDiscrepancyNoteAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (ShowActionType ea : ruleRef.getShowAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getShowAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (HideActionType ea : ruleRef.getHideAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getHideAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (InsertActionType ea : ruleRef.getInsertAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getInsertAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (EventActionType ea : ruleRef.getEventAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            rr.setOID(ruleRef.getOID()+"_"+count);
+            rr.getEventAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        return listLazy;
+    }
+
+    public List<RuleDefType> splitRuleDef(RuleDefType ruleDef, int size) {
+        List<RuleDefType> listRdt = new ArrayList<RuleDefType>();
+        for (int i = 0; i < size; i++) {
+            RuleDefType rdt = new RuleDefType();
+            rdt.setOID(ruleDef.getOID()+"_"+i);
+            rdt.setExpression(ruleDef.getExpression());
+            rdt.setName(ruleDef.getOID()+"_"+i);
+            rdt.setDescription(ruleDef.getOID()+"_"+i);
+            listRdt.add(rdt);
+        }
+        return listRdt;
     }
 
     /**

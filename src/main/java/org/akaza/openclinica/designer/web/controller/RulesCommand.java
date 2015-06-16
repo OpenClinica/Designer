@@ -33,6 +33,17 @@ public class RulesCommand {
         ruleDef = new RuleDefType();
     }
 
+    public RulesCommand(RulesCommand rule) {
+        ruleRef = rule.getRuleRef();
+        target = rule.getTarget();
+        addActions = rule.getAddActions();
+        xml = rule.getXml();
+        rulePropertiesHtml = rule.getRulePropertiesHtml();
+        ruleProperties = rule.getRuleProperties();
+        testRulesResults = rule.getTestRulesResults();
+        testWillActionsRun = rule.getTestWillActionsRun();
+    }
+
     public LazyRuleRefType2 getRuleRef() {
         return ruleRef;
     }
