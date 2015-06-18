@@ -7,6 +7,7 @@ import org.openclinica.ns.response.v31.MessagesType;
 import org.openclinica.ns.response.v31.Response;
 import org.openclinica.ns.rules.v31.RuleAssignmentType;
 import org.openclinica.ns.rules.v31.RuleDefType;
+import org.openclinica.ns.rules.v31.RuleImportType;
 import org.openclinica.ns.rules.v31.Rules;
 import org.openclinica.ns.rules_test.v31.ParameterType;
 import org.openclinica.ns.rules_test.v31.RulesTest;
@@ -43,6 +44,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.xml.bind.JAXBElement;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -604,7 +606,9 @@ public class RuleBuilderController {
         StringReader reader = new StringReader(rulesString);
         Rules rules = null;
         try {
-            rules = (Rules) this.unMarshaller.unmarshal(new StreamSource(reader));
+            // rules = (Rules) this.unMarshaller.unmarshal(new StreamSource(reader));
+            JAXBElement<Rules> root = (JAXBElement<Rules>) this.unMarshaller.unmarshal(new StreamSource(reader));
+            rules = (Rules) root.getValue();
         } catch (FileNotFoundException e) {
             throw new UnMarshallingException();
             // TODO Auto-generated catch block
