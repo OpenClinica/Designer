@@ -568,7 +568,8 @@ public class RuleBuilderController {
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
-        ra.setRunOnSchedule(form.getRunOnSchedule());
+        if (!form.getRunOnSchedule().getTime().equals("")) 
+            ra.setRunOnSchedule(form.getRunOnSchedule());
         Rules r = new Rules();
         for (LazyRuleRefType2 lrr : listLzRuleRef) {
             ra.getRuleRef().add(lrr);
