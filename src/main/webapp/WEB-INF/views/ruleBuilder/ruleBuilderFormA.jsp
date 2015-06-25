@@ -398,35 +398,42 @@
             <p class="margin_left_notif">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.toLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].to" path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorTextColor"><fmt:message key="label_to"/>: </form:label>
                 <div class="background_button_div" style="height: 25px;">
-                    <div style="opacity: 0.6;" id="to_div-${gridRow.index}" >
-                        <span id="to_participant-${gridRow.index}" class="participantBtn ui-button span_btn" style="margin-left: 3px;">
+                    <div style="opacity: 0.6;" id="to_divoc-${gridRow.index}" >
+                        <span id="to_participant-${gridRow.index}" class="participantBtn ui-button span_btn" style="margin-left: 10px;">
                             Participant
                         </span>
                     </div>
                 </div>
-                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder" title="${tooltipTo}" style="" class="notifToInput notif_input"/>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssErrorClass="errorBorder notifToInput notif_input" title="${tooltipTo}" style="margin-left: 85px; width: 576px; padding-bottom: 0px; padding-top: 0px;" class="notifToInput notif_input" />
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].to" cssClass="errorTextColor" />
             </p>
 
             <p class="margin_left_notif">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.subjectLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].subject" path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorTextColor"><fmt:message key="label_subject"/>: </form:label>
-                <div class="background_header_div">
-                    <span class="ui-widget-header span_header" >OpenClinica Variables</span>
-                    <span class="ui-widget-header span_header" style="margin-left: 14px;">OpenClinica Participant Variables</span>
+
+                <div class="background_button_div" style="color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-left-radius: 5px; width: 136px; float: left; margin-left: 0; padding-left: 3px;">
+                    <span>OpenClinica Variables</span>
                 </div>
-                <div class="background_button_div">
-                    <div style="opacity: 0.6;" id="subject_div-${gridRow.index}">
-                        <span id="subject_study-${gridRow.index}" class="studyBtn ui-button span_btn" style="margin-left: 10px; vertical-align: top;">
+                <div class="background_button_div" style="color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-right-radius: 5px; width: 441px; ; margin-left: 225px; padding-left: 5px;">
+                    <span>OpenClinica Participant Variables</span>
+                </div>
+
+                <div class="background_button_div" style="border-top-color: transparent; width: 136px; float: left; margin-left: 85px; padding-bottom: 2px; padding-left: 3px; margin-top: -1px;">
+                    <div style="opacity: 0.6;" id="subject_divoc-${gridRow.index}">
+                        <span id="subject_study-${gridRow.index}" class="studyBtn ui-button span_btn" style="margin-left: 7px; vertical-align: top;">
                             Study
                         </span>
-                        <span id="subject_event-${gridRow.index}" class="eventBtn ui-button span_btn" style="margin-left: 10px; vertical-align: top;">
+                        <span id="subject_event-${gridRow.index}" class="eventBtn ui-button span_btn" style="margin-left: 3px; vertical-align: top;">
                             Event
                         </span>
-                        <img src="includes/img/vertical_white.png" class="img_divider">
-                        <span id="subject_participant-${gridRow.index}" class="participantBtn ui-button span_btn" style="margin-left: 3px; vertical-align: top;">
+                    </div>
+                </div>
+                <div class="background_button_div" style="border-top-color: transparent; width: 441px; float: left; margin-left: -1px; padding-bottom: 2px; padding-left: 5px; margin-top: -1px;">
+                    <div style="opacity: 0.6;" id="subject_divocp-${gridRow.index}">
+                        <span id="subject_participant-${gridRow.index}" class="participantBtn ui-button span_btn" style="margin-left: 5px; vertical-align: top;">
                             Participant
                         </span>
-                        <span id="subject_fName-${gridRow.index}" class="fNameBtn ui-button span_btn" style="margin-left: 5px; vertical-align: top;">
+                        <span id="subject_fName-${gridRow.index}" class="fNameBtn ui-button span_btn" style="margin-left: 3px; vertical-align: top;">
                             First Name
                         </span>
                         <span id="subject_url-${gridRow.index}" class="urlBtn ui-button span_btn" style="margin-left: 3px; vertical-align: top;">
@@ -440,24 +447,32 @@
                         </span>
                     </div>
                 </div>
-                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder" title="${tooltipNotifSubject}" class="notifSubjectInput notif_input"/>
+                <form:input path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssErrorClass="errorBorder notifSubjectInput notif_input" title="${tooltipNotifSubject}" class="notifSubjectInput notif_input" style="margin-left: 85px; width: 576px; padding-bottom: 0px; padding-top: 0px;"/>
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].subject" cssClass="errorTextColor" />
             </p>
             <p class="margin_left_notif">
                 <form:label id="ruleRef.lazyNotificationActions${gridRow.index}.messageLabel" for="ruleRef.lazyNotificationActions[${gridRow.index}].message" path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssErrorClass="errorTextColor"><fmt:message key="label_message"/>: </form:label>
-                <div class="background_header_div">
-                    <span class="ui-widget-header span_header">OpenClinica Variables</span>
-                    <span class="ui-widget-header span_header" style="margin-left: 14px;">OpenClinica Participant Variables</span>
+
+
+                <div class="background_button_div" style="color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-left-radius: 5px; width: 136px; float: left; margin-left: 0; padding-left: 3px;">
+                    <span>OpenClinica Variables</span>
                 </div>
-                <div class="background_button_div">
-                    <div style="opacity: 0.6;" id="message_div-${gridRow.index}">
-                        <span id="message_study-${gridRow.index}" class="studyBtn ui-button span_btn" style="margin-left: 10px; vertical-align: top;">
+                <div class="background_button_div" style="color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-right-radius: 5px; width: 441px; ; margin-left: 225px; padding-left: 5px;">
+                    <span>OpenClinica Participant Variables</span>
+                </div>
+
+                <div class="background_button_div" style="border-top-color: transparent; width: 136px; float: left; margin-left: 85px; padding-bottom: 2px; padding-left: 3px; margin-top: -1px;">
+                    <div style="opacity: 0.6;" id="message_divoc-${gridRow.index}">
+                        <span id="message_study-${gridRow.index}" class="studyBtn ui-button span_btn" style="margin-left: 7px; vertical-align: top;">
                             Study
                         </span>
-                        <span id="message_event-${gridRow.index}" class="eventBtn ui-button span_btn" style="margin-left: 10px; vertical-align: top;">
+                        <span id="message_event-${gridRow.index}" class="eventBtn ui-button span_btn" style="margin-left: 3px; vertical-align: top;">
                             Event
                         </span>
-                        <img src="includes/img/vertical_white.png" class="img_divider">
+                    </div>
+                </div>
+                <div class="background_button_div" style="border-top-color: transparent; width: 441px; float: left; margin-left: -1px; padding-bottom: 2px; padding-left: 5px; margin-top: -1px;">
+                    <div style="opacity: 0.6;" id="message_divocp-${gridRow.index}">
                         <span id="message_participant-${gridRow.index}" class="participantBtn ui-button span_btn" style="margin-left: 5px; vertical-align: top;">
                             Participant
                         </span>
@@ -475,7 +490,7 @@
                         </span>
                     </div>
                 </div>
-                <form:textarea path="ruleRef.lazyNotificationActions[${gridRow.index}].message" rows="3" cols="50" cssErrorClass="errorBorder" title="${tooltipNotifMessage}" style="width: 586px; height: 150px;" class="notifMessageInput notif_input"/>
+                <form:textarea path="ruleRef.lazyNotificationActions[${gridRow.index}].message" rows="3" cols="50" cssErrorClass="errorBorder notifMessageInput notif_input" title="${tooltipNotifMessage}" style="width: 576px; height: 150px; margin-bottom: -5px;" class="notifMessageInput notif_input"/>
                 <form:errors path="ruleRef.lazyNotificationActions[${gridRow.index}].message" cssClass="errorTextColor" />
             </p>
             </span>
@@ -712,7 +727,8 @@
                     part = "message";
                     break;
             }
-            document.getElementById(part+"_div-"+value["index"]).style.opacity = 1;
+            document.getElementById(part+"_divoc-"+value["index"]).style.opacity = 1;
+            document.getElementById(part+"_divocp-"+value["index"]).style.opacity = 1;
             document.getElementById(part+"_div-"+value["index"]).className += " active";
         });
 
@@ -728,7 +744,8 @@
                     break;
             }
             if (!isButtonOnClick) {
-                document.getElementById(part+"_div-"+value["index"]).style.opacity = 0.6;
+                document.getElementById(part+"_divoc-"+value["index"]).style.opacity = 0.6;
+                document.getElementById(part+"_divocp-"+value["index"]).style.opacity = 0.6;
                 var tmpClass = document.getElementById(part+"_div-"+value["index"]).className = "";
             }
         })
