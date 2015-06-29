@@ -7,6 +7,7 @@ import org.openclinica.ns.response.v31.MessagesType;
 import org.openclinica.ns.response.v31.Response;
 import org.openclinica.ns.rules.v31.RuleAssignmentType;
 import org.openclinica.ns.rules.v31.RuleDefType;
+import org.openclinica.ns.rules.v31.RuleImportType;
 import org.openclinica.ns.rules.v31.Rules;
 import org.openclinica.ns.rules_test.v31.ParameterType;
 import org.openclinica.ns.rules_test.v31.RulesTest;
@@ -43,6 +44,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.xml.bind.JAXBElement;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -91,10 +93,11 @@ public class RuleBuilderController {
         final String ruleOid = request.getParameter("ruleOid");
         final String target = request.getParameter("target");
         final String runTime = request.getParameter("runTime");
+        final String message = request.getParameter("message");
 
         if (ruleOid != null && target != null) {
             final UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
-            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime));
+            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime, message));
             userPreferences.turnOnEditMode();
         }
         return "ruleBuilder";
@@ -565,9 +568,8 @@ public class RuleBuilderController {
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
-        ra.getRuleRef().add(form.getRuleRef());
-        ra.getRuleRef().get(0).setOID(form.getRuleDef().getOID());
-        ra.setRunOnSchedule(form.getRunOnSchedule());
+        if (!form.getRunOnSchedule().getTime().equals("")) 
+            ra.setRunOnSchedule(form.getRunOnSchedule());
         Rules r = new Rules();
         for (LazyRuleRefType2 lrr : listLzRuleRef) {
             ra.getRuleRef().add(lrr);
@@ -605,7 +607,9 @@ public class RuleBuilderController {
         StringReader reader = new StringReader(rulesString);
         Rules rules = null;
         try {
-            rules = (Rules) this.unMarshaller.unmarshal(new StreamSource(reader));
+            // rules = (Rules) this.unMarshaller.unmarshal(new StreamSource(reader));
+            JAXBElement<Rules> root = (JAXBElement<Rules>) this.unMarshaller.unmarshal(new StreamSource(reader));
+            rules = (Rules) root.getValue();
         } catch (FileNotFoundException e) {
             throw new UnMarshallingException();
             // TODO Auto-generated catch block

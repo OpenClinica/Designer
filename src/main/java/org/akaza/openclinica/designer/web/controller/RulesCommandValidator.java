@@ -183,10 +183,13 @@ public class RulesCommandValidator implements Validator {
                         }
                     } else {
                         while (tokenizer.hasMoreTokens()) {
-                            Matcher matcher = pattern.matcher(tokenizer.nextToken().trim());
-                            if (!matcher.matches()) {
-                                e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].to", "email.to.not.valid");
-                                break;
+                            String stringToken = tokenizer.nextToken().trim();
+                            if (!stringToken.equals("${participant}")) {
+                                Matcher matcher = pattern.matcher(stringToken.trim());
+                                if (!matcher.matches()) {
+                                    e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].to", "email.to.not.valid");
+                                    break;
+                                }
                             }
                         }
                     }

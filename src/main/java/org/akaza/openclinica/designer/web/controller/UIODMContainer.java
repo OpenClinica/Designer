@@ -107,12 +107,20 @@ public class UIODMContainer {
         return null;
     }
 
-    public RulesCommand getRuleCommandByRuleOidAndTarget(String ruleOid, String target, String runTime) {
+    public RulesCommand getRuleCommandByRuleOidAndTarget(String ruleOid, String target, String runTime, String message) {
         Rules rules = getRules();
         for (RuleAssignmentType ruleAssignment : rules.getRuleAssignment()) {
             if (ruleAssignment.getTarget().getValue().equals(target)) {
                 for (RuleRefType ruleRef : ruleAssignment.getRuleRef()) {
                     if (ruleRef.getOID().equals(ruleOid)) {
+                        if (message != null) {
+                            if (ruleRef.getNotificationAction().size() > 0) {
+                                ruleRef.getNotificationAction().get(0).setMessage(message);
+                            }
+                            if (ruleRef.getEmailAction().size() > 0) {
+                                ruleRef.getEmailAction().get(0).setMessage(message);
+                            }
+                        }
                         RuleDefType ruleDef = getRuleDefByOid(ruleRef.getOID(), rules.getRuleDef());
                         if (ruleDef != null) {
                             RulesCommand rc = new RulesCommand();

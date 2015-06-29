@@ -1,14 +1,6 @@
 package org.akaza.openclinica.designer.web.controller;
 
-import org.openclinica.ns.rules.v31.DiscrepancyNoteActionType;
-import org.openclinica.ns.rules.v31.EmailActionType;
-import org.openclinica.ns.rules.v31.HideActionType;
-import org.openclinica.ns.rules.v31.InsertActionType;
-import org.openclinica.ns.rules.v31.RuleRefType;
-import org.openclinica.ns.rules.v31.ShowActionType;
-import org.openclinica.ns.rules.v31.EventActionType;
-import org.openclinica.ns.rules.v31.RuleDefType;
-import org.openclinica.ns.rules.v31.NotificationActionType;
+import org.openclinica.ns.rules.v31.*;
 import org.springframework.util.AutoPopulatingList;
 
 import java.util.ArrayList;
@@ -75,45 +67,82 @@ public class LazyRuleRefType2 extends RuleRefType {
     public List<LazyRuleRefType2> splitRuleRef(RuleRefType ruleRef) {
         List<LazyRuleRefType2> listLazy = new ArrayList<LazyRuleRefType2>();
         int count = 0;
+        int currentActionNumber = countActions(ruleRef);
+        String oid = null;
         for (EmailActionType ea : ruleRef.getEmailAction()) {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
-            rr.setOID(ruleRef.getOID()+"_"+count);
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
             rr.getEmailAction().add(ea);
             count++;
             listLazy.add(rr);
         }
         for (DiscrepancyNoteActionType ea : ruleRef.getDiscrepancyNoteAction()) {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
-            rr.setOID(ruleRef.getOID()+"_"+count);
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
             rr.getDiscrepancyNoteAction().add(ea);
             count++;
             listLazy.add(rr);
         }
         for (ShowActionType ea : ruleRef.getShowAction()) {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
-            rr.setOID(ruleRef.getOID()+"_"+count);
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
             rr.getShowAction().add(ea);
             count++;
             listLazy.add(rr);
         }
         for (HideActionType ea : ruleRef.getHideAction()) {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
-            rr.setOID(ruleRef.getOID()+"_"+count);
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
             rr.getHideAction().add(ea);
             count++;
             listLazy.add(rr);
         }
         for (InsertActionType ea : ruleRef.getInsertAction()) {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
-            rr.setOID(ruleRef.getOID()+"_"+count);
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
             rr.getInsertAction().add(ea);
             count++;
             listLazy.add(rr);
         }
         for (EventActionType ea : ruleRef.getEventAction()) {
             LazyRuleRefType2 rr = new LazyRuleRefType2();
-            rr.setOID(ruleRef.getOID()+"_"+count);
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
             rr.getEventAction().add(ea);
+            count++;
+            listLazy.add(rr);
+        }
+        for (NotificationActionType ea : ruleRef.getNotificationAction()) {
+            LazyRuleRefType2 rr = new LazyRuleRefType2();
+            oid = ruleRef.getOID();
+            if (currentActionNumber > 1) {
+                oid = ruleRef.getOID()+"_"+count;
+            }
+            rr.setOID(oid);
+            rr.getNotificationAction().add(ea);
             count++;
             listLazy.add(rr);
         }
@@ -124,10 +153,14 @@ public class LazyRuleRefType2 extends RuleRefType {
         List<RuleDefType> listRdt = new ArrayList<RuleDefType>();
         for (int i = 0; i < size; i++) {
             RuleDefType rdt = new RuleDefType();
-            rdt.setOID(ruleDef.getOID()+"_"+i);
+            String oid = ruleDef.getOID();
+            if (size > 1) {
+                oid = ruleDef.getOID()+"_"+i;
+            }
+            rdt.setOID(oid);
             rdt.setExpression(ruleDef.getExpression());
-            rdt.setName(ruleDef.getOID()+"_"+i);
-            rdt.setDescription(ruleDef.getOID()+"_"+i);
+            rdt.setName(oid);
+            rdt.setDescription(oid);
             listRdt.add(rdt);
         }
         return listRdt;
@@ -175,6 +208,10 @@ public class LazyRuleRefType2 extends RuleRefType {
             }
         }
         return false;
+    }
+
+    private int countActions(RuleRefType ruleRef) {
+        return ruleRef.getDiscrepancyNoteAction().size() + ruleRef.getEmailAction().size() + ruleRef.getShowAction().size() + ruleRef.getHideAction().size() + ruleRef.getInsertAction().size() + ruleRef.getEventAction().size() + ruleRef.getNotificationAction().size();
     }
 
     private void emailActionToLazyEmailAction(List<EmailActionType> emailAction) {
