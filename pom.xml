@@ -4,7 +4,7 @@
     <groupId>org.akaza.openclinica.designer</groupId>
     <artifactId>Designer</artifactId>
     <packaging>war</packaging>
-    <version>SNAPSHOT</version>
+    <version>1.3</version>
     <name>Designer</name>
     <properties>
         <roo.version>1.1.5.RELEASE</roo.version>
@@ -718,8 +718,8 @@
                             <goal>create</goal>
                         </goals>
                         <configuration>
-                            <doCheck>true</doCheck>
-                            <doUpdate>true</doUpdate>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
                             <buildNumberPropertyName>changeSet</buildNumberPropertyName>
                             <!--timestampFormat>"yyyy-MM-dd HH:mm Z"</timestampFormat-->
                             <!--format>{0} {1,date,yyyy-MM-dd HH:mm Z}</format>
