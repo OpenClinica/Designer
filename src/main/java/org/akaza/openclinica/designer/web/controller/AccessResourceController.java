@@ -145,13 +145,10 @@ public class AccessResourceController {
             InputStreamReader isr = new InputStreamReader(studyMetadataXML, "UTF-8");
             odm = (ODM) this.unMarshaller.unmarshal(new StreamSource(isr));
             // odm = (ODM) this.unMarshaller.unmarshal(new StreamSource(studyMetadataXML));
-            logger.debug("This is the place where to Log the Metadata");
             if (odm != null) {
-                logger.debug("This System.Out is BEFORE Logging ODM Json object");
                 ObjectMapper mapper = new ObjectMapper();
                 String jsonInString = mapper.writeValueAsString(odm);
                 logger.debug(jsonInString);
-                logger.debug("This System.Out is AFTER Logging ODM Json object");
             }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
