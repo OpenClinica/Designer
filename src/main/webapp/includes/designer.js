@@ -52,7 +52,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyDiscrepancyNoteActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyDiscrepancyNoteActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -81,7 +81,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyEmailActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyEmailActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyEmailActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEmailActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyEmailActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEmailActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -113,7 +113,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyShowActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyShowActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -148,7 +148,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyHideActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyHideActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -181,7 +181,7 @@
              + "<\/span><\/legend>"
              + "<p>"
              + "<label id=\"ruleRef.lazyInsertActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-             + " <select name=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+             + " <select name=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyInsertActions[" + index  + "].ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
              + " <option value=\"true\">true<\/option> "
              + " <option value=\"false\">false<\/option> "
              + "  <\/select>"
@@ -251,7 +251,7 @@
          + "<\/span><\/legend>"
          + "<p>"
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
-         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" > "
+         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyEventActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
          + " <option value=\"true\">true<\/option> "
          + " <option value=\"false\">false<\/option> "
          + "  <\/select>"
@@ -260,7 +260,7 @@
          + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyEventActions[" + index  + "].OID\" id=\"ruleRef.lazyEventActions" + index  + ".OID\" title=\"" + tooltipApplyTo + "\" style=\"width: 50%\"> "
          + "<\/p><p>"
          + "<label id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".PropertyLabel\" for=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\">Property:<\/label>"
-         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\" title=\"" + tooltipEventProperty + "\" > "
+         + " <select name=\"ruleRef.lazyEventActions[" + index  + "].lazyProperties[" + index  + "].Property\" id=\"ruleRef.lazyEventActions" + index  + ".lazyProperties" + index  + ".Property\" title=\"" + tooltipEventProperty + "\" class=\"evaluate_select\" style=\"width: 120px;\"> "
          + " <option value=\"\">Select<\/option> "
          + " <option value=\"STARTDATE\">STARTDATE<\/option> "
          + "  <\/select>"
@@ -275,6 +275,84 @@
          );
          $('#theCenter').animate({ scrollTop: $("#lazyEventActions" + index).offset().top }, 1000);
          initializeToolTips();
+    }
+
+    function addNotificationAction (toolExpressionEvaluatesTo,tooltipTo,tooltipSubject,tooltipMessage) {
+        var nameAttrOLlazyNotificationActions =  $("textarea[name*=lazyNotificationActions]").last().attr("id");
+            index = nameAttrOLlazyNotificationActions == null ? 0 : parseInt(nameAttrOLlazyNotificationActions.match(/[\d]/)) +1;
+            // var propPrefix = "ruleRef.lazyNotificationActions[" + index  + "]";
+            // var idPrefix = "ruleRef.lazyNotificationActions" + index  + "";
+            $("#ruleActions").append(
+             "<span id=\"lazyNotificationActions" + index + "\">"
+             + "<fieldset class=\"login\">"
+             + "<legend><span>Notification Action " //+ index
+             + "<a id=\"notificationAction\" href=\"#\" onclick=\"$('#lazyNotificationActions"+ index +"').remove();\"><img title=\"Remove\" alt=\"Remove\" src=\"images/bt_Remove.gif\" name=\"bt_Remove1\"><\/a>"
+             + "<\/span><\/legend>"
+             + "<p class=\"margin_left_notif\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".ifExpressionEvaluatesLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].ifExpressionEvaluates\">Evaluates to:<\/label>"
+             + " <select name=\"ruleRef.lazyNotificationActions[" + index  + "].ifExpressionEvaluates\" id=\"ruleRef.lazyNotificationActions" + index  + ".ifExpressionEvaluates\" title=\"" + toolExpressionEvaluatesTo + "\" class=\"evaluate_select\"> "
+             + " <option value=\"true\">true<\/option> "
+             + " <option value=\"false\">false<\/option> "
+             + "  <\/select>"
+             + " <\/p><p class=\"margin_left_notif\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".toLabel\" for=\"ruleRef.lazyEmailActions[" + index  + "].message\">To:<\/label>"
+             + "<div style=\"height: 25px;\" class=\"background_button_div\"><div style=\"opacity: 0.6;\" id=\"to_divoc-" +index+ "\" ><span id=\"to_participant-" + index  + "\" class=\"participantBtn ui-button span_btn\" style=\"margin-left: 10px;\">Participant</span><\/div><\/div>"
+             + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyNotificationActions[" + index  + "].to\" id=\"ruleRef.lazyNotificationActions" + index  + ".to\" title=\"" + tooltipTo + "\" class=\"notifToInput notif_input\" style=\"margin-left: 85px; width: 576px; padding-bottom: 0px; padding-top: 0px;\"> "
+             + "<\/p><p class=\"margin_left_notif\" style=\"margin-top: -1px;\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".subjectLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].subject\">Subject:<\/label>"
+             
+             + "<div class=\"background_button_div\" style=\"color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-left-radius: 5px; width: 136px; float: left; margin-left: 0; padding-left: 3px;\">"
+             + "<span>OpenClinica Variables<\/span>"
+             + "<\/div>"
+             + "<div class=\"background_button_div\" style=\"color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-right-radius: 5px; width: 441px; ; margin-left: 225px; padding-left: 5px;\">"
+             + "<span>OpenClinica Participant Variables<\/span>"
+             + "<\/div>"
+             + "<div class=\"background_button_div\" style=\"border-top-color: transparent; width: 136px; float: left; margin-left: 85px; padding-bottom: 2px; padding-left: 3px; margin-top: -1px;\">"
+             + "<div style=\"opacity: 0.6;\" id=\"subject_divoc-" + index + "\">"
+             + "<span id=\"subject_study-" + index + "\" class=\"studyBtn ui-button span_btn\" style=\"margin-left: 7px; vertical-align: top;\">Study<\/span>"
+             + "<span id=\"subject_event-" + index + "\" class=\"eventBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">Event<\/span>"
+             + "<\/div><\/div>"
+             + "<div class=\"background_button_div\" style=\"border-top-color: transparent; width: 441px; float: left; margin-left: -1px; padding-bottom: 2px; padding-left: 5px; margin-top: -1px;\">"
+             + "<div style=\"opacity: 0.6;\" id=\"subject_divocp-" + index + "\">"
+             + "<span id=\"subject_participant-" + index + "\" class=\"participantBtn ui-button span_btn\" style=\"margin-left: 5px; vertical-align: top;\">Participant<\/span>"
+             + "<span id=\"subject_fName-" + index + "\" class=\"fNameBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">First Name<\/span>"
+             + "<span id=\"subject_url-" + index + "\" class=\"urlBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">URL<\/span>"
+             + "<span id=\"subject_urlLogin-" + index + "\" class=\"urlLoginBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">URL+Login<\/span>"
+             + "<span id=\"subject_accessCode-" + index + "\" class=\"accessCodeBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">Access Code<\/span>"
+             + "<\/div><\/div>"
+
+             + "<input type=\"text\" value=\"\" name=\"ruleRef.lazyNotificationActions[" + index  + "].subject\" id=\"ruleRef.lazyNotificationActions" + index  + ".subject\" title=\"" + tooltipSubject + "\" class=\"notifSubjectInput notif_input\" style=\"margin-left: 85px; width: 576px; padding-bottom: 0px; padding-top: 0px;\"> "
+             + "<\/p><p class=\"margin_left_notif\">"
+             + "<label id=\"ruleRef.lazyNotificationActions" + index  + ".messageLabel\" for=\"ruleRef.lazyNotificationActions[" + index  + "].message\">Message:<\/label>"
+
+             + "<div class=\"background_button_div\" style=\"color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-left-radius: 5px; width: 136px; float: left; margin-left: 0; padding-left: 3px;\">"
+             + "<span>OpenClinica Variables<\/span>"
+             + "<\/div>"
+             + "<div class=\"background_button_div\" style=\"color: rgb(148, 148, 148); border-bottom-color: transparent; border-top-right-radius: 5px; width: 441px; ; margin-left: 225px; padding-left: 5px;\">"
+             + "<span>OpenClinica Participant Variables<\/span>"
+             + "<\/div>"
+             + "<div class=\"background_button_div\" style=\"border-top-color: transparent; width: 136px; float: left; margin-left: 85px; padding-bottom: 2px; padding-left: 3px; margin-top: -1px;\">"
+             + "<div style=\"opacity: 0.6;\" id=\"message_divoc-" + index + "\">"
+             + "<span id=\"message_study-" + index + "\" class=\"studyBtn ui-button span_btn\" style=\"margin-left: 7px; vertical-align: top;\">Study<\/span>"
+             + "<span id=\"message_event-" + index + "\" class=\"eventBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">Event<\/span>"
+             + "<\/div><\/div>"
+             + "<div class=\"background_button_div\" style=\"border-top-color: transparent; width: 441px; float: left; margin-left: -1px; padding-bottom: 2px; padding-left: 5px; margin-top: -1px;\">"
+             + "<div style=\"opacity: 0.6;\" id=\"message_divocp-" + index + "\">"
+             + "<span id=\"message_participant-" + index + "\" class=\"participantBtn ui-button span_btn\" style=\"margin-left: 5px; vertical-align: top;\">Participant<\/span>"
+             + "<span id=\"message_fName-" + index + "\" class=\"fNameBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">First Name<\/span>"
+             + "<span id=\"message_url-" + index + "\" class=\"urlBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">URL<\/span>"
+             + "<span id=\"message_urlLogin-" + index + "\" class=\"urlLoginBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">URL+Login<\/span>"
+             + "<span id=\"message_accessCode-" + index + "\" class=\"accessCodeBtn ui-button span_btn\" style=\"margin-left: 3px; vertical-align: top;\">Access Code<\/span>"
+             + "<\/div><\/div>"
+             
+             + "<textarea cols=\"50\" rows=\"3\" name=\"ruleRef.lazyNotificationActions[" + index  + "].message\" id=\"ruleRef.lazyNotificationActions" + index  + ".message\" title=\"" + tooltipMessage + "\" style=\"width: 576px; height: 150px; margin-left: 85px;\" class=\"notifMessageInput notif_input\"><\/textarea>"
+             + "<\/p>"
+             + "<\/fieldset>"
+             + "<\/span>"
+             );
+
+             $('#theCenter').animate({ scrollTop: $("#lazyNotificationActions" + index).offset().top }, 1000);
+             initializeToolTips();
     }
 
     function addRunOnStatus(propPrefix,idPrefix,runOnNotStarted,runOnScheduled,runOnStarted,runOnCompleted,runOnSkipped,runOnStopped){

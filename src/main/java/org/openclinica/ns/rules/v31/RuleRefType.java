@@ -49,7 +49,8 @@ import javax.xml.bind.annotation.XmlType;
     "showAction",
     "hideAction",
     "insertAction",
-    "eventAction"
+    "eventAction",
+    "notificationAction"
 })
 public class RuleRefType {
 
@@ -65,6 +66,8 @@ public class RuleRefType {
     protected List<InsertActionType> insertAction;
     @XmlElement(name = "EventAction")
     protected List<EventActionType> eventAction;
+    @XmlElement(name = "NotificationAction")
+    protected List<NotificationActionType> notificationAction;
     @XmlAttribute(name = "OID", required = true)
     protected String oid;
 
@@ -240,6 +243,35 @@ public class RuleRefType {
             eventAction = new ArrayList<EventActionType>();
         }
         return this.eventAction;
+    }
+
+    /**
+     * Gets the value of the notificationAction property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the notificationAction property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getNotificationAction().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link NotificationActionType }
+     * 
+     * 
+     */
+    public List<NotificationActionType> getNotificationAction() {
+        if (notificationAction == null) {
+            notificationAction = new ArrayList<NotificationActionType>();
+        }
+        return this.notificationAction;
     }
 
     /**
