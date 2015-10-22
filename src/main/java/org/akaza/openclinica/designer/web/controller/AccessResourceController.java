@@ -4,6 +4,7 @@ import org.akaza.openclinica.designer.core.DisableSSLHostNameVerifier;
 import org.akaza.openclinica.designer.core.NaiveTrustProvider;
 import org.akaza.openclinica.designer.web.HostAccessService;
 import org.cdisc.ns.odm.v130.ODM;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.openclinica.ns.response.v31.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -137,6 +138,11 @@ public class AccessResourceController {
             InputStreamReader isr = new InputStreamReader(studyMetadataXML, "UTF-8");
             odm = (ODM) this.unMarshaller.unmarshal(new StreamSource(isr));
             // odm = (ODM) this.unMarshaller.unmarshal(new StreamSource(studyMetadataXML));
+            if (odm != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                String jsonInString = mapper.writeValueAsString(odm);
+                logger.debug(jsonInString);
+            }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
