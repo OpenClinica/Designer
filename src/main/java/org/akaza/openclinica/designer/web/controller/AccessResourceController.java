@@ -4,6 +4,7 @@ import org.akaza.openclinica.designer.core.DisableSSLHostNameVerifier;
 import org.akaza.openclinica.designer.core.NaiveTrustProvider;
 import org.akaza.openclinica.designer.web.HostAccessService;
 import org.cdisc.ns.odm.v130.ODM;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.openclinica.ns.response.v31.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +52,7 @@ public class AccessResourceController {
     private static final String PARAM_RUN_TIME = "runTime";
     private static final String PARAM_MESSAGE = "msg";
     private static final String SESSION_ATTR_FORM = "form";
-    
+
     protected final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     public AccessResourceController() {
@@ -61,7 +63,8 @@ public class AccessResourceController {
     public String createForm(Model model, HttpSession session, HttpServletRequest request, @RequestParam(PARAM_HOST) String providerHost,
             @RequestParam(PARAM_APP) String providerApp, @RequestParam(PARAM_STUDY_OID) String studyOid,
             @RequestParam(PARAM_PROVIDER_USER) String providerUser, @RequestParam(value = PARAM_APP_PATH, required = false) String path,
-            @RequestParam(value = PARAM_RULE_OID, required = false) String ruleOid, @RequestParam(value = PARAM_TARGET, required = false) String target, @RequestParam(value = PARAM_RUN_TIME, required = false) String runTime, @RequestParam(value = PARAM_MESSAGE, required = false) String message)
+            @RequestParam(value = PARAM_RULE_OID, required = false) String ruleOid, @RequestParam(value = PARAM_TARGET, required = false) String target,
+            @RequestParam(value = PARAM_RUN_TIME, required = false) String runTime, @RequestParam(value = PARAM_MESSAGE, required = false) String message)
             throws Exception {
 
         if (!hostAccessService.isHostAllowedAccess(providerHost)) {
@@ -69,8 +72,8 @@ public class AccessResourceController {
         }
         logger.debug("Host is Valid ...");
         if (message != null) {
-            message = message.replace("-0-","\n");
-            message = message.replace("-1-"," ");
+            message = message.replace("-0-", "\n");
+            message = message.replace("-1-", " ");
         }
         userPreferences.setAppName(providerApp);
         userPreferences.setPath(path);
@@ -102,8 +105,7 @@ public class AccessResourceController {
     }
 
     @RequestMapping(value = "/refreshSession", method = RequestMethod.GET)
-    public @ResponseBody
-    String refreshSession() throws IOException {
+    public @ResponseBody String refreshSession() throws IOException {
         return "sessionRefreshed";
     }
 
@@ -120,7 +122,7 @@ public class AccessResourceController {
     @RequestMapping(value = "/initMetadata", method = RequestMethod.GET)
     public ModelAndView initMetadata(Model model, HttpSession session, @RequestParam("host") String providerHost, @RequestParam("app") String providerApp,
             @RequestParam("study_oid") String studyOid) throws Exception {
-        // model.addAttribute("contact", new Contact());
+        // model.addAttribute("contact", new Contact());`
         userPreferences.setAppName(providerApp);
         userPreferences.setHost(providerHost);
         userPreferences.setStudyOid(studyOid);
@@ -138,10 +140,16 @@ public class AccessResourceController {
         ODM odm = null;
         String uri = userPreferences.getMetadataURL();
         InputStream studyMetadataXML = new ByteArrayInputStream(userPreferences.getRestTemplate().getForObject(URI.create(uri), byte[].class));
+
         try {
             InputStreamReader isr = new InputStreamReader(studyMetadataXML, "UTF-8");
             odm = (ODM) this.unMarshaller.unmarshal(new StreamSource(isr));
             // odm = (ODM) this.unMarshaller.unmarshal(new StreamSource(studyMetadataXML));
+            if (odm != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                String jsonInString = mapper.writeValueAsString(odm);
+                logger.debug(jsonInString);
+            }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
