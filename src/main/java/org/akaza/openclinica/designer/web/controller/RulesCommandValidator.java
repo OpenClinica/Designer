@@ -1,5 +1,6 @@
 package org.akaza.openclinica.designer.web.controller;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.openclinica.ns.rules.v31.DiscrepancyNoteActionType;
 import org.openclinica.ns.rules.v31.EmailActionType;
 import org.openclinica.ns.rules.v31.HideActionType;
@@ -82,17 +83,15 @@ public class RulesCommandValidator implements Validator {
                 if (emailAction.getTo() == null || emailAction.getTo().trim().length() == 0) {
                     e.rejectValue("ruleRef.lazyEmailActions[" + action.getEmailAction().indexOf(emailAction) + "].to", "email.to.empty");
                 } else {
-                    Pattern pattern = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                	EmailValidator validator = EmailValidator.getInstance();
                     StringTokenizer tokenizer = new StringTokenizer(emailAction.getTo(), ",");
                     if (tokenizer.countTokens() == 0) {
-                        Matcher matcher = pattern.matcher(emailAction.getTo());
-                        if (!matcher.matches()) {
+                        if (!validator.isValid(emailAction.getTo())) {
                             e.rejectValue("ruleRef.lazyEmailActions[" + action.getEmailAction().indexOf(emailAction) + "].to", "email.to.not.valid");
                         }
                     } else {
                         while (tokenizer.hasMoreTokens()) {
-                            Matcher matcher = pattern.matcher(tokenizer.nextToken().trim());
-                            if (!matcher.matches()) {
+                            if (!validator.isValid(tokenizer.nextToken().trim())) {
                                 e.rejectValue("ruleRef.lazyEmailActions[" + action.getEmailAction().indexOf(emailAction) + "].to", "email.to.not.valid");
                                 break;
                             }

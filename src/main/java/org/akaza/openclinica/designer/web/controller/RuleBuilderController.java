@@ -450,7 +450,12 @@ public class RuleBuilderController {
          * session.setAttribute(SESSION_ATTR_TESTINPUTFIELDS, inputFields);
          */
 
-        testRules(form, uiODMBuilder, new TestRulesGetResponseHandler());
+        ArrayList<TestRulesResponseHandler> responseHandlers = new ArrayList();
+        responseHandlers.add(new TestRulesGetResponseHandler());
+        responseHandlers.add(new TestRulesSubmitResponseHandler());
+
+        testRules(form, uiODMBuilder, responseHandlers);
+        form.populateTestWillActionsRun();
         session.setAttribute(SESSION_ATTR_TESTINPUTFIELDS, form.getRulePropertiesHtml());
 
         // success response handling
@@ -471,6 +476,10 @@ public class RuleBuilderController {
     @RequestMapping(value = "/testForm", method = RequestMethod.POST)
     public String processTestSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
+        ArrayList<Message> messages = new ArrayList<Message>();
+        form.getRuleRef().lazyToNonLazy();
+        form.setTestRulesResults(new HashMap<String, String>());
+
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         UIODMBuilder uiODMBuilder = new UIODMBuilder(uiODMContainer);
 
@@ -486,10 +495,11 @@ public class RuleBuilderController {
             return null;
         }
 
-        form.getRuleRef().lazyToNonLazy();
-        ArrayList<Message> messages = new ArrayList<Message>();
+        ArrayList<TestRulesResponseHandler> responseHandlers = new ArrayList();
+        responseHandlers.add(new TestRulesGetResponseHandler());
+        responseHandlers.add(new TestRulesSubmitResponseHandler());
 
-        testRules(form, uiODMBuilder, new TestRulesSubmitResponseHandler());
+        testRules(form, uiODMBuilder, responseHandlers);
         form.populateTestWillActionsRun();
         session.setAttribute(SESSION_ATTR_FORM, form);
 
@@ -509,13 +519,15 @@ public class RuleBuilderController {
         return new Message(MessageType.error, "Could not submit to OC instance because :: " + message);
     }
 
-    private void testRules(RulesCommand form, UIODMBuilder uiODMBuilder, TestRulesResponseHandler responseHandler) {
+    private void testRules(RulesCommand form, UIODMBuilder uiODMBuilder, ArrayList<TestRulesResponseHandler> responseHandlers) {
         ArrayList<Message> messages = new ArrayList<Message>();
         RulesTest resp = null;
         try {
             resp =
                 userPreferences.getRestTemplate().postForObject(userPreferences.getValidateAndTestRuleURL(), createRulesTestFromCommand(form), RulesTest.class);
-            responseHandler.handle(form, resp, uiODMBuilder);
+            for (TestRulesResponseHandler responseHandler : responseHandlers) {
+                responseHandler.handle(form, resp, uiODMBuilder);
+            }
             return;
         } catch (Exception e) {
             messages.add(createRestExceptionMessage(e));
@@ -568,8 +580,9 @@ public class RuleBuilderController {
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
-        if (!form.getRunOnSchedule().getTime().equals("")) 
+        if (form.getRunOnSchedule() != null && !form.getRunOnSchedule().getTime().equals("")) {
             ra.setRunOnSchedule(form.getRunOnSchedule());
+        }
         Rules r = new Rules();
         for (LazyRuleRefType2 lrr : listLzRuleRef) {
             ra.getRuleRef().add(lrr);
