@@ -15,6 +15,7 @@
 	    <spring-security.version>3.0.5.RELEASE</spring-security.version>
 	    <logback.version>0.9.28</logback.version>
    		<!--scm.path>scm:svn:http://svn.akazaresearch.com/openclinica-projects-prop/Designer/trunk</scm.path-->
+
         <scm.path>scm:git:https://github.com/OpenClinica/Designer.git</scm.path>
     </properties>
 	<repositories>
@@ -762,8 +763,8 @@
                             <goal>create</goal>
                         </goals>
                         <configuration>
-                            <doCheck>true</doCheck>
-                            <doUpdate>true</doUpdate>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
                             <buildNumberPropertyName>changeSet</buildNumberPropertyName>
                             <!--timestampFormat>"yyyy-MM-dd HH:mm Z"</timestampFormat-->
                             <!--format>{0} {1,date,yyyy-MM-dd HH:mm Z}</format>
@@ -793,7 +794,6 @@
                 
             </plugin>
         </plugins>
-
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

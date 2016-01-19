@@ -16,4 +16,8 @@
             <destName>Designer-${project.version}.war</destName>
         </file>
     </files>
+<<<<<<< HEAD
 </assembly>
+=======
+</assembly>
+>>>>>>> 1.1
