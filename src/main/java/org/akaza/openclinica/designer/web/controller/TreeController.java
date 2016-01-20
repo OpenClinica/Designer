@@ -49,13 +49,18 @@ public class TreeController {
 
     @RequestMapping(value = "/itemDetails", method = RequestMethod.GET)
     public @ResponseBody
-    UIItemDetail getItemDetails(@RequestParam String name, HttpSession session) throws IOException {
+    UIEntityDetail getItemDetails(@RequestParam String name, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         UIODMBuilder uiODMBuilder = new UIODMBuilder(uiODMContainer);
-        UIItemDetail itemDetail = uiODMBuilder.buildItemDetail(name);
+        UIEntityDetail itemDetail = uiODMBuilder.buildItemDetail(name);
 
-        return itemDetail;
+        if (name.lastIndexOf('.') != -1) {
+            return (UIEventItemDetail) itemDetail;
+        } else {
+            return (UIItemDetail) itemDetail;
+        }
+        
     }
 
     @RequestMapping(value = "/eventsList", method = RequestMethod.GET)
@@ -97,7 +102,7 @@ public class TreeController {
 
     @RequestMapping(value = "/eventCrfsList", method = RequestMethod.GET)
     public @ResponseBody
-    List<TreeModel> eventsCrfsList(@RequestParam String eventOid, HttpSession session) throws IOException {
+    List<TreeModelInterface> eventsCrfsList(@RequestParam String eventOid, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         return getEventCrfs(uiODMContainer, eventOid, false);
@@ -105,14 +110,34 @@ public class TreeController {
 
     @RequestMapping(value = "/eventCrfsListOid", method = RequestMethod.GET)
     public @ResponseBody
-    List<TreeModel> eventsCrfsListOid(@RequestParam String eventOid, HttpSession session) throws IOException {
+    List<TreeModelInterface> eventsCrfsListOid(@RequestParam String eventOid, HttpSession session) throws IOException {
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute("uiODMContainer");
         return getEventCrfs(uiODMContainer, eventOid, true);
     }
 
-    private List<TreeModel> getEventCrfs(UIODMContainer uiODMContainer, String eventOid, Boolean useOid) {
-        List<TreeModel> crfs = new ArrayList<TreeModel>();
+    private List<TreeModelInterface> getEventCrfs(UIODMContainer uiODMContainer, String eventOid, Boolean useOid) {
+        
+        List<TreeModelInterface> crfs = new ArrayList<TreeModelInterface>();
+
+        // Event Start Date
+        TreeModelLeaf startDate = new TreeModelLeaf(useOid ? "STARTDATE" : "Start Date", "closed", "item", "E_", eventOid + ".STARTDATE");
+        startDate.setName("Start Date");
+        startDate.setOid(eventOid + ".STARTDATE");
+        startDate.addAttr("oid", eventOid + ".STARTDATE");
+        startDate.addAttr("eventOid", eventOid);
+        startDate.getData().setIcon("item");
+        crfs.add(startDate);
+
+        // Event Status
+        TreeModelLeaf eventStatus = new TreeModelLeaf(useOid ? "STATUS" : "Status", "closed", "item", "E_", eventOid + ".STATUS");
+        eventStatus.setName("Status");
+        eventStatus.setOid(eventOid + ".STATUS");
+        eventStatus.addAttr("oid", eventOid + ".STATUS");
+        eventStatus.addAttr("eventOid", eventOid);
+        eventStatus.getData().setIcon("item");
+        crfs.add(eventStatus);
+        
         UIEvent uiEvent = uiODMContainer.getEventsByOID(eventOid);
 
         for (UICrf uiCrf : uiEvent.getCrfs()) {
@@ -127,6 +152,7 @@ public class TreeController {
             crfs.add(newCrf);
 
         }
+
         return crfs;
 
     }

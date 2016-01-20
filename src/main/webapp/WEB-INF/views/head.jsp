@@ -87,6 +87,7 @@
         //myLayout.resizeAll();
         $westAccordion.accordion("resize");
         $eastAccordion.accordion("resize");
+        resizeWYSIWYGItem();
     };
     
     function getFirstRange() {
@@ -109,10 +110,10 @@
     }
     
     function showDialog(link){
-   	   $("#divId").dialog("open");
-   	   $("#modalIframeId").attr("src",link);
-   	   return false;
-   	}
+       $("#divId").dialog("open");
+       $("#modalIframeId").attr("src",link);
+       return false;
+    }
 
 
 
@@ -146,9 +147,18 @@
     
     function populateItemDetails(oid){
         $.getJSON('tree/itemDetails',{ name: oid }, function(data) {
-              $('#itemDetails').html('<p>' + addItemDetailsTable(data) + '</p>');
-              $('#accordion2').accordion('activate', 1);
-            });
+            var divitemheight;
+            if (oid.indexOf(".") > -1) {
+                $('#entityDetails').html('<p>' + addEntityDetailsTable(data) + '</p>');
+                divitemheight = $('#entityDetails').parent().css('height');
+                $('#accordion2').accordion('activate', 2);
+            } else {
+                $('#itemDetails').html('<p>' + addItemDetailsTable(data) + '</p>');
+                divitemheight = $('#itemDetails').parent().css('height');
+                $('#accordion2').accordion('activate', 1);
+            }
+            $('#accordion2 .ui-accordion-content-active').css('height', divitemheight);
+        });
     }
     
     function addItemDetailsTable(data){
@@ -206,15 +216,73 @@
             }   
           return html;        
     }
+
+    function addEntityDetailsTable(data){
+        var html = "";
+        var responseOptionsValueHtml = "";
+
+        var codeListItemSize = numAttrs(data.responseOptions);
+        if (codeListItemSize > 0) {
+            responseOptionsValueHtml = " " + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + codeListItemSize + "):</th>" + "</tr>"
+            var dialogResponseOptionsValueHtml = "<table><tbody>" + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + codeListItemSize + "):</th>" + "</tr>"
+
+            for(key2 in data.responseOptions) {
+                var theVar =
+                     "<tr>" 
+                     + "<td style=\"padding: 0.2em 3em; border-top: 0px none; border-bottom: 0px none;\">" + key2  + "</td>" 
+                     + "<td style=\"border-top: 0px none; border-bottom: 0px none;\">" + data.responseOptions[key2] + "</td>" 
+                     + "</tr>";
+                responseOptionsValueHtml += theVar;
+                dialogResponseOptionsValueHtml += theVar;                       
+            }
+
+            $('#dialogResponseOptionsValuesHtml').html(dialogResponseOptionsValueHtml + "</tbody></table>");
+        }
+             
+        html += "<div id=\"tables\" class=\"block\" style=\"margin: 0px;\">"
+            + "<table><tbody>"
+            + "<tr>" 
+            + "<td>" + data.itemName +  "</td>"
+            + "</tr>"
+            + "</tbody></table>"
+            + "<table><tbody>"
+            + "<tr>" + "<th>Event Name:</th>" + "<td>" + data.eventName + "</td>" + "</tr>"
+            + "<tr>" + "<th>Event OID:</th>" + "<td>" + data.eventOid + "</td>" + "</tr>"
+            + "<tr>" + "<th>Event Repeating:</th>" + "<td>" + data.eventRepeating + "</td>" + "</tr>"
+            + "<tr>" + "<th>Item Name:</th>" + "<td>" + data.itemName + "</td>" + "</tr>"
+            + "<tr>" + "<th>OID:</th>" + "<td>" + data.oid + "</td>" + "</tr>"
+            + "<tr>" + "<th>Data Type:</th>" + "<td>" + data.dataType + "</td>" + "</tr>"
+            +  responseOptionsValueHtml
+            + "</tbody></table>"
+            + "</div>"
+            ;
+
+        return html;        
+    }
     
     function openLink(){
        $('#dialogResponseOptionsValues').dialog("open");
     }
+
+    function numAttrs(obj) {
+        var count = 0;
+            for(var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    ++count;
+                }
+            }
+        return count;
+    }
+
+    function resizeWYSIWYGItem() {
+      $("#targetWYSIWYG > div, #ruleExpressionWYSIWYG > div").each(function() { 
+        var new_width = ($("#ui-tabs-1").width() - 150 > 550) ? 550 : $("#ui-tabs-1").width() - 150;
+        $(this).width(new_width);
+      });
+    }
     
 
     $(document).ready( function() {
-    	
-    	
         
         myLayout = $('body').layout({
             west__size:         200
@@ -246,15 +314,17 @@
         });
         
         $('#actions').mouseover(function() {
-        	myLayout.allowOverflow(this)
-        	$('.dropdownCont').css({'visibility' : 'visible', 'opacity' : '1'})
+            myLayout.allowOverflow(this)
+            $('.dropdownCont').css({'visibility' : 'visible', 'opacity' : '1'})
         });
         
         $('#actions').mouseleave(function() {
             $('.dropdownCont').css({'visibility' : 'hidden', 'opacity' : '0'})
         });
         
-
+        $(window).resize(function() {
+          resizeWYSIWYGItem();
+        });
 
         // THEME SWITCHER
         //$('#switcher').themeswitcher();
@@ -273,45 +343,45 @@
         
         <%-- Initialize Session timeout dialog box, div in center.jsp --%>
         $("#sessionTimeoutDialog").dialog({
-        	closeOnEscape: false,
+            closeOnEscape: false,
             autoOpen: false,
             modal: true
         }).prev('.ui-dialog-titlebar').find('a').hide();
         
         <%-- Manage session timeout. Open a dialog box 2 minutes before timeout, this runs every 30 mins --%>
         setInterval(function() {
-        	var lastAccessedTimeInSession = $.cookie('lastAccessedTime');
-        	var currentDate = new Date();
-        	//var curentTimeInUTC = currentDate.getTime() + (currentDate.getTimezoneOffset() * 60000);
-        	var curentTime = currentDate.getTime();
-        	var theTime = parseInt((lastAccessedTimeInSession - curentTime)/60000);
-        	console.log(theTime + " " + lastAccessedTimeInSession + " " + curentTime);
-        	if ( theTime < 0 && !$("#sessionTimeoutDialog").dialog( "isOpen" ) ){
-        		var ocURL = "${sessionScope['scopedTarget.userPreferences'].exitURL}";
-        		$('#counter').html("Your session has expired.")
+            var lastAccessedTimeInSession = $.cookie('lastAccessedTime');
+            var currentDate = new Date();
+            //var curentTimeInUTC = currentDate.getTime() + (currentDate.getTimezoneOffset() * 60000);
+            var curentTime = currentDate.getTime();
+            var theTime = parseInt((lastAccessedTimeInSession - curentTime)/60000);
+            console.log(theTime + " " + lastAccessedTimeInSession + " " + curentTime);
+            if ( theTime < 0 && !$("#sessionTimeoutDialog").dialog( "isOpen" ) ){
+                var ocURL = "${sessionScope['scopedTarget.userPreferences'].exitURL}";
+                $('#counter').html("Your session has expired.")
                 $('#sessionTimeoutDialog').dialog( "option", "buttons", { "Go back to OpenClinica": function() { window.location = ocURL; } } );
-        		$("#sessionTimeoutDialog").dialog("open");
-        	}
-        	if ( theTime == 2 && !$("#sessionTimeoutDialog").dialog( "isOpen" ) ){
-        		var ocURL = "${sessionScope['scopedTarget.userPreferences'].appURL}";
-        		$('#counter').countdown('destroy');
+                $("#sessionTimeoutDialog").dialog("open");
+            }
+            if ( theTime == 2 && !$("#sessionTimeoutDialog").dialog( "isOpen" ) ){
+                var ocURL = "${sessionScope['scopedTarget.userPreferences'].appURL}";
+                $('#counter').countdown('destroy');
                 $('#counter').countdown({until: '+0h +2m +00s', format: 'YOWDHMS', significant: 2, layout: '{mnn}{sep}{snn}',
-                	onExpiry: function(){
-                		//console.log(ocURL)
-                		$('#counter').countdown('destroy');
+                    onExpiry: function(){
+                        //console.log(ocURL)
+                        $('#counter').countdown('destroy');
                         $('#counter').html("Your session has expired.")
                         $('#sessionTimeoutDialog').dialog( "option", "buttons", { "Go back to OpenClinica": function() { window.location = ocURL; } } );
-                	}
-                	});
+                    }
+                    });
                 $('#sessionTimeoutDialog').dialog( 
-                		"option", 
-                		"buttons", 
-                		{ "Reset": function() {
-                			$.getJSON('access/refreshSession');
-                			$(this).dialog("close"); 
-                			}});
+                        "option", 
+                        "buttons", 
+                        { "Reset": function() {
+                            $.getJSON('access/refreshSession');
+                            $(this).dialog("close"); 
+                            }});
                 $("#sessionTimeoutDialog").dialog("open");
-        	}
+            }
         }, 60000);
 
 
@@ -342,7 +412,7 @@
              modal: true,
              buttons: {
                  "Save": function() {
-                	 save();
+                     save();
                      $( this ).dialog( "close" );
                  },
                  "Cancel": function() {
@@ -356,7 +426,7 @@
              modal: true,
              buttons: {
                  "Ok": function() {
-                	 reset();
+                     reset();
                      $( this ).dialog( "close" );
                  },
                  "Cancel": function() {
@@ -367,7 +437,7 @@
         
         var $tabs = $("#tabs2").tabs({
             ajaxOptions: {
-            	cache: false,
+                cache: false,
                 error: function( xhr, status, index, anchor ) {
                     alert("Couldn't load this tab. We'll try to fix this as soon as possible.");
                 }
@@ -380,7 +450,7 @@
             //alert(ui.tab + " :: " + ui.panel + " :: " + ui.index + " ::1 ")
             var currentlySelectedTab = $(this).tabs( "option" , "selected");
             if (ui.index == 1) {
-            	nicEditors.findEditor('ruleDef.expression.value').saveContent()
+                nicEditors.findEditor('ruleDef.expression.value').saveContent()
                 nicEditors.findEditor('target.value').saveContent()
                 $.ajax({
                     type: 'POST',
@@ -393,8 +463,8 @@
                 });
             }
             if (currentlySelectedTab == 0 && ui.index == 2 ) {
-            	var x = true;
-            	nicEditors.findEditor('ruleDef.expression.value').saveContent()
+                var x = true;
+                nicEditors.findEditor('ruleDef.expression.value').saveContent()
                 nicEditors.findEditor('target.value').saveContent()
                 $.ajax({
                     type: 'POST',
@@ -402,8 +472,8 @@
                     data: $("#rulesCommand").serialize(),
                     success: function (result) {
                         if (result.length > 0 ){
-                        	x=false;
-                        	$.post('ruleBuilder/ruleBuilderFormA', $("#rulesCommand").serialize(), function(data) {
+                            x=false;
+                            $.post('ruleBuilder/ruleBuilderFormA', $("#rulesCommand").serialize(), function(data) {
                                 $('#kkforms').html(data);
                             });
                         }
@@ -451,8 +521,7 @@
                 return x; 
             }
         });
-        
-        
+
     });
 
     </script>

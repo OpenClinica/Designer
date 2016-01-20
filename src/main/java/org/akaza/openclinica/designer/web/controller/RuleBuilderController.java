@@ -6,6 +6,8 @@ import org.akaza.openclinica.designer.web.fields.InputField;
 import org.openclinica.ns.response.v31.MessagesType;
 import org.openclinica.ns.response.v31.Response;
 import org.openclinica.ns.rules.v31.RuleAssignmentType;
+import org.openclinica.ns.rules.v31.RuleDefType;
+import org.openclinica.ns.rules.v31.RuleImportType;
 import org.openclinica.ns.rules.v31.Rules;
 import org.openclinica.ns.rules_test.v31.ParameterType;
 import org.openclinica.ns.rules_test.v31.RulesTest;
@@ -42,6 +44,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.xml.bind.JAXBElement;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -87,13 +90,14 @@ public class RuleBuilderController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getCreateForm(Model model, HttpSession session, HttpServletRequest request) throws IOException {
-
         final String ruleOid = request.getParameter("ruleOid");
         final String target = request.getParameter("target");
+        final String runTime = request.getParameter("runTime");
+        final String message = request.getParameter("message");
 
         if (ruleOid != null && target != null) {
             final UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
-            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target));
+            session.setAttribute(SESSION_ATTR_FORM, uiODMContainer.getRuleCommandByRuleOidAndTarget(ruleOid, target, runTime, message));
             userPreferences.turnOnEditMode();
         }
         return "ruleBuilder";
@@ -102,9 +106,7 @@ public class RuleBuilderController {
     @RequestMapping(value = "/ruleBuilderFormA", method = RequestMethod.GET)
     public void form(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model,
             @RequestParam(value = PARAM_RESET, required = false) String resetParam) {
-
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM) != null ? (RulesCommand) session.getAttribute(SESSION_ATTR_FORM) : null;
-
         if (form == null || (resetParam != null && resetParam.equals("true"))) {
             form = new RulesCommand();
             session.setAttribute(SESSION_ATTR_FORM, form);
@@ -122,7 +124,6 @@ public class RuleBuilderController {
     public @ResponseBody
     ArrayList<Message> processDesignTabToTest(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
-
         ArrayList<Message> messages = new ArrayList<Message>();
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         // TODO: See if there is a way to move this to one place currently happens here and in Validator.
@@ -181,7 +182,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/ruleBuilderFormA", method = RequestMethod.POST)
     public String processSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
-
     	logger.debug("Validating form ...");
         ArrayList<Message> messages = new ArrayList<Message>();
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
@@ -196,7 +196,6 @@ public class RuleBuilderController {
         messages = validateRule(uiODMContainer, rulesCommandToRules(form), new DefaultResponseHandler(VALID_RULE_MESSAGE));
 
         session.setAttribute(SESSION_ATTR_FORM, form);
-
         // success response handling
         if (isAjaxRequest(requestedWith)) {
             model.addAttribute("messages", messages);
@@ -246,7 +245,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/xmlForm", method = RequestMethod.GET)
     public void processSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model,
             @RequestParam(value = PARAM_RESET, required = false) String resetParam) throws IOException {
-
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM);
         if (resetParam != null && resetParam.equals("true")) {
             form = new RulesCommand();
@@ -285,7 +283,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/xmlForm", method = RequestMethod.POST)
     public String processXmlFormSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, RulesCommand form,
             BindingResult result, HttpSession session, Model model, @RequestParam("ignoreDuplicates") Boolean ignoreDuplicates) throws IOException {
-
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         ArrayList<Message> messages = new ArrayList<Message>();
 
@@ -399,12 +396,11 @@ public class RuleBuilderController {
     ArrayList<Message> processXmlTabSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
         ArrayList<Message> messages = new ArrayList<Message>();
-
         if (result.hasErrors()) {
             model.addAttribute("ajaxRequest", isAjaxRequest(requestedWith));
             return messages;
         }
-
+        
         Rules r = null;
         try {
             r = loadRulesFromString(form.getXml());
@@ -433,7 +429,6 @@ public class RuleBuilderController {
     @RequestMapping(value = "/testForm", method = RequestMethod.GET)
     public String testForm(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, HttpSession session, Model model)
             throws IOException {
-
         ArrayList<Message> messages = new ArrayList<Message>();
         RulesCommand form = (RulesCommand) session.getAttribute(SESSION_ATTR_FORM);
         form.getRuleRef().lazyToNonLazy();
@@ -455,7 +450,12 @@ public class RuleBuilderController {
          * session.setAttribute(SESSION_ATTR_TESTINPUTFIELDS, inputFields);
          */
 
-        testRules(form, uiODMBuilder, new TestRulesGetResponseHandler());
+        ArrayList<TestRulesResponseHandler> responseHandlers = new ArrayList();
+        responseHandlers.add(new TestRulesGetResponseHandler());
+        responseHandlers.add(new TestRulesSubmitResponseHandler());
+
+        testRules(form, uiODMBuilder, responseHandlers);
+        form.populateTestWillActionsRun();
         session.setAttribute(SESSION_ATTR_TESTINPUTFIELDS, form.getRulePropertiesHtml());
 
         // success response handling
@@ -476,6 +476,9 @@ public class RuleBuilderController {
     @RequestMapping(value = "/testForm", method = RequestMethod.POST)
     public String processTestSubmit(@RequestHeader(value = "X-Requested-With", required = false) String requestedWith, @Valid RulesCommand form,
             BindingResult result, HttpSession session, Model model) throws IOException {
+        ArrayList<Message> messages = new ArrayList<Message>();
+        form.getRuleRef().lazyToNonLazy();
+        form.setTestRulesResults(new HashMap<String, String>());
 
         UIODMContainer uiODMContainer = (UIODMContainer) session.getAttribute(SESSION_ATTR_UIODMCONTAINER);
         UIODMBuilder uiODMBuilder = new UIODMBuilder(uiODMContainer);
@@ -492,10 +495,11 @@ public class RuleBuilderController {
             return null;
         }
 
-        form.getRuleRef().lazyToNonLazy();
-        ArrayList<Message> messages = new ArrayList<Message>();
+        ArrayList<TestRulesResponseHandler> responseHandlers = new ArrayList();
+        responseHandlers.add(new TestRulesGetResponseHandler());
+        responseHandlers.add(new TestRulesSubmitResponseHandler());
 
-        testRules(form, uiODMBuilder, new TestRulesSubmitResponseHandler());
+        testRules(form, uiODMBuilder, responseHandlers);
         form.populateTestWillActionsRun();
         session.setAttribute(SESSION_ATTR_FORM, form);
 
@@ -515,13 +519,15 @@ public class RuleBuilderController {
         return new Message(MessageType.error, "Could not submit to OC instance because :: " + message);
     }
 
-    private void testRules(RulesCommand form, UIODMBuilder uiODMBuilder, TestRulesResponseHandler responseHandler) {
+    private void testRules(RulesCommand form, UIODMBuilder uiODMBuilder, ArrayList<TestRulesResponseHandler> responseHandlers) {
         ArrayList<Message> messages = new ArrayList<Message>();
         RulesTest resp = null;
         try {
             resp =
                 userPreferences.getRestTemplate().postForObject(userPreferences.getValidateAndTestRuleURL(), createRulesTestFromCommand(form), RulesTest.class);
-            responseHandler.handle(form, resp, uiODMBuilder);
+            for (TestRulesResponseHandler responseHandler : responseHandlers) {
+                responseHandler.handle(form, resp, uiODMBuilder);
+            }
             return;
         } catch (Exception e) {
             messages.add(createRestExceptionMessage(e));
@@ -534,7 +540,7 @@ public class RuleBuilderController {
         Map<String, String> vars = Collections.singletonMap("study", uiODMContainer.getStudyOid());
         Response resp = null;
         try {
-            resp = userPreferences.getRestTemplate().postForObject(url, rule, Response.class, vars);
+            resp = userPreferences.getRestTemplate().postForObject(url, rule, Response.class, vars);   
             if (resp.isValid()) {
                 messages.addAll(responseHandler.handle());
             } else {
@@ -567,17 +573,24 @@ public class RuleBuilderController {
      * Convert RulesCommand to Rules Object
      */
     private Rules rulesCommandToRules(RulesCommand form) {
-        form.getRuleRef().lazyToNonLazy();
+        RulesCommand rc = new RulesCommand(form); 
+        rc.getRuleRef().setOID(form.getRuleDef().getOID());
+        LazyRuleRefType2 lzRuleRef = new LazyRuleRefType2();
+        List<LazyRuleRefType2> listLzRuleRef = lzRuleRef.splitRuleRef(rc.getRuleRef());
         RuleAssignmentType ra = new RuleAssignmentType();
         form.getTarget().setValue(form.getTarget().getValue() == null ? "" : form.getTarget().getValue().trim());
         ra.setTarget(form.getTargetCurated(form.getTarget()));
-        ra.getRuleRef().add(form.getRuleRef());
-        ra.getRuleRef().get(0).setOID(form.getRuleDef().getOID());
+        if (form.getRunOnSchedule() != null && !form.getRunOnSchedule().getTime().equals("")) {
+            ra.setRunOnSchedule(form.getRunOnSchedule());
+        }
         Rules r = new Rules();
+        for (LazyRuleRefType2 lrr : listLzRuleRef) {
+            ra.getRuleRef().add(lrr);
+        }
         r.getRuleAssignment().add(ra);
-        r.getRuleDef().add(form.getRuleDefCurated());
-        r.getRuleDef().get(0).setName(r.getRuleDef().get(0).getOID());
-        r.getRuleDef().get(0).setDescription(r.getRuleDef().get(0).getOID());
+        for(RuleDefType rdt : lzRuleRef.splitRuleDef(form.getRuleDefCurated(), listLzRuleRef.size())) {
+            r.getRuleDef().add(rdt);   
+        }
         return r;
 
     }
@@ -604,11 +617,12 @@ public class RuleBuilderController {
      * Convert XML which is represented as a String to Rules Object
      */
     private Rules loadRulesFromString(String rulesString) throws UnMarshallingException {
-
         StringReader reader = new StringReader(rulesString);
         Rules rules = null;
         try {
-            rules = (Rules) this.unMarshaller.unmarshal(new StreamSource(reader));
+            // rules = (Rules) this.unMarshaller.unmarshal(new StreamSource(reader));
+            JAXBElement<Rules> root = (JAXBElement<Rules>) this.unMarshaller.unmarshal(new StreamSource(reader));
+            rules = (Rules) root.getValue();
         } catch (FileNotFoundException e) {
             throw new UnMarshallingException();
             // TODO Auto-generated catch block

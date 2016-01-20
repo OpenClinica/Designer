@@ -24,7 +24,7 @@ $(function () {
     });
     $("#demo3").jstree({
          "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last, input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 //data.r.html(data.o.attr("oid"));
                 
@@ -126,7 +126,7 @@ $(function () {
 $(function () {
     $("#demo2").jstree({
         "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last, input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 //data.r.html(data.o.attr("oid"));
                 if ( data.r.context.nodeName == 'DIV'){
@@ -231,7 +231,7 @@ $(function () {
 $(function () {
     $("#demo4").jstree({
         "dnd": {
-            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last",
+            "drop_target": "#ocTextArea, input[name*='lazyProperties'], #targetWYSIWYG>div:last, #ruleExpressionWYSIWYG>div:last, input[name*='lazyEventActions']",
             "drop_finish": function (data) {
                 //data.r.html(data.o.attr("oid"));
                 if ( data.r.context.nodeName == 'DIV'){
@@ -248,23 +248,28 @@ $(function () {
                     pos = 0,
                     sel;
                     if (document.selection) {
-                    ctrl.focus();
-                    var r = document.selection.createRange();
-                    
-                    if (r == null) {
-                        return 0;
+                        ctrl.focus();
+                        var r = document.selection.createRange();
+                        
+                        if (r == null) {
+                            return 0;
+                        }
+
+                        var re = ctrl.createTextRange(),
+                            rc = re.duplicate();
+                        re.moveToBookmark(r.getBookmark());
+                        rc.setEndPoint('EndToStart', re);
+
+                        pos = rc.text.length;
+                    } else if (ctrl.selectionStart || ctrl.selectionStart == '0') {
+                        pos = ctrl.selectionStart;
                     }
-
-                    var re = ctrl.createTextRange(),
-                        rc = re.duplicate();
-                    re.moveToBookmark(r.getBookmark());
-                    rc.setEndPoint('EndToStart', re);
-
-                    pos = rc.text.length;
-                } else if (ctrl.selectionStart || ctrl.selectionStart == '0') {
-                    pos = ctrl.selectionStart;
-                }
-                ctrl.value = ctrl.value.slice(0, pos) + "" + data.o.attr("oid") + "" + ctrl.value.slice(pos);
+                    ctrl.value = ctrl.value.slice(0, pos) + "" + data.o.attr("oid") + "" + ctrl.value.slice(pos);
+                    if (data.r.context.id.indexOf("lazyEventActions") > -1 && data.r.context.id.indexOf("OID") > -1 && data.o.attr("id").indexOf(".STARTDATE") > -1) {
+                        var ctrl_value = data.o.attr("oid");
+                        ctrl.value = ctrl_value.slice(0, ctrl_value.indexOf("."));
+                        $(document.getElementById(data.r.context.id)).parent().next().find('select').val(ctrl_value.substr(ctrl_value.indexOf(".") + 1));
+                    }
                 }
             },
             "drag_check": function (data) {
@@ -334,13 +339,13 @@ $(function () {
 
 <script type="text/javascript">
 $(function () {
-	$(".jstree-leaf a").live("click", function(e) {   
-		populateItemDetails($(this).attr("oid"));
-	})  
-	
+    $(".jstree-leaf a").live("click", function(e) {   
+        populateItemDetails($(this).attr("oid"));
+    })  
+    
 });
 </script>
-	
-	
-	
+    
+    
+    
 }

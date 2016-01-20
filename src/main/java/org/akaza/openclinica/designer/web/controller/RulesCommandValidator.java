@@ -1,5 +1,6 @@
 package org.akaza.openclinica.designer.web.controller;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.openclinica.ns.rules.v31.DiscrepancyNoteActionType;
 import org.openclinica.ns.rules.v31.EmailActionType;
 import org.openclinica.ns.rules.v31.HideActionType;
@@ -7,7 +8,9 @@ import org.openclinica.ns.rules.v31.InsertActionType;
 import org.openclinica.ns.rules.v31.PropertyType;
 import org.openclinica.ns.rules.v31.RuleDefType;
 import org.openclinica.ns.rules.v31.ShowActionType;
+import org.openclinica.ns.rules.v31.EventActionType;
 import org.openclinica.ns.rules.v31.TargetType;
+import org.openclinica.ns.rules.v31.NotificationActionType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -45,7 +48,7 @@ public class RulesCommandValidator implements Validator {
         LazyRuleRefType2 action = p.getRuleRef();
         // At least one action has to be selected
         if (action.getLazyDiscrepancyNoteActions().isEmpty() && action.getLazyEmailActions().isEmpty() && action.getLazyHideActions().isEmpty()
-            && action.getLazyInsertActions().isEmpty() && action.getLazyShowActions().isEmpty()) {
+            && action.getLazyInsertActions().isEmpty() && action.getLazyShowActions().isEmpty() && action.getLazyEventActions().isEmpty() && action.getLazyNotificationActions().isEmpty()) {
             e.rejectValue("addActions", "add.action");
         }
 
@@ -59,7 +62,8 @@ public class RulesCommandValidator implements Validator {
         validateHideAction(action, e);
         // Insert action validation
         validateInsertAction(action, e);
-
+        // Notification action validation
+        validateNotificationAction(action, e);
     }
 
     private void validateDiscrepancyNoteAction(LazyRuleRefType2 action, Errors e) {
@@ -79,17 +83,15 @@ public class RulesCommandValidator implements Validator {
                 if (emailAction.getTo() == null || emailAction.getTo().trim().length() == 0) {
                     e.rejectValue("ruleRef.lazyEmailActions[" + action.getEmailAction().indexOf(emailAction) + "].to", "email.to.empty");
                 } else {
-                    Pattern pattern = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                	EmailValidator validator = EmailValidator.getInstance();
                     StringTokenizer tokenizer = new StringTokenizer(emailAction.getTo(), ",");
                     if (tokenizer.countTokens() == 0) {
-                        Matcher matcher = pattern.matcher(emailAction.getTo());
-                        if (!matcher.matches()) {
+                        if (!validator.isValid(emailAction.getTo())) {
                             e.rejectValue("ruleRef.lazyEmailActions[" + action.getEmailAction().indexOf(emailAction) + "].to", "email.to.not.valid");
                         }
                     } else {
                         while (tokenizer.hasMoreTokens()) {
-                            Matcher matcher = pattern.matcher(tokenizer.nextToken().trim());
-                            if (!matcher.matches()) {
+                            if (!validator.isValid(tokenizer.nextToken().trim())) {
                                 e.rejectValue("ruleRef.lazyEmailActions[" + action.getEmailAction().indexOf(emailAction) + "].to", "email.to.not.valid");
                                 break;
                             }
@@ -160,6 +162,42 @@ public class RulesCommandValidator implements Validator {
                                 + insertAction.getDestinationProperty().indexOf(propertyType) + "].OID", "error.empty");
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private void validateNotificationAction(LazyRuleRefType2 action, Errors e) {
+        if (!action.getLazyNotificationActions().isEmpty()) {
+            for (NotificationActionType notificationAction : action.getNotificationAction()) {
+                if (notificationAction.getTo() == null || notificationAction.getTo().trim().length() == 0) {
+                    e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].to", "email.to.empty");
+                } else {
+                    Pattern pattern = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                    StringTokenizer tokenizer = new StringTokenizer(notificationAction.getTo(), ",");
+                    if (tokenizer.countTokens() == 0) {
+                        Matcher matcher = pattern.matcher(notificationAction.getTo());
+                        if (!matcher.matches()) {
+                            e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].to", "email.to.not.valid");
+                        }
+                    } else {
+                        while (tokenizer.hasMoreTokens()) {
+                            String stringToken = tokenizer.nextToken().trim();
+                            if (!stringToken.equals("${participant}")) {
+                                Matcher matcher = pattern.matcher(stringToken.trim());
+                                if (!matcher.matches()) {
+                                    e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].to", "email.to.not.valid");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (notificationAction.getSubject() == null || notificationAction.getSubject().trim().length() == 0) {
+                    e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].subject", "email.subject.empty");
+                }
+                if (notificationAction.getMessage() == null || notificationAction.getMessage().trim().length() == 0) {
+                    e.rejectValue("ruleRef.lazyNotificationActions[" + action.getNotificationAction().indexOf(notificationAction) + "].message", "error.empty");
                 }
             }
         }

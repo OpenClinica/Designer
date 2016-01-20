@@ -19,6 +19,12 @@
                 <p id="itemDetails">Select an item to view its data.</p>
 
             </div>
+
+            <h3><a href="#">Entity Metadata</a></h3>
+            <div>
+                <p id="entityDetails">Select an entity to view its data.</p>
+
+            </div>
             <!--
             <h3><a href="#">Section 3</a></h3>
             <div>

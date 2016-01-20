@@ -335,6 +335,85 @@
             </fieldset>
             </span>
         </c:forEach>
+
+        <!-- event Actions -->
+        <c:forEach items="${rulesCommand.ruleRef.lazyEventActions}" var="eventAction" varStatus="gridRow">
+            <span id="lazyEventActions${gridRow.index}">
+            <fieldset class="login">
+            <legend><span><fmt:message key="label_event_action"/><designerTags:displayTestFlag ruleResult="${rulesCommand.testRulesResults['result']}"  actionResult="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].ifExpressionEvaluates}"/>&nbsp;</span></legend>
+            
+            <p>
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.ifExpressionEvaluatesLabel" for="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" cssErrorClass="error"><fmt:message key="label_evaluates_to"/>: </form:label> 
+                <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].ifExpressionEvaluates}" />&nbsp;
+                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates"/>
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].ifExpressionEvaluates" cssClass="error" />
+            </p>
+
+            <p>
+                <form:label id="ruleRef.lazyEventActions${gridRow.index}.applyToLabel" for="ruleRef.lazyEventActions[${gridRow.index}].OID" path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssErrorClass="error"><fmt:message key="label_event_apply_to"/>: </form:label>
+                <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].OID}" />&nbsp;
+                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].OID"/>
+                <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].OID" cssClass="error"/>
+            </p>
+
+            <span id="ruleRef.lazyEventActions${gridRow.index}.propertiesContainer">
+            <c:forEach items="${eventAction.lazyProperties}" varStatus="gridRow2">
+                <span id="ruleRef.lazyShowActions${gridRow.index}.lazyProperties${gridRow2.index}">
+                
+                <p>
+                    <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.Property" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssErrorClass="error"><fmt:message key="label_property"/>: </form:label> 
+                    <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow2.index].property}" />&nbsp;
+                    <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property"/>
+                    <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].Property" cssClass="error" />
+                </p>
+
+                <p>
+                    <form:label id="ruleRef.lazyEventActions${gridRow.index}.lazyProperties${gridRow2.index}.valueExpression.valueLabel" for="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssErrorClass="error"><fmt:message key="label_event_value_expression"/>: </form:label>
+                    <c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].lazyProperties[gridRow2.index].valueExpression.value}" />&nbsp;                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value"/>
+                    <form:errors path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].valueExpression.value" cssClass="error" />
+                </p>
+                <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].lazyProperties[${gridRow2.index}].placeHolder"/>
+
+
+                </span>
+            </c:forEach>
+            </span>
+
+            <div id="tables" class="block" style="margin: 0px;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="100%"><fmt:message key="label_event_specify_runonstatus_mode" /></td>
+                        </tr>
+                        <tr>
+                            <th><fmt:message key="label_not_scheduled" /></th>
+                            <th><fmt:message key="label_scheduled" /></th>
+                            <th><fmt:message key="label_data_entry_started" /></th>
+                            <th><fmt:message key="label_completed" /></th>
+                            <th><fmt:message key="label_skipped" /></th>
+                            <th><fmt:message key="label_stopped" /></th>
+                        </tr>
+                        <tr>
+                            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].runOnStatus.notScheduled" />
+                            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].runOnStatus.scheduled" />
+                            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].runOnStatus.dataEntryStarted" />
+                            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].runOnStatus.completed" />
+                            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].runOnStatus.skipped" />
+                            <form:hidden path="ruleRef.lazyEventActions[${gridRow.index}].runOnStatus.stopped" />
+                            <td><c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].runOnStatus.notScheduled}" /></td>
+                            <td><c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].runOnStatus.scheduled}" /></td>
+                            <td><c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].runOnStatus.dataEntryStarted}" /></td>
+                            <td><c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].runOnStatus.completed}" /></td>
+                            <td><c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].runOnStatus.skipped}" /></td>
+                            <td><c:out value="${rulesCommand.ruleRef.lazyEventActions[gridRow.index].runOnStatus.stopped}" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            </fieldset>
+            </span>
+        </c:forEach>
     </div>
     <h3><fmt:message key="label_step_2"/></h3>
     <fieldset class="variables">

@@ -7,3 +7,6 @@ release.properties
 .classpath
 .project
 .settings/
+designer.log
+.idea/
+Designer.iml

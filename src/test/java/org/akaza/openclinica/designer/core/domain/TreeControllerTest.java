@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 
 import org.akaza.openclinica.designer.web.controller.TreeController;
 import org.akaza.openclinica.designer.web.controller.TreeModel;
+import org.akaza.openclinica.designer.web.controller.TreeModelLeaf;
+import org.akaza.openclinica.designer.web.controller.TreeModelInterface;
 import org.akaza.openclinica.designer.web.controller.UICrf;
 import org.akaza.openclinica.designer.web.controller.UIEvent;
 import org.akaza.openclinica.designer.web.controller.UIODMContainer;
@@ -73,11 +75,17 @@ public class TreeControllerTest {
         UIODMContainer mockedUIODMContainer = mock(UIODMContainer.class);
         when(mockedUIODMContainer.getEventsByOID(METHOD_PARAM)).thenReturn(getEvent());
         mockHttpSession.setAttribute("uiODMContainer", mockedUIODMContainer);
-        List<TreeModel> treeModel = treeController.eventsCrfsList(METHOD_PARAM, mockHttpSession);
-        assertEquals(treeModel.size(), 1);
-        assertEquals(treeModel.get(0).getOid(), "C_CRF");
-        assertEquals(treeModel.get(0).getData().getIcon(), "crf");
-        assertEquals(treeModel.get(0).getData().getTitle(), "AE");
+        List<TreeModelInterface> treeModel = treeController.eventsCrfsList(METHOD_PARAM, mockHttpSession);
+        assertEquals(treeModel.size(), 3);
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getOid(), METHOD_PARAM + ".STARTDATE");
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getIcon(), "item");
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getTitle(), "Start Date");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getOid(), METHOD_PARAM + ".STATUS");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getIcon(), "item");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getTitle(), "Status");
+        assertEquals(((TreeModel) treeModel.get(2)).getOid(), "C_CRF");
+        assertEquals(((TreeModel) treeModel.get(2)).getData().getIcon(), "crf");
+        assertEquals(((TreeModel) treeModel.get(2)).getData().getTitle(), "AE");
     }
 
     @Test
@@ -87,10 +95,16 @@ public class TreeControllerTest {
         UIODMContainer mockedUIODMContainer = mock(UIODMContainer.class);
         when(mockedUIODMContainer.getEventsByOID(METHOD_PARAM)).thenReturn(getEvent());
         mockHttpSession.setAttribute("uiODMContainer", mockedUIODMContainer);
-        List<TreeModel> treeModel = treeController.eventsCrfsListOid(METHOD_PARAM, mockHttpSession);
-        assertEquals(treeModel.size(), 1);
-        assertEquals(treeModel.get(0).getOid(), "C_CRF");
-        assertEquals(treeModel.get(0).getData().getIcon(), "crf");
-        assertEquals(treeModel.get(0).getData().getTitle(), "C_CRF");
+        List<TreeModelInterface> treeModel = treeController.eventsCrfsListOid(METHOD_PARAM, mockHttpSession);
+        assertEquals(treeModel.size(), 3);
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getOid(), METHOD_PARAM + ".STARTDATE");
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getIcon(), "item");
+        assertEquals(((TreeModelLeaf) treeModel.get(0)).getData().getTitle(), "STARTDATE");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getOid(), METHOD_PARAM + ".STATUS");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getIcon(), "item");
+        assertEquals(((TreeModelLeaf) treeModel.get(1)).getData().getTitle(), "STATUS");
+        assertEquals(((TreeModel) treeModel.get(2)).getOid(), "C_CRF");
+        assertEquals(((TreeModel) treeModel.get(2)).getData().getIcon(), "crf");
+        assertEquals(((TreeModel) treeModel.get(2)).getData().getTitle(), "C_CRF");
     }
 }

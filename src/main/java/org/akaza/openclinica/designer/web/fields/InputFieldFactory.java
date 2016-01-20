@@ -1,5 +1,6 @@
 package org.akaza.openclinica.designer.web.fields;
 
+import org.akaza.openclinica.designer.web.controller.UIEntityDetail;
 import org.akaza.openclinica.designer.web.controller.UIItemDetail;
 import org.akaza.openclinica.designer.web.fields.InputField.DataType;
 import org.akaza.openclinica.designer.web.fields.InputField.Type;
@@ -23,8 +24,8 @@ public class InputFieldFactory {
         return new SelectInputField(type, dataType, propertyName, displayName, options, validators);
     }
 
-    public static InputField createInputField(String propertyName, String displayName, UIItemDetail itemDetail) {
-        String itemResponseType = itemDetail.getItemDetailsPerCrfVersion().get(0).getResponseType();
+    public static InputField createInputField(String propertyName, String displayName, UIEntityDetail itemDetail) {
+        String itemResponseType = ((UIItemDetail) itemDetail).getItemDetailsPerCrfVersion().get(0).getResponseType();
         final String ocIntegerDataType = "INTEGER";
         final String ocStringDataType = "TEXT";
         final String ocDateDataType = "DATE";
@@ -41,23 +42,23 @@ public class InputFieldFactory {
             }
         } else if (itemResponseType.equals("single-select") || itemResponseType.equals("radio")) {
             if (itemDetail.getDataType().equals(ocIntegerDataType)) {
-                return createSelectField(Type.SINGLESELECT, DataType.INTEGER, propertyName, displayName, itemDetail.getOptionsForFirstVersion(),
+                return createSelectField(Type.SINGLESELECT, DataType.INTEGER, propertyName, displayName, ((UIItemDetail) itemDetail).getOptionsForFirstVersion(),
                         FieldValidator.INTEGER_VALIDATOR);
             } else if (itemDetail.getDataType().equals(ocFloatDataType)) {
-                return createSelectField(Type.SINGLESELECT, DataType.INTEGER, propertyName, displayName, itemDetail.getOptionsForFirstVersion(),
+                return createSelectField(Type.SINGLESELECT, DataType.INTEGER, propertyName, displayName, ((UIItemDetail) itemDetail).getOptionsForFirstVersion(),
                         FieldValidator.NUMBER_VALIDATOR);
             } else {
-                return createSelectField(Type.SINGLESELECT, DataType.STRING, propertyName, displayName, itemDetail.getOptionsForFirstVersion());
+                return createSelectField(Type.SINGLESELECT, DataType.STRING, propertyName, displayName, ((UIItemDetail) itemDetail).getOptionsForFirstVersion());
             }
         } else if (itemResponseType.equals("multi-select") || itemResponseType.equals("checkbox")) {
             if (itemDetail.getDataType().equals(ocIntegerDataType)) {
-                return createSelectField(Type.MULTISELECT, DataType.INTEGER, propertyName, displayName, itemDetail.getMultiSelectListForFirstVersion(),
+                return createSelectField(Type.MULTISELECT, DataType.INTEGER, propertyName, displayName, ((UIItemDetail) itemDetail).getMultiSelectListForFirstVersion(),
                         FieldValidator.INTEGER_VALIDATOR);
             } else if (itemDetail.getDataType().equals(ocFloatDataType)) {
-                return createSelectField(Type.MULTISELECT, DataType.INTEGER, propertyName, displayName, itemDetail.getMultiSelectListForFirstVersion(),
+                return createSelectField(Type.MULTISELECT, DataType.INTEGER, propertyName, displayName, ((UIItemDetail) itemDetail).getMultiSelectListForFirstVersion(),
                         FieldValidator.NUMBER_VALIDATOR);
             } else {
-                return createSelectField(Type.MULTISELECT, DataType.STRING, propertyName, displayName, itemDetail.getMultiSelectListForFirstVersion());
+                return createSelectField(Type.MULTISELECT, DataType.STRING, propertyName, displayName, ((UIItemDetail) itemDetail).getMultiSelectListForFirstVersion());
             }
         } else {
             return createInputField(Type.TEXT, DataType.STRING, propertyName, displayName);

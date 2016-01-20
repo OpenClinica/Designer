@@ -4,6 +4,7 @@ import org.akaza.openclinica.designer.web.fields.InputField;
 import org.jsoup.Jsoup;
 import org.openclinica.ns.rules.v31.RuleDefType;
 import org.openclinica.ns.rules.v31.RuleRefType;
+import org.openclinica.ns.rules.v31.RunOnScheduleType;
 import org.openclinica.ns.rules.v31.TargetType;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class RulesCommand {
     TargetType target;
     RuleDefType ruleDef;
     List<String> addActions = new ArrayList();
+    RunOnScheduleType runOnSchedule;
     // XML tab
     String xml;
     // Test tab
@@ -29,6 +31,17 @@ public class RulesCommand {
         ruleRef = new LazyRuleRefType2();
         target = new TargetType();
         ruleDef = new RuleDefType();
+    }
+
+    public RulesCommand(RulesCommand rule) {
+        ruleRef = rule.getRuleRef();
+        target = rule.getTarget();
+        addActions = rule.getAddActions();
+        xml = rule.getXml();
+        rulePropertiesHtml = rule.getRulePropertiesHtml();
+        ruleProperties = rule.getRuleProperties();
+        testRulesResults = rule.getTestRulesResults();
+        testWillActionsRun = rule.getTestWillActionsRun();
     }
 
     public LazyRuleRefType2 getRuleRef() {
@@ -67,6 +80,14 @@ public class RulesCommand {
         return getTargetCurated(this.target);
     }
 
+    public void setRunOnSchedule(RunOnScheduleType runOnSchedule) {
+        this.runOnSchedule = runOnSchedule;
+    }
+
+    public RunOnScheduleType getRunOnSchedule() {
+        return runOnSchedule;
+    }
+
     public TargetType getTargetCurated(TargetType htmlBasedTarget) {
         // To avoid receiving org.codehaus.jackson.map.JsonMappingException when command object is JSONd
         if (htmlBasedTarget == null) {
@@ -98,11 +119,16 @@ public class RulesCommand {
         return ruleDef;
     }
 
-    public void buildFromRules(TargetType target, RuleDefType ruleDef, RuleRefType ruleRef) {
+    public void buildFromRules(TargetType target, RuleDefType ruleDef, RuleRefType ruleRef, String runTime) {
         this.setTarget(target);
         this.setRuleDef(ruleDef);
         LazyRuleRefType2 ruleRefType = new LazyRuleRefType2(ruleRef);
         this.setRuleRef(ruleRefType);
+        if (runTime != null) {
+            RunOnScheduleType runOnScheduleType = new RunOnScheduleType();
+            runOnScheduleType.setTime(runTime);
+            this.setRunOnSchedule(runOnScheduleType);
+        }
     }
 
     public List<InputField> getRulePropertiesHtml() {

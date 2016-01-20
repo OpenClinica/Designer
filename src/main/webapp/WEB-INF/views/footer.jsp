@@ -6,7 +6,7 @@
         <td class="footer" width="20%"></td>
         <td class="footer" style="vertical-align:top;align:left;">&copy; 2004-2014 OpenClinica, LLC and collaborators. The OpenClinica Rule Designer is provided AS IS, without warranty. Please refer to the <a href="https://openclinica.com/designer-terms" target="_blank">OpenClinica Rule Designer Terms of Service</a> and/or your OpenClinica Enterprise Subscription agreement for terms and conditions of use.</td>
 
-        <td class="footer" width="20%" style="vertical-align:top;align:left;">Version: 1.1 &nbsp;&nbsp;</td>
+        <td class="footer" width="20%" style="vertical-align:top;align:left;">Version: 1.2 &nbsp;&nbsp;</td>
         <td width="10%" align="right" valign="bottom"></td>
     </tr>
     <tr>
