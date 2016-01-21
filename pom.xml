@@ -48,7 +48,9 @@
         </repository>
         <repository>
             <id>Akaza Dev Repository</id>
-            <url>http://svn.akazaresearch.com/ocrepository/repository</url>
+            <!-- <url>http://svn.akazaresearch.com/ocrepository/repository</url> -->
+            <!-- <url>https://dev.openclinica.com/artifactory/libs-release</url> -->
+            <url>http://supadosworks.com/artifactory/</url>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -479,7 +481,8 @@
         <dependency>
             <groupId>org.akaza.openclinica.odm</groupId>
             <artifactId>openclinica-odm</artifactId>
-            <version>0.1.0.BUILD-SNAPSHOT</version>
+            <!-- <version>0.1.0.BUILD-SNAPSHOT</version> -->
+            <version>2.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
