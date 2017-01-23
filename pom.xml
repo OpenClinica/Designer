@@ -59,10 +59,6 @@
             <id>maven-central</id>
             <url>http://repo1.maven.org/maven2</url>
         </repository>
-        <repository>
-            <id>Akaza Dev Repository</id>
-            <url>http://svn.akazaresearch.com/ocrepository/repository</url>
-        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -562,7 +558,7 @@
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
-            <version>3.2</version>
+            <version>4.0</version>
         </dependency>
         <dependency>
         	<groupId>org.codehaus.groovy</groupId>
