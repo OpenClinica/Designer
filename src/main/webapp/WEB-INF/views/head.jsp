@@ -164,14 +164,10 @@
     function addItemDetailsTable(data){
         var html = "";
         for(key in data.itemDetailsPerCrfVersion) {
-            console.log("key: " + key);
              var listRefSize = 0;
              var codeListItemSize = data.itemDetailsPerCrfVersion[key].codeList.codeListItem.length;
-             console.log("codeListItemSize: " + codeListItemSize);
              var listRefSize = codeListItemSize;
-             console.log("data.itemDetailsPerCrfVersion[key]: " + data.itemDetailsPerCrfVersion[key]);
              if(codeListItemSize == 0){
-                console.log("data.itemDetailsPerCrfVersion[key].multiSelectList: " + data.itemDetailsPerCrfVersion[key].multiSelectList.multiSelectListItem);
                 listRefSize = data.itemDetailsPerCrfVersion[key].multiSelectList.multiSelectListItem.length;
              }
              var responseOptionsValueHtml = " " + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + listRefSize + "):</th>" + "</tr>"
