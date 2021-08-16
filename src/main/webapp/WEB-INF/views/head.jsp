@@ -164,23 +164,44 @@
     function addItemDetailsTable(data){
         var html = "";
         for(key in data.itemDetailsPerCrfVersion) {
+             var listRefSize = 0;
              var codeListItemSize = data.itemDetailsPerCrfVersion[key].codeList.codeListItem.length;
-             var responseOptionsValueHtml = " " + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + codeListItemSize + "):</th>" + "</tr>"
-             var dialogResponseOptionsValueHtml = "<table><tbody>" + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + codeListItemSize + "):</th>" + "</tr>"
-             for(key2 in data.itemDetailsPerCrfVersion[key].codeList.codeListItem) {
-                 var theVar =
-                     "<tr>" 
-                     + "<td style=\"padding: 0.2em 3em; border-top: 0px none; border-bottom: 0px none;\">" + data.itemDetailsPerCrfVersion[key].codeList.codeListItem[key2].decode.translatedText[0].value  + "</td>" 
-                     + "<td style=\"border-top: 0px none; border-bottom: 0px none;\">" + data.itemDetailsPerCrfVersion[key].codeList.codeListItem[key2].codedValue + "</td>" 
-                     + "</tr>";
-                 if(key2 < 5){ 
-                     responseOptionsValueHtml += theVar;
-                     dialogResponseOptionsValueHtml += theVar;
-                 }else{
-                     dialogResponseOptionsValueHtml += theVar;
-                 }                       
+             var listRefSize = codeListItemSize;
+             if(codeListItemSize == 0){
+                listRefSize = data.itemDetailsPerCrfVersion[key].multiSelectList.multiSelectListItem.length;
              }
-             responseOptionsValueHtml += codeListItemSize >= 5 ? "<tr><td colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"><a onclick=\"openLink()\" href=\"#\">more</a></td></tr>" : "";
+             var responseOptionsValueHtml = " " + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + listRefSize + "):</th>" + "</tr>"
+             var dialogResponseOptionsValueHtml = "<table><tbody>" + "<tr>" + "<th colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"> Response Options/Values (" + listRefSize + "):</th>" + "</tr>"
+             if(codeListItemSize == 0){
+                 for(key2 in data.itemDetailsPerCrfVersion[key].multiSelectList.multiSelectListItem) {
+                     var theVar =
+                         "<tr>"
+                         + "<td style=\"padding: 0.2em 3em; border-top: 0px none; border-bottom: 0px none;\">" + data.itemDetailsPerCrfVersion[key].multiSelectList.multiSelectListItem[key2].decode.translatedText[0].value  + "</td>"
+                         + "<td style=\"border-top: 0px none; border-bottom: 0px none;\">" + data.itemDetailsPerCrfVersion[key].multiSelectList.multiSelectListItem[key2].codedOptionValue + "</td>"
+                         + "</tr>";
+                     if(key2 < 5){
+                         responseOptionsValueHtml += theVar;
+                         dialogResponseOptionsValueHtml += theVar;
+                     }else{
+                         dialogResponseOptionsValueHtml += theVar;
+                     }
+                 }
+             }else{
+                 for(key2 in data.itemDetailsPerCrfVersion[key].codeList.codeListItem) {
+                     var theVar =
+                         "<tr>"
+                         + "<td style=\"padding: 0.2em 3em; border-top: 0px none; border-bottom: 0px none;\">" + data.itemDetailsPerCrfVersion[key].codeList.codeListItem[key2].decode.translatedText[0].value  + "</td>"
+                         + "<td style=\"border-top: 0px none; border-bottom: 0px none;\">" + data.itemDetailsPerCrfVersion[key].codeList.codeListItem[key2].codedValue + "</td>"
+                         + "</tr>";
+                     if(key2 < 5){
+                         responseOptionsValueHtml += theVar;
+                         dialogResponseOptionsValueHtml += theVar;
+                     }else{
+                         dialogResponseOptionsValueHtml += theVar;
+                     }
+                 }
+             }
+             responseOptionsValueHtml += listRefSize >= 5 ? "<tr><td colspan=\"100%\" style=\"border-top: 0px none; border-bottom: 0px none;\"><a onclick=\"openLink()\" href=\"#\">more</a></td></tr>" : "";
              $('#dialogResponseOptionsValuesHtml').html(dialogResponseOptionsValueHtml + "</tbody></table>");
              
              html += "<div id=\"tables\" class=\"block\" style=\"margin: 0px;\">"
